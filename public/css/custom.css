@@ -1,0 +1,68 @@
+
+/*==================================================
+=            Bootstrap 3 Media Queries             =
+==================================================*/
+
+
+.tb1 {
+    border: 1px solid red !important;
+}
+.tb2{
+    border: 1px solid blue !important;
+}
+
+.titleName{
+/*     text-shadow: 2px 2px coral;*/
+    width: 100%;
+    color:white;
+    font-size: 125px;
+    line-height: 130px;
+/*  font-family: 'Indie Flower', cursive;*/
+    font-family: 'Permanent Marker', cursive;
+
+}
+
+.titleSub{
+    width: 100%;
+    color:coral;
+    font-size: 35px;
+/*  font-family: 'Indie Flower', cursive;*/
+    font-family: 'Permanent Marker', cursive;
+}
+
+
+/*==========  Non-Mobile First Method  ==========*/
+
+/* Large Devices, Wide Screens */
+@media only screen and (max-width : 1200px) {
+
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (max-width : 992px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (max-width : 768px) {
+    .titleName{
+        font-size: 60px;
+        line-height: 60px;
+    }
+    .titleSub{
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (max-width : 480px) {
+
+}
+
+/* Custom, iPhone Retina */ 
+@media only screen and (max-width : 320px) {
+
+}
+
