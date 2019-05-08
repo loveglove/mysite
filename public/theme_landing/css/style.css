@@ -58,6 +58,7 @@ nav{
 .nav-menu{
     float: right;
     line-height: 32px;
+    margin-top: 13px;
 }
 
 nav ul li{
@@ -268,13 +269,19 @@ input:-webkit-autofill {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: #000;
+    background-color: #FFF;
     z-index: 9999;
 }
 
+.loader-image{
+    text-align: center;
+    z-index: 9999;
+    margin-top: 35vh;   
+}
+
 .loader {
-    height: 1px;
-    background-color: #fff;
+    height: 2px;
+    background-color: #000;
     position: absolute;
     z-index: 9999;
 }
@@ -630,7 +637,7 @@ input:-webkit-autofill {
 
 .about.type-1 .about-image img:before{
     background: #e4e4e4; 
-    height:200px;
+    max-height: 250px;
 }
 
 .about.type-1 .about-image img{
@@ -675,13 +682,12 @@ input:-webkit-autofill {
 
 
 .work-areas{
-    width: 100%;
-    display: inline-block!important;
+    /*width: 100%;*/
 }
 
 .work-areas .area .icon i:before{
     font-size: 40px;
-    margin-left: 5px;
+   /* margin-left: 5px;*/
 }
 
 .work-areas .area .icon i{
@@ -871,6 +877,7 @@ input:-webkit-autofill {
 
 .blog-content{
     margin-bottom:60px;
+    margin-right:20px;
 }
 
 .blog-title{
@@ -1135,6 +1142,11 @@ a.site-button{
 
 @media screen and (max-width: 767px) {
 
+    .loader-image{
+        text-align: center;
+        z-index: 9999;
+        margin-top: 28vh;   
+    }
 
     .home{
         background:url('/images/pineapple.jpeg');
@@ -1176,7 +1188,7 @@ a.site-button{
     }
     
     .nav-menu{
-        margin-top: 40px;
+        margin-top: 60px;
         display: none;
         float: none;
         width: 100%;

@@ -13,8 +13,12 @@ $(window).load( function() {
 		fixedContentPos: false
 	});
         
+
 //PRELOADER
-        /** Loader */
+if(document.referrer.split('/')[2]!=location.hostname){
+    //User came from other domain or from direct
+
+    /** Loader */
     var loader = $(".loader");
     var wHeight = $(window).height();
     var wWidth = $(window).width();
@@ -32,22 +36,32 @@ $(window).load( function() {
         o += 3;
     } while (o <= 400)
     if (o === 402) {
-        loader.animate({
-            left: 0,
-            width: '100%'
-        })
-        loader.animate({
-            top: '0',
-            height: '100vh'
-        })
+
+        $(".loader").fadeOut('slow');
+
+        // loader.animate({
+        //     left: 0,
+        //     width: '100%'
+        // })
+        // loader.animate({
+        //     top: '0',
+        //     height: '100vh'
+        // })
+        setTimeout(function() {
+            $(".loader-image").fadeOut();
+        },2000);
     }
 
     setTimeout(function() {
-        $(".loader-wrapper").fadeOut('fast');
-        (loader).fadeOut('fast');
-    }, 3500);
+        $(".loader-wrapper").fadeOut('slow');
+        // (loader).fadeOut('slow');
+    }, 3000);
 
+}else{
+    $(".loader-wrapper").hide();
+}
     
+
 if ($('.isotope_items').length) {
 
     // PORTFOLIO ISOTOPE
@@ -79,7 +93,7 @@ $(document).ready( function() {
     
     
     // WOW JS
-    new WOW({ mobile: false }).init();
+    new WOW({ mobile: true }).init();
     
     
       
@@ -162,7 +176,7 @@ $('.responsive').on('click', function (e) {
     // HOME TYPED JS
       $(".element").typed({
         strings: ["...", "a Developer", "an Engineer", "a Problem Solver", "Matt Glover"],
-        typeSpeed: 7,
+        typeSpeed: 6,
         loop:false,
         backDelay: 2000
       });
@@ -177,36 +191,39 @@ $('.responsive').on('click', function (e) {
     });
     
        // OWL CAROUSEL GENERAL JS
-    var owlcar = $('.owl-carousel');
-    if (owlcar.length) {
-        owlcar.each(function () {
-            var $owl = $(this);
-            var itemsData = $owl.data('items');
-            var autoPlayData = $owl.data('autoplay');
-            var paginationData = $owl.data('pagination');
-            var navigationData = $owl.data('navigation');
-            var stopOnHoverData = $owl.data('stop-on-hover');
-            var itemsDesktopData = $owl.data('items-desktop');
-            var itemsDesktopSmallData = $owl.data('items-desktop-small');
-            var itemsTabletData = $owl.data('items-tablet');
-            var itemsTabletSmallData = $owl.data('items-tablet-small');
-            $owl.owlCarousel({
-                items: itemsData
-                , pagination: paginationData
-                , navigation: navigationData
-                , autoPlay: autoPlayData
-                , stopOnHover: stopOnHoverData
-                , navigationText: ["<", ">"]
-                , itemsCustom: [
-                    [0, 1]
-                    , [500, itemsTabletSmallData]
-                    , [710, itemsTabletData]
-                    , [992, itemsDesktopSmallData]
-                    , [1199, itemsDesktopData]
-                ]
-            , });
-        });
-    }
+    // var owlcar = $('.owl-carousel');
+    // if (owlcar.length) {
+    //     owlcar.each(function () {
+    //         var $owl = $(this);
+    //         var itemsData = $owl.data('items');
+    //         var autoPlayData = $owl.data('autoplay');
+    //         var paginationData = $owl.data('pagination');
+    //         var navigationData = $owl.data('navigation');
+    //         var stopOnHoverData = $owl.data('stop-on-hover');
+    //         var itemsDesktopData = $owl.data('items-desktop');
+    //         var itemsDesktopSmallData = $owl.data('items-desktop-small');
+    //         var itemsTabletData = $owl.data('items-tablet');
+    //         var itemsTabletSmallData = $owl.data('items-tablet-small');
+    //         $owl.owlCarousel({
+    //             items: itemsData
+    //             , pagination: paginationData
+    //             , navigation: navigationData
+    //             , margin:10
+    //             , center:true
+    //             , stagePadding: 50
+    //             , autoPlay: autoPlayData
+    //             , stopOnHover: stopOnHoverData
+    //             // , navigationText: ["<", ">"]
+    //             , itemsCustom: [
+    //                 [0, 1]
+    //                 , [500, itemsTabletSmallData]
+    //                 , [710, itemsTabletData]
+    //                 , [992, itemsDesktopSmallData]
+    //                 , [1199, itemsDesktopData]
+    //             ]
+    //         , });
+    //     });
+    // }
     
     
 }); // document ready end 
