@@ -30,10 +30,12 @@
 
 <!-- Font icons -->
 <link rel="stylesheet" href="{{ asset('/theme_landing/icon-fonts/essential-regular-fonts/essential-icons.css') }}"/>
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <link href="https://cdn.jsdelivr.net/themify-icons/0.1.2/css/themify-icons.css" rel="stylesheet">
 <link rel="stylesheet" href="//cdn.materialdesignicons.com/2.4.85/css/materialdesignicons.min.css">
+
+
+
 
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -128,30 +130,31 @@
     </nav>
     
     <!--HOME-->
-    <section class="home" id="home"> 
-            <div class="home-content">
-                <div class="container">
-                    <h1>I am <span class="element">Matt Glover</span></h1>
-                    <div class="header-icons">
-                        <i class="ti-light-bulb" aria-hidden="true" style="margin-left:0px;"></i>
-                        <i class="ti-pulse" aria-hidden="true"></i>
-                        <i class="ti-music-alt" aria-hidden="true"></i>
-                        <i class="ti-infinite" aria-hidden="true"></i>
-                        <a href="#about"><i class="fa fa-angle-down bounce"></i></a>
-                    </div>
+    <section class="home paroller-main" id="home"> 
+        <div class="home-content">
+            <div class="container">
+                <h1>I am <span class="element">Matt Glover</span></h1>
+                <div class="header-icons">
+                    <i class="ti-light-bulb" aria-hidden="true" style="margin-left:0px;"></i>
+                    <i class="ti-pulse" aria-hidden="true"></i>
+                    <i class="ti-music-alt" aria-hidden="true"></i>
+                    <i class="ti-infinite" aria-hidden="true"></i>
+                    <a href="#about"><i class="fa fa-angle-down bounce"></i></a>
                 </div>
             </div>
+        </div>
+    </section>
         <svg class="diagonal home-left" width="21%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
             <path d="M0 100 L100 100 L0 10 Z"></path>
         </svg>
         <svg class="diagonal home-right" width="80%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
             <path d="M0 100 L100 100 L100 10 Z"></path>
         </svg>
-    </section>
     <!-- END HOME -->
 
     <!--ABOUT-->
     <section class="about dgray-bg pt-3 pt-md-2" id="about">
+
         <div class="about type-1">
             <div class="container">
       		
@@ -168,7 +171,7 @@
                     </div>
 
                     <!-- about image -->
-                    <div class="col-md-pull-7 p-5 p-md-0 col-md-4 col-sm-12 about-image fadeInUp" data-wow-delay="0.6s" style="max-height: 250px;" >
+                    <div class="col-md-pull-7 p-5 p-md-0 col-md-4 col-sm-12 about-image fadeInUp" data-wow-delay="0.2s" style="max-height: 250px;" >
                         <img id="profile-img" src="{{ asset('images/headshots/headshot1.JPG') }}" class="img-fluid mb-0 mb-md-5" style="max-height: 275px;" alt="profile_photo">
                     </div>
                 </div>
@@ -209,9 +212,9 @@
                 </div>
 
             </div>
-        <svg class="diagonal-gray" width="100%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
-            <path d="M0 0 L70 100 L100 0 Z"></path>
-        </svg>
+	        <svg class="diagonal-gray" width="100%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+	            <path d="M0 0 L70 100 L100 0 Z"></path>
+	        </svg>
         </div>
     </section>
     
@@ -235,49 +238,41 @@
                 <div class="col-12">
 
                 	<!-- Project Carousel -->
-                	<div class="owl-carousel owl-theme top_30 wow fadeInUp" data-wow-delay="0.4s">
-
-                        <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
-                            <div class="blog-image">
-                                <iframe width="100%" height="180" src="https://www.youtube.com/embed/heVuNAlaSww" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            </div>
-                            <h2 class="blog-title">My LED Wall - 6 x 8 ft</h2>
-                            <p>Composed of four modular panels, The LEDs communicate via DMX protocol and are controlled by a touch screen. </p>
-                        </a>
+                	<div class="owl-carousel owl-theme top_30 wow fadeInUp" data-wow-delay="0.2s">
                         <a href="/projects/fisher-classic" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/fc_banner.jpg" height="180">
+                                <img src="images/golf_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">Fisher Classic - Golf Tournament App</h2>
                             <p>A handy web app built to organize large golf tournaments with friends. The app has several usefull features for large groups of golfers.</p>
                         </a>
                         <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/project-banner-default.jpg" height="180">
+                                <img src="images/medical_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">GateKeeper</h2>
                             <p>A platform for medical equipment vendors to connect with doctors and practioners with personalized video offers. </p>
                         </a>
                         <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/project-banner-default.jpg" height="180">
+                                <img src="images/hvac_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">TrainingTrades</h2>
                             <p>A platform for HVAC vendors and OEM's to list training and course material so industry professionals can locate and sign up to nearby training.</p>
                         </a>
                         <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/project-banner-default.jpg" height="180">
+                                <img src="images/led_banner_icon.jpg" height="180">
                             </div>
-                            <h2 class="blog-title">Glover Home Media Center</h2>
-                            <p>Some cool home controls I built for my house and room mates, includes video scapring, retro video game emulators, and music control.</p>
+                            <h2 class="blog-title">My LED Wall - 6 x 8 ft</h2>
+                            <p>Composed of four modular panels, The LEDs communicate via DMX protocol and are controlled by a touch screen. </p>
                         </a>
                         <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/ableton_banner.png" height="180">
+                                <img src="images/media_banner_icon.jpg" height="180">
                             </div>
-                            <h2 class="blog-title">My Music Production</h2>
-                            <p>My electronic and house music production from back in the day. Some remixes and origial releases. </p>
+                            <h2 class="blog-title">Glover Home Media Center</h2>
+                            <p>Some cool home controls I built for my house and room mates, includes video scapring, retro video game emulators, and music control.</p>
                         </a>
                     </div>
 
@@ -291,7 +286,7 @@
     </section>
     
     <!-- BLOG -->
-    <section class="blog" id="experience">
+    <section class="blog" id="experience" style="background-color: black; padding-bottom: 0px;">
         <div class="container-fluid dgray-bg">
             <div class="container">
 
@@ -318,11 +313,60 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Music -->
+    <section class="blog music-sec paroller-music" id="experience">
+
+        <!-- TOP -->
+        <svg class="diagonal-top music-right-top" width="20%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+            <path d="M100 0 L0 100 L0 0 Z"></path>
+        </svg>
+        <svg class="diagonal-top music-left-top" width="80%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+            <path d="M100 0 L100 100 L0 0 Z"></path>
+        </svg>
+
+        <!-- BOTTOM -->
+    	<svg class="diagonal-bottom music-left-bottom" width="20%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+        	<path d="M0 100 L100 100 L0 10 Z"></path>
+    	</svg>
+    	<svg class="diagonal-bottom music-right-bottom" width="80%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+        	<path d="M0 100 L100 100 L100 10 Z"></path>
+    	</svg>
+    	
+        <div class="container-fluid">
+            <div class="container music-cont">
+
+     <!--            <div class="section-title dleft top_90 mb-4">
+                    <h2>MUSIC</h2>
+                </div> -->
+
+                <div class="row"> 
+                    <!-- experience text -->
+                    <div class="col-12 prof-text section-title wow fadeInUp mt-0 mt-md-5 text-center"  data-wow-delay="0.4s">
+                        <h2>MUSIC</h2>
+                        <p>Check out some of my original tracks</p>
+                        <a href="/music"><p>Listen Here <i class="ti ti-music-alt"></i></p></a>
+                    </div>
+
+                    <!-- experience button -->
+<!--                     <div class="col-md-pull-7 col-md-5 col-sm-12 prof-image wow fadeInUp"  data-wow-delay="0.6s">
+                        <div class="row ml-4 mt-0 mb-3">
+                            <a href="/downloads/MATT_GLOVER_CV_2019.pdf" download> 
+                                <div class="tilt tilt-logo pointer" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">
+                                    <span class="tilt-logo-inner">
+                                        See all Music <i style="font-size: 20px;" class="ti-music-alt"></i>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
+                </div>
 
             </div>
-            <svg class="diagonal-gray" width="100%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
-                <path d="M0 0 L70 100 L100 0 Z"></path>
-            </svg>
         </div>
     </section>
     
@@ -336,7 +380,7 @@
                 <p><b>mattjglover@hotmail.com</b></p>
             </div>
 
-            <div class="col-md-3 wow slideInLeft pl-2 pl-md-0" data-wow-delay="0.3s">
+            <div class="col-md-3 wow slideInLeft pl-2 pl-md-0" data-wow-delay="0.2s">
                 <div class="social-icons text-center text-md-left"> 
                     <a class="fb" href="https://www.facebook.com/profile.php?id=500822307"><i class="ti-facebook" aria-hidden="true"></i></a>
                     <a class="ins" href="https://www.instagram.com/mj_glover/"><i class="ti-instagram" aria-hidden="true"></i></a> 
@@ -347,7 +391,7 @@
                 </div>
             </div>
 
-            <div class="col-md-7 col-md-offset-2 form bottom_90 wow slideInRight" data-wow-delay="0.6s">
+            <div class="col-md-7 col-md-offset-2 form bottom_90 wow slideInRight" data-wow-delay="0.2s">
                 <div class="page-title sub text-center text-md-right">
                     <h5>leave me a message</h5>
                 </div>
@@ -399,6 +443,8 @@
 <script src="{{ asset('/theme_landing/js/main.js') }}"></script> 
     
 <script src="https://unpkg.com/tilt.js@1.1.21/dest/tilt.jquery.min.js"></script>
+
+<script src="{{ asset('/vendor/paroller.js-master/dist/jquery.paroller.js') }}"></script> 
 
 <script>
 
@@ -454,7 +500,7 @@
             loop:true,
             autoplay:true,
             autoplayTimeout:5000,
-            autoplayHoverPause:false,
+            autoplayHoverPause:true,
             margin:15,
             nav:true,
             dotsEach: true,
@@ -471,6 +517,29 @@
                 }
             }
         });
+
+
+        $('.paroller-main').paroller({
+			factorXs: -0.2,
+			factorSm: -0.2,
+			factorMd: -0.4,
+			factorLg: -0.6,
+			factorXl: -0.6,
+			factor: -0.6,
+			type: 'background',
+			direction: 'vertical'
+		}); 
+
+        $('.paroller-music').paroller({
+            factorXs: 0.3,
+            factorSm: 0.3,
+            factorMd: 0.6,
+            factorLg: 0.6,
+            factorXl: 0.6,
+            factor: 0.6,
+            type: 'background',
+            direction: 'vertical'
+        }); 
 
     });
 
