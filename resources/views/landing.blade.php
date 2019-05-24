@@ -36,7 +36,6 @@
 
 
 
-
 <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -100,12 +99,12 @@
 </style>
 
 <!-- LOADER -->
-<div class="loader-wrapper">
+<!-- <div class="loader-wrapper">
     <div class="loader-image">
         <img src="{{ asset('images/bulb_logo.png') }}" height="80"  alt="">
     </div>
     <div class="loader"></div>
-</div>
+</div> -->
     
     <nav>
         <div class="row" >
@@ -144,12 +143,12 @@
             </div>
         </div>
     </section>
-        <svg class="diagonal home-left" width="21%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
-            <path d="M0 100 L100 100 L0 10 Z"></path>
-        </svg>
-        <svg class="diagonal home-right" width="80%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
-            <path d="M0 100 L100 100 L100 10 Z"></path>
-        </svg>
+    <svg class="diagonal home-left" width="21%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+        <path d="M0 100 L100 100 L0 10 Z"></path>
+    </svg>
+    <svg class="diagonal home-right" width="80%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
+        <path d="M0 100 L100 100 L100 10 Z"></path>
+    </svg>
     <!-- END HOME -->
 
     <!--ABOUT-->
@@ -160,7 +159,7 @@
       		
                 <div class="row">
                     <!-- about text -->
-                    <div class="col-md-offset-2 col-md-push-4 col-md-6 col-sm-12 about-text wow fadeInUp"  data-wow-delay="0.4s">
+                    <div class="col-md-offset-2 col-md-push-4 col-md-6 col-sm-12 about-text wow fadeInUp"  data-wow-delay="0.2s">
                         <div class="section-title dleft bottom_30">
                             <h2>ABOUT ME</h2>
                         </div>
@@ -286,7 +285,7 @@
     </section>
     
     <!-- BLOG -->
-    <section class="blog" id="experience" style="background-color: black; padding-bottom: 0px;">
+    <section class="blog" id="experience" style="padding-bottom: 0px;">
         <div class="container-fluid dgray-bg">
             <div class="container">
 
@@ -294,15 +293,15 @@
                     <h2>PROFESSIONAL EXPERIENCE</h2>
                 </div>
 
-                <div class="row">
+                <div class="row mb-5">
                     <!-- experience text -->
-                    <div class="col-md-push-5 col-md-7 col-sm-12 prof-text wow fadeInUp mt-0 mt-md-2"  data-wow-delay="0.4s">
+                    <div class="col-md-push-5 col-md-7 col-sm-12 wow fadeInUp mt-0 mt-md-2"  data-wow-delay="0.4s">
                         <p>I have worked in several technology sectors over the course of my career. I started out working various jobs for family and friends, I went to college then eventually landed my first corporate gig. After I learned many tricks of the trade working for an international corporation, I eventually migrated to the start up world where I currently reside today. My current position is head quartered in Toronto Ontario.</p>
                     </div>
 
                     <!-- experience button -->
-                    <div class="col-md-pull-7 col-md-5 col-sm-12 prof-image wow fadeInUp"  data-wow-delay="0.6s">
-                        <div class="row ml-4 mt-0 mb-3">
+                    <div class="col-md-pull-7 col-md-5 col-sm-12 prof-image wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="row ml-4 mt-0">
                             <a href="/downloads/MATT_GLOVER_CV_2019.pdf" download> 
                                 <div class="tilt tilt-logo pointer" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">
                                     <span class="tilt-logo-inner">
@@ -346,10 +345,10 @@
 
                 <div class="row"> 
                     <!-- experience text -->
-                    <div class="col-12 prof-text section-title wow fadeInUp mt-0 mt-md-5 text-center"  data-wow-delay="0.4s">
-                        <h2>MUSIC</h2>
-                        <p>Check out some of my original tracks</p>
-                        <a href="/music"><p>Listen Here <i class="ti ti-music-alt"></i></p></a>
+                    <div class="col-12 prof-text section-title wow fadeInUp mt-5 mb-5 mt-md-5 text-center text-shadow"  data-wow-delay="0.4s">
+                        <h2 style="color:#748182" class="text-shadow">MUSIC</h2>
+                        <p class="text-shadow">Check out some of my original tracks</p>
+                        <a href="/music"><p class="text-shadow">Listen Here <br><i class="fa fa-play-circle" style="font-size:24px"></i></p></a>
                     </div>
 
                     <!-- experience button -->
@@ -531,9 +530,9 @@
 		}); 
 
         $('.paroller-music').paroller({
-            factorXs: 0.3,
-            factorSm: 0.3,
-            factorMd: 0.6,
+            factorXs: -0.2,
+            factorSm: -0.2,
+            factorMd: -0.4,
             factorLg: 0.6,
             factorXl: 0.6,
             factor: 0.6,
