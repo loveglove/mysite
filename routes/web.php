@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Project Routes
 Route::get('/projects/led-wall', function() { return view('projects.ledwall'); });
 Route::get('/projects/fisher-classic', function() { return view('projects.fisherclassic'); });
-Route::get('/projects/music', function() { return view('projects.music'); });
+Route::get('/music', function() { return view('music'); });
 
 // Auth Routes
 Auth::routes();

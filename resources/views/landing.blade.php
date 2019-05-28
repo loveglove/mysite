@@ -99,12 +99,12 @@
 </style>
 
 <!-- LOADER -->
-<!-- <div class="loader-wrapper">
+<div class="loader-wrapper">
     <div class="loader-image">
         <img src="{{ asset('images/bulb_logo.png') }}" height="80"  alt="">
     </div>
     <div class="loader"></div>
-</div> -->
+</div>
     
     <nav>
         <div class="row" >
@@ -121,6 +121,7 @@
                     <li><a href="#about" class="smoothScroll">About</a></li>
                     <li><a href="#projects" class="smoothScroll">Projects</a></li>
                     <li><a href="#experience" class="smoothScroll">Experience</a></li>
+                    <li><a href="#music" class="smoothScroll">Music</a></li>
                     <li><a href="#contact" class="smoothScroll">Contact</a></li>
               <!--       <li><a href="login" class="">Login</a></li> -->
                 </ul>
@@ -318,7 +319,7 @@
 
 
     <!-- Music -->
-    <section class="blog music-sec paroller-music" id="experience">
+    <section class="blog music-sec paroller-music" id="music">
 
         <!-- TOP -->
         <svg class="diagonal-top music-right-top" width="20%" height="170" viewBox="0 0 100 102" preserveAspectRatio="none">
@@ -345,7 +346,7 @@
 
                 <div class="row"> 
                     <!-- experience text -->
-                    <div class="col-12 prof-text section-title wow fadeInUp mt-5 mb-5 mt-md-5 text-center text-shadow"  data-wow-delay="0.4s">
+                    <div class="col-12 prof-text section-title wow fadeInUp mt-5 mb-5 mt-md-5 text-center"  data-wow-delay="0.4s">
                         <h2 style="color:#748182" class="text-shadow">MUSIC</h2>
                         <p class="text-shadow">Check out some of my original tracks</p>
                         <a href="/music"><p class="text-shadow">Listen Here <br><i class="fa fa-play-circle" style="font-size:24px"></i></p></a>
@@ -533,9 +534,9 @@
             factorXs: -0.2,
             factorSm: -0.2,
             factorMd: -0.4,
-            factorLg: 0.6,
-            factorXl: 0.6,
-            factor: 0.6,
+            factorLg: 0.5,
+            factorXl: 0.5,
+            factor: 0.5,
             type: 'background',
             direction: 'vertical'
         }); 

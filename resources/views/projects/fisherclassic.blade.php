@@ -80,8 +80,9 @@
                 <ul class="nav-menu">
                     <li><a href="/#home" class="smoothScroll">Home</a></li>
                     <li><a href="/#about" class="smoothScroll">About</a></li>
-                    <li><a href="/#portfolio" class="smoothScroll">Projects</a></li>
-                    <li><a href="/#blog" class="smoothScroll">Experience</a></li>
+                    <li><a href="/#projects" class="smoothScroll">Projects</a></li>
+                    <li><a href="/#experience" class="smoothScroll">Experience</a></li>
+                    <li><a href="/#music" class="smoothScroll">Music</a></li>
                     <li><a href="/#contact" class="smoothScroll">Contact</a></li>
               <!--       <li><a href="login" class="">Login</a></li> -->
                 </ul>
