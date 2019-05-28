@@ -121,6 +121,7 @@
                     <br/>  
 
                     <div class="row">
+
                     	<div class="col-12">
                 			<div id="waveform"></div>
                 			<div class="progress-container" style="height:8px;">
@@ -133,22 +134,40 @@
                 		<div class="col-12">
 		                	<div class="list-group" id="playlist">
 
-			                    <a href="/audio/as/Applied Science - SnarlCat (Original Mix).mp3" class="list-group-item">
+			                    <a href="/audio/as/Applied Science - SnarlCat (Original Mix).mp3" class="list-group-item active">
 			                        <i class="icon fa fa-play"></i>
 			                        Applied Science - SnarlCat (Original Mix)
 			                        <span class="badge">6:51</span>
 			                    </a>
 
-			                    <a href="/audio/as/Applied Science - All Out...(Original Mix).mp3" class="list-group-item active">
+			                    <a href="/audio/as/Applied Science - Sleep When Your Dead (Original Mix).mp3" class="list-group-item">
 			                        <i class="icon fa fa-play"></i>
-			                        Applied Science - All Out...(Original Mix)
-			                        <span class="badge">5:31</span>
+			                        Applied Science - Sleep When Your Dead (Original Mix)
+			                        <span class="badge">5:09</span>
+			                    </a>
+
+			                    <a href="/audio/as/Applied Science - Parsimony (Original Mix).mp3" class="list-group-item">
+			                        <i class="icon fa fa-play"></i>
+			                        Applied Science - Parsimony (Original Mix)
+			                        <span class="badge">4:43</span>
 			                    </a>
 
 			                    <a href="/audio/as/DJ Baker & StatusBrown - Work On It (The Applied Science Remix).mp3" class="list-group-item">
 			                        <i class="icon fa fa-play"></i>
 			                        DJ Baker & StatusBrown - Work On It (The Applied Science Remix)                      
 			                        <span class="badge">6:11</span>
+			                    </a>
+
+			                    <a href="/audio/as/Eurythmics - Seventeen (Applied Science Remix).mp3" class="list-group-item">
+			                        <i class="icon fa fa-play"></i>
+			                        Eurythmics - Seventeen (Applied Science Remix)                   
+			                        <span class="badge">7:38</span>
+			                    </a>
+
+			                    <a href="/audio/as/Applied Science - All Out...(Original Mix).mp3" class="list-group-item">
+			                        <i class="icon fa fa-play"></i>
+			                        Applied Science - All Out...(Original Mix)
+			                        <span class="badge">5:31</span>
 			                    </a>
 
                                 <a href="/audio/as/Metric - Gimme Sympathy (Applied Science Remix).mp3" class="list-group-item">
