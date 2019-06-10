@@ -222,7 +222,7 @@
     <section class="portfolio" id="projects">
         <div class="container">
             <div class="section-title dleft top_90">
-                <h2>PROJECTS</h2>
+                <h2>PERSONAL PROJECTS</h2>
      <!--            <div class="portfolio_filter">
                     <ul>
                         <li class="select-cat" data-filter="*">All</li>
@@ -239,14 +239,14 @@
 
                 	<!-- Project Carousel -->
                 	<div class="owl-carousel owl-theme top_30 wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="/projects/fisher-classic" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://fisherclassic.ca" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
                                 <img src="images/golf_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">Fisher Classic - Golf Tournament App</h2>
                             <p>A handy web app built to organize large golf tournaments with friends. The app has several usefull features for large groups of golfers.</p>
                         </a>
-                        <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://mygatekeeper.ca" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
                                 <img src="images/medical_banner_icon.jpg" height="180">
                             </div>
@@ -272,7 +272,7 @@
                                 <img src="images/media_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">Glover Home Media Center</h2>
-                            <p>Some cool home controls I built for my house and room mates, includes video scapring, retro video game emulators, and music control.</p>
+                            <p>Some cool home utilities I built for my house and room mates, includes video scraping, retro video game emulators, and music control.</p>
                         </a>
                     </div>
 
@@ -347,7 +347,7 @@
                 <div class="row"> 
                     <!-- experience text -->
                     <div class="col-12 prof-text section-title wow fadeInUp mt-5 mb-5 mt-md-5 text-center"  data-wow-delay="0.4s">
-                        <h2 style="color:#748182" class="text-shadow">MUSIC</h2>
+                        <h2 style="color:#748182" class="text-shadow">MY MUSIC</h2>
                         <p class="text-shadow">Check out some of my original tracks</p>
                         <a href="/music"><p class="text-shadow">Listen Here <br><i class="fa fa-play-circle" style="font-size:24px"></i></p></a>
                     </div>
@@ -377,7 +377,7 @@
             <div class="section-title text-center text-md-left pb-0">
                 <h2 class="bottom_30">GET IN TOUCH</h2>
                 <p>Need help designing a product, or turning an idea into a reality? Give me a shout, I can help you get started!</p>
-                <p><b>mattjglover@hotmail.com</b></p>
+                <p><b>matt@mattglover.ca</b></p>
             </div>
 
             <div class="col-md-3 wow slideInLeft pl-2 pl-md-0" data-wow-delay="0.2s">

@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtpout.secureserver.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +42,7 @@ return [
     |
     */
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => env('MAIL_PORT', 465),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'mjglover0@gmail.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@mattglover.ca'),
         'name' => env('MAIL_FROM_NAME', 'MG Site'),
     ],
 
@@ -84,7 +84,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', 'mattjglover0@gmail.com'),
+    'username' => env('MAIL_USERNAME', 'matt@mattglover.ca'),
 
     'password' => env('MAIL_PASSWORD', 'Btown2108'),
 
