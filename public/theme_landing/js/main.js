@@ -99,7 +99,6 @@ $(document).ready( function() {
       
     //SMOOTH SCROLL
     $(document).on("scroll", onScroll);
-
     $('a[href^="#"]').on('click', function (e) {
         e.preventDefault();
         $(document).off("scroll");
@@ -125,22 +124,22 @@ $(document).ready( function() {
     });
     
         
-    function onScroll(event){
-        if ($('#home').length) {     
-            var scrollPos = $(document).scrollTop();
-            $('nav ul li a').each(function () {
-                var currLink = $(this);
-                var refElement = $(currLink.attr("href"));
-                if (refElement.position().top-90 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-                    $('nav ul li a').removeClass("active");
-                    currLink.addClass("active");
-                }
-                else{
-                    currLink.removeClass("active");
-                }
-            });
-        }              
-    }
+        function onScroll(event){
+          if ($('#home').length) {     
+    var scrollPos = $(document).scrollTop();
+    $('nav ul li a').each(function () {
+        var currLink = $(this);
+        var refElement = $(currLink.attr("href"));
+        if (refElement.position().top-90 <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+            $('nav ul li a').removeClass("active");
+            currLink.addClass("active");
+        }
+        else{
+            currLink.removeClass("active");
+        }
+    });
+   }              
+}
     
     
     //NAVBAR SHOW - HIDE
@@ -174,14 +173,13 @@ $('.responsive').on('click', function (e) {
     $(window).resize(centerInit);
     
     
-    
     // HOME TYPED JS
-    $(".element").typed({
+      $(".element").typed({
         strings: ["...", "a Developer", "an Engineer", "a Problem Solver", "Matt Glover"],
         typeSpeed: 6,
         loop:false,
         backDelay: 2000
-    });
+      });
  
     
     
