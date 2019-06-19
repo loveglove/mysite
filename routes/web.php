@@ -15,12 +15,14 @@ app('debugbar')->disable();
 
 // Main Routes
 Route::get('/', function() { return view('landing'); });
+Route::get('/music', function() { return view('music'); });
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 // Project Routes
 Route::get('/projects/led-wall', function() { return view('projects.ledwall'); });
 Route::get('/projects/fisher-classic', function() { return view('projects.fisherclassic'); });
-Route::get('/music', function() { return view('music'); });
+
 
 // Auth Routes
 Auth::routes();
