@@ -99,13 +99,11 @@ class RegisterController extends Controller
     }
 
 
-
-
     /**
-     * Obtain the user information from provider.  Check if the user already exists in our
-     * database by looking up their provider_id in the database.
-     * If the user exists, log them in. Otherwise, create a new user then log them in. After that 
-     * redirect them to the authenticated users homepage.
+     * Obtain the user information from provider.  
+     * Check if the user already exists by looking up their provider_id in the database.
+     * If the user exists, log them in. Otherwise, create a new user then log them in.  
+     * After that redirect them to the authenticated users homepage.
      *
      * @return Response
      */

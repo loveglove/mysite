@@ -353,7 +353,7 @@
                     </div>
 
                     <!-- experience button -->
-<!--                     <div class="col-md-pull-7 col-md-5 col-sm-12 prof-image wow fadeInUp"  data-wow-delay="0.6s">
+<!--                <div class="col-md-pull-7 col-md-5 col-sm-12 prof-image wow fadeInUp"  data-wow-delay="0.6s">
                         <div class="row ml-4 mt-0 mb-3">
                             <a href="/downloads/MATT_GLOVER_CV_2019.pdf" download> 
                                 <div class="tilt tilt-logo pointer" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">
@@ -410,7 +410,7 @@
                             <textarea name="con_message" id="con_message" class="requie" placeholder="How can I help you?" rows="8"></textarea>
                             
                             <div class="g-recaptcha" data-sitekey="6LcSoJ8UAAAAAHu9DFvKD-_zZrupP4NmC_9h3nf9"></div>
-
+                            <br>
                             <button id="con_submit" class="sitebtn mt-3" type="submit">Send Message <i class="fa fa-paper-plane pl-2"></i></button>
                         </div>
                     </div>

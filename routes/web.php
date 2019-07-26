@@ -16,6 +16,7 @@ app('debugbar')->disable();
 // Main Routes
 Route::get('/', function() { return view('landing'); });
 Route::get('/music', function() { return view('music'); });
+Route::get('/privacy', function() { return view('privacy'); });
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -43,9 +44,12 @@ Route::get('/nxm', function() { return view('nxm.nxm'); });
 Route::get('/map.html', function() { return view('nxm.nxm'); });
 Route::get('/trip.html', function() { return view('nxm.trip'); });
 
+// APP ROUTES
 
-
-
+// TWILIO
+Route::get('/apps/operator/test', 'TwilController@twilTest');
+Route::get('/apps/operator/voice/inbound', 'TwilController@voiceInbound');
+Route::get('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
 
 
 // Mail Routes
