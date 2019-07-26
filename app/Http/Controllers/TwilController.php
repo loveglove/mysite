@@ -24,20 +24,29 @@ class TwilController extends Controller
     // inbound call from +1 647 930 6035
     public function voiceInbound(Request $request)
     {
-		// Start our TwiML response
-		// $response = new TwiML;
-		// Read a message aloud to the caller
-		// $response->say(
-		//     "Thank you for calling! Have a great day.", 
-		//     array("voice" => "alice")
-		// );
 
+    	$autoOpen = false;
 
-		$response = new VoiceResponse();
-		$response->say('Welcome');
-		$response->play('', ['digits' => 'w9ww9ww9ww9ww9ww9ww9ww9ww9ww9']);
+		$numberA = '4169851997';
+		$numberB = '7057968449';
 
-		return response($response)->header('Content-Type', 'application/xml');
+    	if($autoOpen){
+
+			Twilio::message($numberA, "Someone is buzzing in");
+			Twilio::message($numberB, "Someone is buzzing in");
+			$response = new VoiceResponse();
+			$response->say('Welcome, come on in', ['voice' => 'alice', 'language' => 'en-gb']);
+			$response->play('', ['digits' => 'w9w9w9w9w9w9w9w9w9ww9ww9ww9']);
+			return response($response)->header('Content-Type', 'application/xml');
+
+		}else{
+
+			// $response = new VoiceResponse();
+			// $response->dial('4169851997');
+			// return response($response)->header('Content-Type', 'application/xml');
+			return redirect('http://twimlets.com/simulring?PhoneNumbers%5B0%5D='.$numberA.'&PhoneNumbers%5B1%5D='.$numberB.'&Message=%22&');
+
+		}
 
  	}
  	
@@ -45,7 +54,7 @@ class TwilController extends Controller
  	// inbound text from +1 647 930 6035
     public function messageInbound(Request $request)
     {
-
+    	// respond to a text
  	}
 
 }
