@@ -98,14 +98,15 @@
     }
 </style>
 
-<!-- LOADER -->
-<div class="loader-wrapper">
-    <div class="loader-image">
-        <img src="{{ asset('images/bulb_logo.png') }}" height="80"  alt="">
+    <!-- LOADER -->
+    <div class="loader-wrapper">
+        <div class="loader-image">
+            <img src="{{ asset('images/bulb_logo.png') }}" height="80"  alt="">
+        </div>
+        <div class="loader"></div>
     </div>
-    <div class="loader"></div>
-</div>
     
+    <!-- NAV -->
     <nav>
         <div class="row" >
             <div class="container-fluid">
@@ -123,12 +124,13 @@
                     <li><a href="#experience" class="smoothScroll">Experience</a></li>
                     <li><a href="#music" class="smoothScroll">Music</a></li>
                     <li><a href="#contact" class="smoothScroll">Contact</a></li>
-              <!--       <li><a href="login" class="">Login</a></li> -->
+                    <li><a href="login" class="">Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
     
+
     <!--HOME-->
     <section class="home paroller-main" id="home"> 
         <div class="home-content">
@@ -186,7 +188,7 @@
                         </div>
                         <div class="text">
                             <h6>Web Design</h6> 
-                            <p>My bread and butter is web application design & development. I absolutely love to build web apps and provide creative solutions for any.</p>
+                            <p>My bread and butter is web application design & development. I absolutely love to build web apps and provide creative solutions for any project.</p>
                         </div>
                     </div>
                     <!-- an area -->
@@ -239,40 +241,47 @@
 
                 	<!-- Project Carousel -->
                 	<div class="owl-carousel owl-theme top_30 wow fadeInUp" data-wow-delay="0.2s">
-                        <a href="/projects/fisher-classic" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://fisherclassic.com" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/golf_banner_icon.jpg" height="180">
+                                <img src="images/projects/golf_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">Fisher Classic - Golf Tournament App</h2>
                             <p>A handy web app built to organize large golf tournaments with friends. The app has several usefull features for large groups of golfers.</p>
                         </a>
-                        <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://mygatekeeper.com" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/medical_banner_icon.jpg" height="180">
+                                <img src="images/projects/medical_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">GateKeeper</h2>
-                            <p>A platform for medical equipment vendors to connect with doctors and practioners with personalized video offers. </p>
+                            <p>A platform for B2B match making. Enabling vendors and suppliers to easily personalize there offers and services to businesses with simple video messages.  </p>
                         </a>
-                        <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://trainingtrades.com" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/hvac_banner_icon.jpg" height="180">
+                                <img src="images/projects/hvac_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">TrainingTrades</h2>
                             <p>A platform for HVAC vendors and OEM's to list training and course material so industry professionals can locate and sign up to nearby training.</p>
                         </a>
-                        <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://www.youtube.com/watch?v=heVuNAlaSww" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/led_banner_icon.jpg" height="180">
+                                <img src="images/projects/led_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">My LED Wall - 6 x 8 ft</h2>
                             <p>Composed of four modular panels, The LEDs communicate via DMX protocol and are controlled by a touch screen. </p>
                         </a>
                         <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
-                                <img src="images/media_banner_icon.jpg" height="180">
+                                <img src="images/projects/media_banner_icon.jpg" height="180">
                             </div>
                             <h2 class="blog-title">Glover Home Media Center</h2>
-                            <p>Some cool home controls I built for my house and room mates, includes video scapring, retro video game emulators, and music control.</p>
+                            <p>Some cool home controls I built for my house, includes video scraping, retro video game emulators, music playlist controler, and a roomate task scheduler.</p>
+                        </a>
+                        <a href="#" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                            <div class="blog-image">
+                                <img src="images/projects/buzzer_banner_icon.jpg" height="180">
+                            </div>
+                            <h2 class="blog-title">Loft Bot</h2>
+                            <p>Leveraging SMS and Telephony services in the cloud to create a control system for apartment and condo building intercom & access systems.</p>
                         </a>
                     </div>
 
@@ -446,6 +455,8 @@
 
 <script src="{{ asset('/vendor/paroller.js-master/dist/jquery.paroller.js') }}"></script> 
 
+<script src="{{ asset('/vendor/jquery.ripples-master/dist/jquery.ripples-min.js') }}"></script> 
+
 <script>
 
     /*
@@ -518,7 +529,14 @@
             }
         });
 
+        // water ripples 
+        $('#home').ripples({
+            resolution: 512,
+            dropRadius: 20,
+            perturbance: 0.01,
+        });
 
+        // parallax sections
         $('.paroller-main').paroller({
 			factorXs: -0.2,
 			factorSm: -0.2,
@@ -542,6 +560,8 @@
         }); 
 
     });
+
+
 
 
 </script> 

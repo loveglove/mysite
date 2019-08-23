@@ -50,7 +50,7 @@ Route::get('/trip.html', function() { return view('nxm.trip'); });
 Route::get('/apps/operator/test', 'TwilController@twilTest');
 Route::get('/apps/operator/voice/inbound', 'TwilController@voiceInbound');
 Route::get('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
-
+Route::get('/apps/operator/password/process', 'TwilController@processPassword');
 
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
