@@ -8,4 +8,10 @@ class Building extends Model
 {
     protected $table = 'buildings';
     protected $guarded = [];
+
+    public function contacts()
+    {
+        return $this->hasMany('App\Contact'); // model, foreign_key, local_key
+    }
+
 }

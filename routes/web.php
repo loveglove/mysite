@@ -49,7 +49,7 @@ Route::get('/trip.html', function() { return view('nxm.trip'); });
 // TWILIO
 Route::get('/apps/operator/test', 'TwilController@twilTest');
 Route::get('/apps/operator/voice/inbound', 'TwilController@voiceInbound');
-Route::get('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
+Route::any('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
 Route::get('/apps/operator/password/process', 'TwilController@processPassword');
 
 // Mail Routes
