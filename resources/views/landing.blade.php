@@ -65,7 +65,8 @@
 
 <!-- ReCAPTCHA -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+<!-- LinkedIn Badge -->
+<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 </head>
 <body class="diag">
     
@@ -356,9 +357,9 @@
                 <div class="row"> 
                     <!-- experience text -->
                     <div class="col-12 prof-text section-title wow fadeInUp mt-5 mb-5 mt-md-5 text-center"  data-wow-delay="0.4s">
-                        <h2 style="color:#748182" class="text-shadow">MUSIC</h2>
-                        <p class="text-shadow">Check out some of my original tracks</p>
-                        <a href="/music"><p class="text-shadow">Listen Here <br><i class="fa fa-play-circle" style="font-size:24px"></i></p></a>
+                        <h2 style="color:#ebebeb" class="text-shadow">MUSIC</h2>
+                        <p class="text-shadow" style="color:#ebebeb ">Check out some of my original tracks</p>
+                        <a href="/music"><p class="text-shadow" style="color:#ebebeb">Listen Here <br><i class="fa fa-play-circle" style="font-size:42px; margin-top:5px;"></i></p></a>
                     </div>
 
                     <!-- experience button -->
@@ -397,6 +398,9 @@
                     <a class="gh" href="https://github.com/loveglove"><i class="ti-github" aria-hidden="true"></i></a> 
                     <a class="pt" href="https://www.pinterest.ca/mattjglover0187/"><i class="ti-pinterest" aria-hidden="true"></i></a> 
                     
+                </div>
+                <div class="text-center">
+                    <div class="LI-profile-badge pt-4"  data-version="v1" data-size="large" data-locale="en_US" data-type="vertical" data-theme="light" data-vanity="matt-glover-435a82b6"><a class="LI-simple-link" href='https://ca.linkedin.com/in/matt-glover-435a82b6?trk=profile-badge'>Matt Glover</a></div>
                 </div>
             </div>
 

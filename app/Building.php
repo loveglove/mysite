@@ -11,7 +11,7 @@ class Building extends Model
 
     public function contacts()
     {
-        return $this->hasMany('App\Contact'); // model, foreign_key, local_key
+        return $this->hasMany('App\Contact', 'building_id', 'id'); // model, foreign_key, local_key
     }
 
 }

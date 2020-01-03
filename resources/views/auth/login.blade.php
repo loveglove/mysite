@@ -9,7 +9,7 @@
   
 
     <div class="login-box card">
-        <div class="card-body" style="margin: 0 auto;">
+        <div class="card-body" style="margin: 0 auto; min-width:350px;">
 
 
             <!-- LOGO -->
@@ -20,7 +20,7 @@
                     </div>
                     <div class="logo_text">
                         <span>Matt Glover</span><br>
-                        <span style='font-size: 16px;'>Developements</span>
+                        <span style='font-size: 18px;'>Developements</span>
                     </div>
                 </div>
             </a>
@@ -77,13 +77,12 @@
             </form>
 
 
-            <!-- SIGN UP FORM -->
-            <form class="form-horizontal form-material" id="signupform" method="POST" action="{{ route('register') }}">
+            <!-- REGISTER FORM -->
+            <form class="form-horizontal form-material mt-5" id="signupform" method="POST" action="{{ route('register') }}" style="display:none;">
           	    {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                     <div class="col-xs-12">
-                        <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
+                        <input class="form-control" type="text" name="name" required autofocus placeholder="Name" value="{{ old('name') }}">
                         @if ($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -93,7 +92,7 @@
                 </div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                     <div class="col-xs-12">
-                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                        <input id="email" type="email" class="form-control" name="email" placeholder="Email"  value="{{ old('email') }}" required>
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -103,7 +102,7 @@
                 </div>
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <div class="col-xs-12">
-                        <input id="password" type="password" class="form-control" name="password" required>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                         @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
@@ -113,7 +112,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required>
                     </div>
                 </div>
                 <div class="form-group text-center m-t-20">
@@ -136,7 +135,7 @@
             </form>
 
             <!-- FORGOT PASSWORD -->
-            <form class="form-horizontal form-material mt-1 mt-lg-5" id="recoverform" method="POST" action="{{ route('password.email') }}">
+            <form class="form-horizontal form-material mt-1 mt-lg-5" id="recoverform" method="POST" action="{{ route('password.email') }}" style="display:none;">
                 @if (session('status'))
                     <div class="alert alert-success">
                         {{ session('status') }}
@@ -184,20 +183,26 @@
     });
     
     $('body').on('click','#to-recover',function(){
-        $("#loginform, #signupform").fadeOut("fast", function() {
-            $("#recoverform").fadeIn();
+        $("#loginform, #signupform").fadeOut(function() {
+            setTimeout(function(){
+                $("#recoverform").fadeIn();
+            },500);
         }); 
     });
 
     $('body').on('click','#to-login',function(){
-        $("#recoverform, #signupform").fadeOut("fast", function() {
-            $("#loginform").fadeIn();
+        $("#recoverform, #signupform").fadeOut(function() {
+            setTimeout(function(){
+                $("#loginform").fadeIn();
+            },500);
         }); 
     });
 
     $('body').on('click','#to-signup',function(){
-        $("#recoverform, #loginform").fadeOut("fast", function() {
-            $("#signupform").fadeIn();
+        $("#recoverform, #loginform").fadeOut(function() {
+            setTimeout(function(){
+                $("#signupform").fadeIn();
+            },500);
         }); 
     });
 

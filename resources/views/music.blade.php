@@ -134,7 +134,13 @@
                 		<div class="col-12">
 		                	<div class="list-group" id="playlist">
 
-			                    <a href="/audio/as/Applied Science - SnarlCat (Original Mix).mp3" class="list-group-item active">
+                                <a href="/audio/Georgia Lines - Westend Flute.mp3" class="list-group-item active">
+                                    <i class="icon fa fa-play"></i>
+                                    Georgia Lines - Westend Flute (Original Mix)
+                                    <span class="badge">4:24</span>
+                                </a>
+
+			                    <a href="/audio/as/Applied Science - SnarlCat (Original Mix).mp3" class="list-group-item">
 			                        <i class="icon fa fa-play"></i>
 			                        Applied Science - SnarlCat (Original Mix)
 			                        <span class="badge">6:51</span>
@@ -366,7 +372,7 @@
 		});
 
         $(document).ready(function(){
-            wavesurfer.load('/audio/as/Applied Science - SnarlCat (Original Mix).mp3');
+            wavesurfer.load('/audio/Georgia Lines - Westend Flute.mp3');
         });
 
 
