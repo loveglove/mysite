@@ -13,7 +13,7 @@ class MailController extends Controller
     // FLYBITS SendGrid Test
     public function flybitsEmail(Request $request)
     {   
-        // get array of context data payload
+        // get array of context data payload from the webhook request
         $data = $request->all();
 
         // Send Grip Web API
