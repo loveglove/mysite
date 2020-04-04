@@ -8,10 +8,13 @@ use Illuminate\Http\Response;
 use Twilio;
 use Input;
 use Auth;
+use Storage;
+use Carbon\Carbon;
 
 use App\User;
 use App\Building;
 use App\Contact;
+use App\Log;
 use Twilio\Twiml;
 use Twilio\TwiML\VoiceResponse;
 
@@ -20,11 +23,9 @@ class TwilController extends Controller
 {		
 
 	public function twilTest(Request $request)
-	{
-
-		$entry_digit = Auth::user()->building->entry_digit;
-		Twilio::message('4169851997', "Wow it really worked!");
-		return $entry_digit;
+	{   
+		Twilio::message("6475566309","4169851997",'Test Test Test');
+		return "Text Sent";
 	}
     
     // inbound call from +1 647 930 6035
@@ -35,13 +36,19 @@ class TwilController extends Controller
 		$building = Building::where('loftbot_number', $loftbot_number)->first();
 		$contacts = $building->contacts;
 
+		// Log::create([
+		// 	'user_id' => Auth::user()->id,
+  //           'type' => 'Door Entry',
+  //           'data' => $building->mode,
+  //       ]);
+
 		switch($building->mode)
 		{
 			// auto open
 			case 2:
 				foreach($contacts as $contact){
 					if($contact->notify_entry){
-						Twilio::message($contact->phone, "Someone is buzzing in");
+						Twilio::message($loftbot_number, $contact->phone, "Someone is buzzing in");
 					}
 				}
 				$response = new VoiceResponse();
@@ -91,7 +98,7 @@ class TwilController extends Controller
 		if($digits == $building->entry_code){
 			foreach($contacts as $contact){
 				if($contact->notify_entry){
-					Twilio::message($contact->phone, "Someone is buzzing in");
+					Twilio::message($loftbot_number, $contact->phone, "Someone is buzzing in");
 				}
 			}
 			$response = new VoiceResponse();
@@ -116,6 +123,7 @@ class TwilController extends Controller
 
 			$messageArray = explode(" ", $message);
 			$building = $contact->building;
+			$loftbot_number = $building->loftbot_number;
 
 			$command = strtolower($messageArray[0]);
 
@@ -147,7 +155,7 @@ class TwilController extends Controller
 							break;
 						}
 						$building->save();
-						Twilio::message($contact->phone, $mode_name);
+						Twilio::message($loftbot_number, $contact->phone, $mode_name);
 
 					}else{
 						// Return the current mode
@@ -166,7 +174,7 @@ class TwilController extends Controller
 							default:
 							break;
 						}
-						Twilio::message($contact->phone, $mode_name);
+						Twilio::message($loftbot_number, $contact->phone, $mode_name);
 					}
 				break;
 
@@ -176,12 +184,12 @@ class TwilController extends Controller
 						if(ctype_digit($messageArray[1])){
 							$building->entry_code = $messageArray[1];
 							$building->save();
-							Twilio::message($contact->phone, "Passcode set to: ".$messageArray[1]);
+							Twilio::message($loftbot_number, $contact->phone, "Passcode set to: ".$messageArray[1]);
 						}else{
-							Twilio::message($contact->phone, "Passcode must be only digits 0-9, try again.");
+							Twilio::message($loftbot_number, $contact->phone, "Passcode must be only digits 0-9, try again.");
 						}
 					}else{
-						Twilio::message($contact->phone, "Current pascode is: ".$building->entry_code);
+						Twilio::message($loftbot_number, $contact->phone, "Current pascode is: ".$building->entry_code);
 					}
 				break;
 
@@ -200,10 +208,10 @@ class TwilController extends Controller
 						}
 						
 						$contact->save();
-						Twilio::message($contact->phone, "Entry notification is set to: ".($contact->notify_entry ? 'ON' : 'OFF'));
+						Twilio::message($loftbot_number, $contact->phone, "Entry notification is set to: ".($contact->notify_entry ? 'ON' : 'OFF'));
 
 					}else{
-						Twilio::message($contact->phone, "Entry notification is set to: ".($contact->notify_entry ? 'ON' : 'OFF'));
+						Twilio::message($loftbot_number, $contact->phone, "Entry notification is set to: ".($contact->notify_entry ? 'ON' : 'OFF'));
 					}
 				break;
 
@@ -212,16 +220,16 @@ class TwilController extends Controller
 	
 					$building->entry_message = substr($message, 8);
 					$building->save();
-					Twilio::message($contact->phone, "New auto entry message is: ".$building->entry_message);
+					Twilio::message($loftbot_number, $contact->phone, "New auto entry message is: ".$building->entry_message);
 
 				}else{
-					Twilio::message($contact->phone, "Current auto entry message is: ".$building->entry_message);
+					Twilio::message($loftbot_number, $contact->phone, "Current auto entry message is: ".$building->entry_message);
 				}
 			break;
 		}
 
 		}else{
-			Twilio::message($contact->phone, "Access Denied");
+			Twilio::message($loftbot_number, $contact->phone, "Access Denied");
 		}
 
 		return response(null, 200)->header('Content-Type', 'application/xml');
@@ -229,4 +237,12 @@ class TwilController extends Controller
  	}
 
 
+ 	// FLYBITS SMS Test
+	public function flybitsSMS(Request $request)
+	{
+		$data = $request->all();
+		Twilio::message('6475566309', $data["phone"], $data["text"]);
+		return response()->json($data);
+	}
+    
 }

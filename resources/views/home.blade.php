@@ -31,7 +31,8 @@
             </div>
         </div>
 
-        <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div id="content-area" class="col-lg-4 col-xlg-3 col-md-5">
+
             <div class="card">
                 <div class="card-body">
                     <center class="m-t-30"> <img src="{{ Auth::user()->avatar }}" class="img-circle" width="150">
@@ -40,22 +41,91 @@
                         <div class="row text-center justify-content-md-center">
                             <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">254</font></a></div>
                             <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-picture"></i> <font class="font-medium">54</font></a></div>
+                            <div class="col-4"><a href="javascript:void(0)" class="link"><i class="icon-people"></i> <font class="font-medium">54</font></a></div>
                         </div>
                     </center>
                 </div>
-                <div>
-                    <hr> </div>
-                <div class="card-body"> <small class="text-muted">Email address </small>
-                    <h6>{{ Auth::user()->email }}</h6> <small class="text-muted p-t-30 db">Phone</small>
-                    <h6>+91 654 784 547</h6> <small class="text-muted p-t-30 db">Address</small>
-                    <h6>71 Pilgrim Avenue Chevy Chase, MD 20815</h6>
-                    <div class="map-box">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d470029.1604841957!2d72.29955005258641!3d23.019996818380896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e848aba5bd449%3A0x4fcedd11614f6516!2sAhmedabad%2C+Gujarat!5e0!3m2!1sen!2sin!4v1493204785508" style="border:0" allowfullscreen="" width="100%" height="150" frameborder="0"></iframe>
-                    </div> <small class="text-muted p-t-30 db">Social Profile</small>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title m-t-10">Content Title</h4>
+                    <h6 class="card-subtitle">Content Subtitle</h6>
                 </div>
             </div>
+
         </div>
 
     </div>
 </div>
+@endsection
+
+@section('scripts')
+
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+<script src="/vendor/flybits/dist/flybits.js"></script>
+<script>
+
+Flybits.init({
+  HOST: '//v3.flybits.com',
+  CTXREPORTDELAY: 5000,
+}).then(function(cfg){
+    /** cfg is the initialized state of the SDK configuration.
+      It is not required to be used, it is only returned for your convenience.*/
+
+    // Anonymous login 
+    var idp = new Flybits.idp.AnonymousIDP({
+        projectID: 'B0757CAF-56E1-450B-A994-B9000EA97CA9'
+    });
+    Flybits.Session.connect(idp);
+
+    //start working with SDK
+    Flybits.api.Content.getAll().then(function(resultObj){
+
+        console.log(resultObj.result);
+		// assuming there is a Content instance in the response
+		// var contentInstance = resultObj.result[0];
+		// retrieve JSON body
+
+		resultObj.result.forEach(function(contentInstance){
+			var content = contentInstance.getData();
+			var title = '';
+			var subtitle = '';
+			console.log(content);
+			// switch(content.type) {
+			//   case "event-information":
+			//     	console.log(content);
+			//     break;
+			//   case "articles":
+			//     	console.log(content);
+			//     break;
+			//  case "actionable-offer":
+			//     	console.log(content);
+			//     break;
+			// 	default:
+			//     console.log("More content found with no renderable type");
+			// }
+
+			// var html = `<div class="card">
+			//                 <div class="card-body">
+			//                     <h4 class="card-title m-t-10">`+ title + `</h4>
+			//                     <h6 class="card-subtitle">` + subtitle + `</h6>
+			//                 </div>
+			//             </div>`;
+			// $("#content-area").append(html);
+		});
+
+    }).then(function(obj){
+        // do stuff with body of Content instance.
+        console.log(obj);
+    });
+
+}).catch(function(validationObj){
+  // handle error
+  console.log(validationObj);
+});
+
+</script>
+
 @endsection

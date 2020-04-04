@@ -313,13 +313,14 @@
                     <!-- experience button -->
                     <div class="col-md-pull-7 col-md-5 col-sm-12 prof-image wow fadeInUp" data-wow-delay="0.6s">
                         <div class="row ml-4 mt-0">
-                            <a href="/downloads/MATT_GLOVER_CV_2019.pdf" download> 
+                        <a href="#contact" class="smoothScroll"> 
                                 <div class="tilt tilt-logo pointer" data-tilt data-tilt-glare="true" data-tilt-scale="1.1">
                                     <span class="tilt-logo-inner">
-                                        Download my CV <i style="font-size: 20px;" class="ti-cloud-down bounce"></i>
+                                        Request my CV <i style="font-size: 20px;" class="ti-cloud-down bounce"></i>
                                     </span>
                                 </div>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -421,7 +422,6 @@
                         <div class="col-md-12">
                             <!--Message-->
                             <textarea name="con_message" id="con_message" class="requie" placeholder="How can I help you?" rows="8"></textarea>
-                            
                             <div class="g-recaptcha" data-sitekey="6LcSoJ8UAAAAAHu9DFvKD-_zZrupP4NmC_9h3nf9"></div>
                             <br>
                             <button id="con_submit" class="sitebtn mt-3" type="submit">Send Message <i class="fa fa-paper-plane pl-2"></i></button>
@@ -436,7 +436,7 @@
     </section>
     <footer>
         <div class="container">
-            <p>Copyright © 2019 Matt Glover</p>
+            <p>Copyright © 2020 Matt Glover</p>
         </div>
     </footer>
                 

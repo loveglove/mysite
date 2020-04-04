@@ -1,0 +1,110 @@
+{
+  "_args": [
+    [
+      "flybits",
+      "/var/www/html/mattglover"
+    ]
+  ],
+  "_from": "flybits@latest",
+  "_hasShrinkwrap": false,
+  "_id": "flybits@2.4.18",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/flybits",
+  "_nodeVersion": "8.11.3",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/flybits_2.4.18_1547775281961_0.3161473046500929"
+  },
+  "_npmUser": {
+    "email": "developer@flybits.eu",
+    "name": "flybits"
+  },
+  "_npmVersion": "5.6.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "flybits",
+    "raw": "flybits",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/flybits/-/flybits-2.4.18.tgz",
+  "_shasum": "2b8c7b15c2cf538c68d3150794c28db11ff79d94",
+  "_shrinkwrap": null,
+  "_spec": "flybits",
+  "_where": "/var/www/html/mattglover",
+  "author": {
+    "name": "Justin Lam"
+  },
+  "bugs": {
+    "url": "https://github.com/flybits/flybits.js/issues"
+  },
+  "dependencies": {
+    "atob": "^2.0.3",
+    "localforage": "^1.4.2",
+    "node-persist": "^2.0.7"
+  },
+  "description": "JavaScript SDK that can be used to build Flybits enabled applications on both the client and server side.",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "chai": "^3.5.0",
+    "event-stream": "^3.3.2",
+    "fetch-mock": "^5.9.4",
+    "git-rev": "^0.2.1",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-jsdoc3": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-run": "^1.7.1",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.7",
+    "isomorphic-fetch": "^2.2.1",
+    "mocha": "^2.5.3",
+    "mockery": "^1.7.0",
+    "q": "^1.4.1",
+    "run-sequence": "^1.1.5",
+    "should": "^9.0.2",
+    "should-sinon": "0.0.5",
+    "sinon": "^2.1.0"
+  },
+  "directories": {},
+  "dist": {
+    "fileCount": 21,
+    "integrity": "sha512-+H9DUARK9Cl7MyAYO6dHINawNpf7Q/t67pEdEgveSTl8lruLZ6dkB1e0aeVXJGKvoRf50W1cDNNFhIlSN8SvyQ==",
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJcQS0yCRA9TVsSAnZWagAAjHEP/jZtFmvaFN1xGrAzObs6\nMfFKHENufpoAxOYyRzKGC0+fXX5ODbjSHG33O7EiMJOIYjfox+d7QktPvhfO\nDyLt33A2LhZ2XJ3g0JS5h0hLoCq/WHGW3+EiY/+XYm4jeRkruFoxbgJ78I3J\n7x/rmEAJvb29b+PCLWNweQDhU6muTSR9usmtO5Dbw5fGXxwo+3o0aR5A4Phs\nj+d5B2PJNl7eW6BQsDYWhDgSZgFat4r11PGXrcJRvHFmdOrV7XHHUkO/A7K7\nJdrB0CGM5vZlJp7YEHxJoc2XtQ4fqlWqvArwEfKdVBacdvCHlVu0TiZ8WQjb\n4LiPCLMyzLNEI3DvJQevXpgmj1t7nYjc1ZsR+huWHs+TJ8M3o+S8PtkxtX9B\nGAljf6gwDeQzmx8cRjcdcpeZD/itAFIAr02yJVOHl3dQIkuiM6+rOjIwgGpg\nFNqiGszdpz6EuIsozjqZQ0jIyuSblS9vax8C6t+CCs+TbNf/sMhzf8VaIOTY\n4nMwaewcA1EfYFwXnKyTo1TAI9m33OwxpheZL93k0a6whUu0Mmebrkkrfvhh\ndnYqgdkbZbhJQnkh9iMQz034BRgwLlqpfmOrtpgk5rPsby9kGDNMBcp9X2J6\nhRsPpdFlw9lnPpTjcPFwgdyZUlAOh77mpbDzIf0GlAMAcOTKRbeLpnROJHX7\nRPKk\r\n=je3d\r\n-----END PGP SIGNATURE-----\r\n",
+    "shasum": "2b8c7b15c2cf538c68d3150794c28db11ff79d94",
+    "tarball": "https://registry.npmjs.org/flybits/-/flybits-2.4.18.tgz",
+    "unpackedSize": 377191
+  },
+  "gitHead": "a29ba06b23ae5661f6c2e52b948265f989fd2197",
+  "homepage": "https://github.com/flybits/flybits.js#readme",
+  "license": "Apache-2.0",
+  "main": "./dist/flybits.js",
+  "maintainers": [
+    {
+      "name": "flybits",
+      "email": "developer@flybits.eu"
+    }
+  ],
+  "name": "flybits",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flybits/flybits.js.git"
+  },
+  "scripts": {
+    "test": "mocha --colors --recursive",
+    "testnocolor": "mocha --no-colors --recursive",
+    "testnyan": "mocha --colors --recursive --reporter nyan"
+  },
+  "version": "2.4.18"
+}

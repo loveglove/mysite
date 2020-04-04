@@ -54,3 +54,7 @@ Route::get('/apps/operator/password/process', 'TwilController@processPassword');
 
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
+
+//Flybits Test
+Route::any('/apps/flybits/sms', 'TwilController@flybitsSMS');
+Route::any('/apps/flybits/email', 'MailController@flybitsEmail');
