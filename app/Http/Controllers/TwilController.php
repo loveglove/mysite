@@ -24,7 +24,14 @@ class TwilController extends Controller
 
 	public function twilTest(Request $request)
 	{   
-		Twilio::message("6475566309","4169851997",'Test Test Test');
+		Twilio::message("6475566309","4169851997",'Test Test Test'); // from, to, message
+
+		Log::create([
+			'building_id' => 1,
+            'type' => 'Door Entry',
+            'data' => 2,
+		]);
+		
 		return "Text Sent";
 	}
     
@@ -36,11 +43,11 @@ class TwilController extends Controller
 		$building = Building::where('loftbot_number', $loftbot_number)->first();
 		$contacts = $building->contacts;
 
-		// Log::create([
-		// 	'user_id' => Auth::user()->id,
-  //           'type' => 'Door Entry',
-  //           'data' => $building->mode,
-  //       ]);
+		Log::create([
+			'building_id' => $building->id,
+            'type' => 'Door Entry',
+            'data' => $building->mode,
+		]);
 
 		switch($building->mode)
 		{

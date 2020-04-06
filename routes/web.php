@@ -39,11 +39,6 @@ Route::get('/comingsoon', function() { return view('sandbox.comingsoon'); });
 Route::get('/bean', function() { return view('SM/georgia'); });
 Route::get('/byejordan', function() { return view('SM/jordan'); });
 
-// NXM Routes
-Route::get('/nxm', function() { return view('nxm.nxm'); });
-Route::get('/map.html', function() { return view('nxm.nxm'); });
-Route::get('/trip.html', function() { return view('nxm.trip'); });
-
 // APP ROUTES
 
 // TWILIO
@@ -55,6 +50,6 @@ Route::get('/apps/operator/password/process', 'TwilController@processPassword');
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
 
-//Flybits Test
+// Flybits Test
 Route::any('/apps/flybits/sms', 'TwilController@flybitsSMS');
 Route::any('/apps/flybits/email', 'MailController@flybitsEmail');

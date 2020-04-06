@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Matt Glover :: Applications</title>
+    <title>Matt Glover :: @yield('pageTitle')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('/theme_app/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -17,6 +17,7 @@
     <!-- You can change the theme colors from here -->
     <link href="{{ asset('/theme_app/horizontal/css/colors/blue.css') }}" id="theme" rel="stylesheet">
 
+    @yield('css')
 
 </head>
 <body class="fix-header card-no-border logo-center">
@@ -82,13 +83,16 @@
 
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ti ti-user"></i></a>
                             <div class="dropdown-menu dropdown-menu-right scale-up">
-                                <ul class="dropdown-user">
+                                <ul class="dropdown-user" style="width:350px;">
                                     <li>
-                                        <div class="dw-user-box">
-                                            <div class="u-img"><img src="{{ Auth::user()->avatar }}" alt="user"></div>
-                                            <div class="u-text">
+                                        <div class="row m-1">
+                                            <div class="col-3 text-center">
+                                                <img src="{{ Auth::user()->avatar }}" class="img-circle" width="75">
+                                            </div>
+                                            <div class="col-9 mt-2">
                                                 <h4>{{ Auth::user()->name }}</h4>
-                                                <p class="text-muted">{{ Auth::user()->email }}</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <p class="text-muted">{{ Auth::user()->email }}</p>
+                                            </div>
                                         </div>
                                     </li>
  <!--                                    <li role="separator" class="divider"></li>
@@ -180,13 +184,26 @@
     <script src="{{ asset('/theme_app/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js') }}"></script>
     <script src="{{ asset('/theme_app/assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
     <!--Custom JavaScript -->
-    <script src="{{ asset('/theme_app/horizontal/js/custom.min.js') }}"></script>
+    <script src="{{ asset('/theme_app/horizontal/js/custom.js') }}"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
 <!--     <script src="{{ asset('/theme_app/assets/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script> -->
 
-	@yield('scripts')
+<!-- This is data table -->
+<script src="{{ asset('/theme_app/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+<!-- start - This is for export functionality only -->
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+<!-- end - This is for export functionality only -->
+	
+
+@yield('scripts')
 
 </body>
 
