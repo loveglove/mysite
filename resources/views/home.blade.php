@@ -16,6 +16,16 @@
 
 
 @section('content')
+<style>
+    .add-ct-btn {
+        position: absolute;
+        right: 10px;
+        top: 45px;
+    }
+    .add-ct-btn .btn {
+        line-height: 1.2;
+    }
+</style>
 
 <div class="container">
     <div class="row">
@@ -26,9 +36,13 @@
                 </div>
                 <div class="card-body">
 
+                    <!-- Add Contact -->
+                    <h2 class="add-ct-btn">
+                        <button type="button" class="btn btn-circle btn-lg btn-success waves-effect waves-dark">+</button>
+                    </h2>
+
                     <!-- Controls -->
                     <div class="row m-3 mb-4">
-
                         <!-- stat -->
                         <div class="col-lg-2 col-md-6">
                             <div class="row">
