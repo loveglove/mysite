@@ -10,12 +10,16 @@
 
     <title>Matt Glover :: @yield('pageTitle')</title>
 
+
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('/theme_app/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="{{ asset('/theme_app/assets/plugins/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="{{ asset('/theme_app/horizontal/css/style.css') }}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{ asset('/theme_app/horizontal/css/colors/blue.css') }}" id="theme" rel="stylesheet">
+    
 
     @yield('css')
 
@@ -185,23 +189,36 @@
     <script src="{{ asset('/theme_app/assets/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
     <!--Custom JavaScript -->
     <script src="{{ asset('/theme_app/horizontal/js/custom.js') }}"></script>
-    <!-- ============================================================== -->
-    <!-- Style switcher -->
-    <!-- ============================================================== -->
-<!--     <script src="{{ asset('/theme_app/assets/plugins/styleswitcher/jQuery.style.switcher.js') }}"></script> -->
+    <!-- Toast -->
+    <script src="{{ asset('/theme_app/assets/plugins/toast-master/js/jquery.toast.js') }}"></script>
 
-<!-- This is data table -->
-<script src="{{ asset('/theme_app/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<!-- start - This is for export functionality only -->
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-<!-- end - This is for export functionality only -->
-	
+    <!-- This is data table -->
+    <script src="{{ asset('/theme_app/assets/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <!-- end - This is for export functionality only -->
+    
+    
+
+    <script>
+        /*
+        * AJAX Setup
+        */
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            dataType: "json"
+        });
+
+    </script>
 
 @yield('scripts')
 

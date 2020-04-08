@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 
+use Request;
+use Response;
 use Auth;
 use Input;
 use Carbon\Carbon;
@@ -33,6 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $building = Building::where("user_id", Auth::user()->id)->first();
 
         $logs = Log::orderBy('created_at','desc')->get();
 
@@ -47,10 +50,29 @@ class HomeController extends Controller
                             });
 
         return view('home', [
+            "building" => $building,
             "logs" => $logs,
             "this_month_count" => $this_month->count(),
             "last_month_count" => $last_month->count(),
         ]);
+
+    }
+
+    public function saveSettings(Request $request)
+    {
+
+        $data = Request::all();
+
+        $building = Auth::user()->building;
+        $building->entry_message = $data["message"];
+        $building->entry_digit = $data["digits"];
+        $building->mode = $data["mode"];
+        if (Request::has('passcode')) {
+            $building->entry_code = $data["passcode"];
+        }   
+        $building->save();
+
+        return Response::json(['success' => true, "msg", "values" => $data]);
 
     }
 

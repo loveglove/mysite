@@ -46,6 +46,7 @@ Route::get('/apps/operator/test', 'TwilController@twilTest');
 Route::get('/apps/operator/voice/inbound', 'TwilController@voiceInbound');
 Route::any('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
 Route::get('/apps/operator/password/process', 'TwilController@processPassword');
+Route::post('/apps/operator/save', 'HomeController@saveSettings');
 
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
