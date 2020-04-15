@@ -25,7 +25,7 @@ class MailController extends Controller
         $email->addContent(
             "text/html", "<strong>".$data["body"]."</strong><br><br><img src='https://www.flybits.com/wp-content/uploads/2018/04/flybits-logo-RGB.png' width='200' alt='Flybits Logo' />"
         );
-        $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+        $sendgrid = new \SendGrid('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');
         try {
             $response = $sendgrid->send($email);
             print $response->statusCode() . "\n";
@@ -37,5 +37,6 @@ class MailController extends Controller
 
         return response()->json($data);
     }
+
 
 }

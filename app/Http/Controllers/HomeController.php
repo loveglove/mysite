@@ -39,6 +39,8 @@ class HomeController extends Controller
 
         $logs = Log::orderBy('created_at','desc')->get();
 
+        // dd($logs);
+
         $this_month = Log::whereMonth('created_at', '=', Carbon::now());
         $last_month = Log::whereMonth('created_at', '=', Carbon::now()->subMonth(1));
 

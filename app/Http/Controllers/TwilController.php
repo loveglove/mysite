@@ -243,13 +243,5 @@ class TwilController extends Controller
 
  	}
 
-
- 	// FLYBITS SMS Test
-	public function flybitsSMS(Request $request)
-	{
-		$data = $request->all();
-		Twilio::message('6475566309', $data["phone"], $data["text"]);
-		return response()->json($data);
-	}
     
 }

@@ -39,7 +39,7 @@ Route::get('/comingsoon', function() { return view('sandbox.comingsoon'); });
 Route::get('/bean', function() { return view('SM/georgia'); });
 Route::get('/byejordan', function() { return view('SM/jordan'); });
 
-// APP ROUTES
+
 
 // TWILIO
 Route::get('/apps/operator/test', 'TwilController@twilTest');
@@ -52,5 +52,6 @@ Route::post('/apps/operator/save', 'HomeController@saveSettings');
 Route::post('/contact', 'PublicController@contact');
 
 // Flybits Test
-Route::any('/apps/flybits/sms', 'TwilController@flybitsSMS');
-Route::any('/apps/flybits/email', 'MailController@flybitsEmail');
+Route::any('/apps/flybits/sms', 'FlybitsController@flybitsSMS');
+Route::any('/apps/flybits/email', 'FlybitsController@flybitsEmail');
+Route::any('/apps/flybits/emailcsv', 'FlybitsController@flybitsEmailCSV');

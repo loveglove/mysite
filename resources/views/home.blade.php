@@ -145,6 +145,7 @@
                                     <th>When</th>
                                     <th>Time</th>
                                     <th>Date</th>
+                                    <th>Date</th>
                                     <th>Owner</th>
                                     <th>Mode</th>
                                 </tr>
@@ -156,6 +157,7 @@
                                     <td>{{ $log->created_at->diffForHumans() }}</td>
                                     <td>{{ $log->created_at->format('g:i a') }}</td>
                                     <td>{{ $log->created_at->format('l F jS, Y') }}</td>
+                                    <td>{{ $log->created_at }}</td>
                                     <td>{{ $log->building->contact->name }}</td>
                                     <td>{{ $log->mode() }}</td>
                                 </tr>
@@ -193,6 +195,7 @@ $(function () {
         dom: 'Bfrtip',
         responsive: true,
         pageLength: 5,
+        order: [[ 4, "desc" ]],
         buttons: [
             { extend: 'copy', className: 'btn btn-info' },
             { extend: 'csv', className: 'btn btn-info' },
@@ -280,7 +283,7 @@ $(function () {
                         heading: 'Settings Updated',
                         text: 'Your loftbot settings have been saved',
                         position: 'top-right',
-                        loaderBg:'#ff6849',
+                        loaderBg:'#2ab9c9',
                         icon: 'success',
                         hideAfter: 3500, 
                         stack: 6
