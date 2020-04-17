@@ -11,6 +11,7 @@ use Input;
 use Auth;
 use Storage;
 use Carbon\Carbon;
+use App\Log;
 
 use Twilio\Twiml;
 use Twilio\TwiML\VoiceResponse;
@@ -30,7 +31,7 @@ class FlybitsController extends Controller
 
         // 2) Create SendGrid Mail Object populate with payload values
         $email = new \SendGrid\Mail\Mail(); 
-        $email->setFrom("no-reply@example.com", $data["from"]);
+        $email->setFrom("matt.glover@flybits.com", $data["from"]);
         $email->setSubject($data["subject"]);
         $email->addTo($data["email"], "Demo User");
         $email->addContent(
@@ -38,7 +39,7 @@ class FlybitsController extends Controller
         );
 
         // 3) Create a connection to SendGrid with customer API Key
-        $sendgrid = new \SendGrid("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");
+        $sendgrid = new \SendGrid("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");
 
         // 4) Send the new email object via SendGrid
         $sendgrid->send($email);
@@ -59,13 +60,13 @@ class FlybitsController extends Controller
     {   
         // Map of proxyID to email address
         $PII = array(
-            "6d32b2e2-d949-44a8-a117-87bf6c7010b6" => "mattjglover@hotmail.com",
-            "26583a23-b13a-4e95-9a01-d316d86fd78b" => "matt.glover@flybits.com",
-            "7a2f3575-abda-4c93-8860-0a668c9bd5ad" => "sigifredo.ochoa@flybits.com",
+            "6d32b2e2-d949-44a8-a117-87bf6c7010b6" => "Sebastian.Lozano@mastercard.com",
+            "26583a23-b13a-4e95-9a01-d316d86fd78b" => "Hernan.PardinasOsadchuk@mastercard.com",
+            "7a2f3575-abda-4c93-8860-0a668c9bd5ad" => "matt.glover@flybits.com",
             "43989ad6-3e7e-4695-b13d-65a06c262d63" => "jason.davies@flybits.com"
         );
 
-        // 1) Get array of context data payload from the webhook request
+        // 1) Get context data payload from the webhook request
         $data = $request->all();
 
         // 2) Look up email from PII array where Proxy ID matches
@@ -77,7 +78,7 @@ class FlybitsController extends Controller
         // 3) If match found, create SendGrid email object and populate with payload values
         if(!empty($sendto)){
             $email = new \SendGrid\Mail\Mail(); 
-            $email->setFrom("no-reply@example.com", "Flybits");
+            $email->setFrom("matt.glover@flybits.com", "Flybits Demo");
             $email->setSubject("Been to the ATM recently?");
             $email->addTo($sendto, "Recipient");
             $email->addContent(
@@ -85,10 +86,12 @@ class FlybitsController extends Controller
             );
 
             // 4) Create a connection to SendGrid with customer API Key
-            $sendgrid = new \SendGrid("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");
+            $sendgrid = new \SendGrid("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");
 
             // 5) Send the new email object via SendGrid
             $sendgrid->send($email);
+
+            // Log::create(['building_id' => 1, 'type' => 'Flybits Webhook', 'data' => $sendto]);
         }
 
         // 6) Respond to Webhook request (nothing to return)

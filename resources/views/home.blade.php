@@ -37,24 +37,25 @@
                 <div class="card-body">
 
                     <!-- Add Contact -->
-                    <h2 class="add-ct-btn">
-                        <button type="button" class="btn btn-circle btn-lg btn-success waves-effect waves-dark">+</button>
+                    <h2 class="add-ct-btn" data-toggle="tooltip" title="Manage Contacts" data-placement="left">
+                        <button type="button" data-toggle="modal" data-target="#contacts-modal" class="mytooltip btn btn-circle btn-lg btn-success waves-effect waves-dark"><i class="ti-user"></i></button>
                     </h2>
+
 
                     <!-- Controls -->
                     <div class="row m-3 mb-4">
                         <!-- stat -->
                         <div class="col-lg-2 col-md-6">
-                            <div class="row">
+                            <div class="row mb-4 mb-sm-0">
                                 <div class="col-6">
                                     <div class="chart-text">
-                                        <h6 class="m-b-0"><small>THIS<br> MONTH</small></h6>
+                                        <h6 class="m-b-0"><small>THIS MONTH</small></h6>
                                         <h1 class="m-t-0 text-info">{{ $this_month_count }}</h1>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="chart-text">
-                                        <h6 class="m-b-0"><small>LAST<br> MONTH</small></h6>
+                                        <h6 class="m-b-0"><small>LAST MONTH</small></h6>
                                         <h1 class="m-t-0 text-primary">{{ $last_month_count }}</h1>
                                     </div>
                                 </div>
@@ -78,27 +79,30 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="input-group">
+                                        <div class="input-group mb-2 mb-lg-0">
                                             <span class="input-group-btn"><button class="btn btn-info" type="button"><i class="ti-key"></i></button></span>
                                             <input id="passcode" type="text" name="passcode" class="form-control" placeholder="Passcode..." value="{{ $building->entry_code }}" {{ ($building->mode != 3) ? "disabled" : "" }}>
                                         </div>
                                     </div>
-                                    <div class="col-lg-2">
+                                    <div class="col-lg-2 d-none d-lg-block">
                                         <button class="btn btn-block btn-info" type="submit">Save Settings</button>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-9">
-                                        <div class="input-group">
+                                        <div class="input-group mb-2 mb-lg-0">
                                             <span class="input-group-btn"><button class="btn btn-info" type="button"><i class="ti-comment"></i> </button></span>
                                             <input type="text" name="message" class="form-control" placeholder="Welcome message..." value="{{ $building->entry_message }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
-                                        <div class="input-group">
+                                        <div class="input-group mb-2 mb-lg-0">
                                             <span class="input-group-btn"><button class="btn btn-info" type="button">#</button></span>
                                             <input type="text" name="digits" class="form-control" placeholder="Entry Digits..." value="{{ $building->entry_digit }}">
                                         </div>
+                                    </div>
+                                    <div class="col-12 d-block d-lg-none mt-4 mb-lg-0">
+                                        <button class="btn btn-block btn-info" type="submit">Save Settings</button>
                                     </div>
                                 </div>
                             </form>
@@ -112,8 +116,7 @@
                     <div class="card-body m-b-20">
                         <div class="d-flex flex-wrap">
                             <div>
-                                <h3 class="card-title">Last Entry:</h3>
-                                <h6 class="card-subtitle">--</h6>
+                                <h3 class="card-title d-none d-sm-block">Last Entry: {{ $last_entry->created_at->diffForHumans() }}</h3>
                             </div>
                             <div class="ml-auto align-self-center">
                                 <ul class="list-inline m-b-0">
@@ -127,11 +130,11 @@
                         <div class="campaign ct-charts"><div class="chartist-tooltip" style="top: 63px; left: 576px;"></div></div>
                         <div class="row text-center">
                             <div class="col-4 m-t-20">
-                                <h1 class="m-b-0 font-light">5</h1><small>Morning</small></div>
+                                <h1 class="m-b-0 font-light">{{ $morning }}</h1><small>Morning</small></div>
                             <div class="col-4 m-t-20">
-                                <h1 class="m-b-0 font-light">4</h1><small>Afternoon</small></div>
+                                <h1 class="m-b-0 font-light">{{ $afternoon }}</h1><small>Afternoon</small></div>
                             <div class="col-4 m-t-20">
-                                <h1 class="m-b-0 font-light">0</h1><small>Evening</small></div>
+                                <h1 class="m-b-0 font-light">{{ $evening }}</h1><small>Evening</small></div>
                         </div>
                     </div>
                     <!-- end chart -->
@@ -145,7 +148,6 @@
                                     <th>When</th>
                                     <th>Time</th>
                                     <th>Date</th>
-                                    <th>Date</th>
                                     <th>Owner</th>
                                     <th>Mode</th>
                                 </tr>
@@ -156,8 +158,7 @@
                                     <td>{{ $log->building->loftbotNumber() }}</td>
                                     <td>{{ $log->created_at->diffForHumans() }}</td>
                                     <td>{{ $log->created_at->format('g:i a') }}</td>
-                                    <td>{{ $log->created_at->format('l F jS, Y') }}</td>
-                                    <td>{{ $log->created_at }}</td>
+                                    <td data-sort="{{ $log->created_at }}">{{ $log->created_at->format('D F jS, Y') }}</td>
                                     <td>{{ $log->building->contact->name }}</td>
                                     <td>{{ $log->mode() }}</td>
                                 </tr>
@@ -167,14 +168,44 @@
                     </div>
                     <!-- end table -->
 
-
-
                 </div>
             </div>
         </div>
 
     </div>
 </div>
+
+
+
+<!-- start modal -->
+<div id="contacts-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Manage Contacts</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger waves-effect waves-light">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
+
 @endsection
 
 
@@ -190,12 +221,17 @@
 
 <script>
 $(function () {
+    
+    var chart_values = JSON.parse('{{ json_encode($chart_values) }}').reverse(); //numbers
+    var chart_dates = {!! json_encode($chart_dates) !!}; //strings
+    chart_dates.reverse().pop()
+    chart_dates.push('Today');
 
     $('#entryTable').DataTable({
         dom: 'Bfrtip',
         responsive: true,
         pageLength: 5,
-        order: [[ 4, "desc" ]],
+        "order": [[ 3, "desc" ]],
         buttons: [
             { extend: 'copy', className: 'btn btn-info' },
             { extend: 'csv', className: 'btn btn-info' },
@@ -204,8 +240,6 @@ $(function () {
             { extend: 'print', className: 'btn btn-info' },
         ]
     })
-
-
 
     $('input:radio[name="mode"]').change(
         function(){
@@ -218,18 +252,35 @@ $(function () {
         }
     );
 
+    $('#settingsForm').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url:'/apps/operator/save',
+            data: $('#settingsForm').serialize(),
+            success:function(data){
+                console.log(data);
+                $.toast({
+                    heading: 'Settings Updated',
+                    text: 'Your loftbot settings have been saved',
+                    position: 'top-right',
+                    loaderBg:'#2ab9c9',
+                    icon: 'success',
+                    hideAfter: 3500, 
+                    stack: 6
+                });
+            }
+        });
+    });
+
 
     // ============================================================== 
     // Chart
     // ============================================================== 
-    
     var chart = new Chartist.Line('.campaign', {
-          labels: [1, 2, 3, 4, 5, 6, 7, 8],
-          series: [
-            [0, 5, 6, 8, 25, 9, 8, 24]
-          ]}, {
+          labels: chart_dates,
+          series: [chart_values]
+          },{
           low: 0,
-          high: 28,
           showArea: true,
           fullWidth: true,
           plugins: [
@@ -270,64 +321,40 @@ $(function () {
             'stop-color': 'rgba(38, 198, 218, 1)'
           });
         });
-    
 
-        $('#settingsForm').submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                url:'/apps/operator/save',
-                data: $('#settingsForm').serialize(),
-                success:function(data){
-                    console.log(data);
-                    $.toast({
-                        heading: 'Settings Updated',
-                        text: 'Your loftbot settings have been saved',
-                        position: 'top-right',
-                        loaderBg:'#2ab9c9',
-                        icon: 'success',
-                        hideAfter: 3500, 
-                        stack: 6
-                    });
-                }
-            });
+
+        // ============================================================== 
+        // This is for the animation
+        // ==============================================================
+        chart.on('draw', function(data) {
+            if (data.type === 'line' || data.type === 'area') {
+                data.element.animate({
+                    d: {
+                        begin: 500 * data.index,
+                        dur: 1000,
+                        from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+                        to: data.path.clone().stringify(),
+                        easing: Chartist.Svg.Easing.easeInOutElastic
+                    }
+                });
+            }
+            if (data.type === 'bar') {
+                data.element.animate({
+                    y2: {
+                        dur: 500,
+                        from: data.y1,
+                        to: data.y2,
+                        easing: Chartist.Svg.Easing.easeInOutElastic
+                    },
+                    opacity: {
+                        dur: 500,
+                        from: 0,
+                        to: 1,
+                        easing: Chartist.Svg.Easing.easeInOutElastic
+                    }
+                });
+            }
         });
-
-
-    // ============================================================== 
-    // This is for the animation
-    // ==============================================================
-    
-    // for (var i = 0; i < chart.length; i++) {
-    //     chart[i].on('draw', function(data) {
-    //         if (data.type === 'line' || data.type === 'area') {
-    //             data.element.animate({
-    //                 d: {
-    //                     begin: 500 * data.index,
-    //                     dur: 500,
-    //                     from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
-    //                     to: data.path.clone().stringify(),
-    //                     easing: Chartist.Svg.Easing.easeInOutElastic
-    //                 }
-    //             });
-    //         }
-    //         if (data.type === 'bar') {
-    //             data.element.animate({
-    //                 y2: {
-    //                     dur: 500,
-    //                     from: data.y1,
-    //                     to: data.y2,
-    //                     easing: Chartist.Svg.Easing.easeInOutElastic
-    //                 },
-    //                 opacity: {
-    //                     dur: 500,
-    //                     from: 0,
-    //                     to: 1,
-    //                     easing: Chartist.Svg.Easing.easeInOutElastic
-    //                 }
-    //             });
-    //         }
-    //     });
-    // }
 
 });
 

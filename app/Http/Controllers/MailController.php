@@ -10,22 +10,19 @@ use Mail;
 class MailController extends Controller
 {
   
-    // FLYBITS SendGrid Test
-    public function flybitsEmail(Request $request)
+    //SendGrid Test
+    public function sendGridTest(Request $request)
     {   
-        // get array of context data payload from the webhook request
-        $data = $request->all();
 
-        // Send Grip Web API
         $email = new \SendGrid\Mail\Mail(); 
-        $email->setFrom("no-reply@example.com", $data["from"]);
-        $email->setSubject($data["subject"]);
-        $email->addTo($data["email"], "Demo User");
-        $email->addContent("text/plain", $data["body"]);
+        $email->setFrom("matt@mattglover.ca", "MG Test");
+        $email->setSubject("Sending with SendGrid is Fun");
+        $email->addTo("mattjglover@hotmail.com", "Example User");
+        $email->addContent("text/plain", "and easy to do anywhere, even with PHP");
         $email->addContent(
-            "text/html", "<strong>".$data["body"]."</strong><br><br><img src='https://www.flybits.com/wp-content/uploads/2018/04/flybits-logo-RGB.png' width='200' alt='Flybits Logo' />"
+            "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
         );
-        $sendgrid = new \SendGrid('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');
+        $sendgrid = new \SendGrid("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");
         try {
             $response = $sendgrid->send($email);
             print $response->statusCode() . "\n";
@@ -35,7 +32,7 @@ class MailController extends Controller
             echo 'Caught exception: '. $e->getMessage() ."\n";
         }
 
-        return response()->json($data);
+        return response()->json($response);
     }
 
 

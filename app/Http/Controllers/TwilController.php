@@ -43,11 +43,7 @@ class TwilController extends Controller
 		$building = Building::where('loftbot_number', $loftbot_number)->first();
 		$contacts = $building->contacts;
 
-		Log::create([
-			'building_id' => $building->id,
-            'type' => 'Door Entry',
-            'data' => $building->mode,
-		]);
+		Log::create(['building_id' => $building->id, 'type' => 'Door Buzzer Called', 'data' => $building->mode]);
 
 		switch($building->mode)
 		{

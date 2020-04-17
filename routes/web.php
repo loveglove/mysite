@@ -51,7 +51,10 @@ Route::post('/apps/operator/save', 'HomeController@saveSettings');
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
 
-// Flybits Test
+// Flybits
 Route::any('/apps/flybits/sms', 'FlybitsController@flybitsSMS');
 Route::any('/apps/flybits/email', 'FlybitsController@flybitsEmail');
 Route::any('/apps/flybits/emailcsv', 'FlybitsController@flybitsEmailCSV');
+
+
+Route::get('/apps/email/test', 'MailController@sendGridTest');

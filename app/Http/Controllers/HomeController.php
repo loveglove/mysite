@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
 
+use DB;
 use Request;
 use Response;
 use Auth;
@@ -37,25 +38,33 @@ class HomeController extends Controller
     {
         $building = Building::where("user_id", Auth::user()->id)->first();
 
-        $logs = Log::orderBy('created_at','desc')->get();
+        $logs = Log::orderBy('id','desc')->get();
 
-        // dd($logs);
+        $this_month = Log::whereMonth('created_at', Carbon::now())->count();
+        $last_month = Log::whereMonth('created_at', Carbon::now()->subMonth(1))->count();
 
-        $this_month = Log::whereMonth('created_at', '=', Carbon::now());
-        $last_month = Log::whereMonth('created_at', '=', Carbon::now()->subMonth(1));
+        $today = Carbon::now();
+        for ($i = 0; $i < 7; $i++) {
+            $chart_dates[] = $today->format('D jS');
+            $chart_values[] = Log::whereDay('created_at', $today->format('d'))->count();
+            $today = $today->subDay();
+        }
 
-        $this_month_array = Log::whereMonth('created_at', '=', Carbon::now())
-                            ->orderBy('created_at')
-                            ->get()
-                            ->groupBy(function ($val) {
-                                return Carbon::parse($val->created_at)->format('d');
-                            });
+        $morning = Log::whereBetween(DB::raw('TIME(created_at)'), ['00:00:01', '12:00:00'])->count();
+        $afternoon = Log::whereBetween(DB::raw('TIME(created_at)'), ['12:00:01', '18:00:00'])->count();
+        $evening = Log::whereBetween(DB::raw('TIME(created_at)'), ['18:00:01', '24:00:00'])->count();
 
         return view('home', [
             "building" => $building,
             "logs" => $logs,
-            "this_month_count" => $this_month->count(),
-            "last_month_count" => $last_month->count(),
+            "this_month_count" => $this_month,
+            "last_month_count" => $last_month,
+            "last_entry" => $logs->first(),
+            "chart_values" => $chart_values,
+            "chart_dates" => $chart_dates,
+            "morning" => $morning,
+            "afternoon" => $afternoon,
+            "evening" => $evening,
         ]);
 
     }
