@@ -38,6 +38,8 @@ class HomeController extends Controller
     {
         $building = Building::where("user_id", Auth::user()->id)->first();
 
+        $contacts = Contact::all();
+
         $logs = Log::orderBy('id','desc')->get();
 
         $this_month = Log::whereMonth('created_at', Carbon::now())->count();
@@ -50,12 +52,14 @@ class HomeController extends Controller
             $today = $today->subDay();
         }
 
-        $morning = Log::whereBetween(DB::raw('TIME(created_at)'), ['00:00:01', '12:00:00'])->count();
-        $afternoon = Log::whereBetween(DB::raw('TIME(created_at)'), ['12:00:01', '18:00:00'])->count();
-        $evening = Log::whereBetween(DB::raw('TIME(created_at)'), ['18:00:01', '24:00:00'])->count();
+        $morning = Log::whereMonth('created_at', Carbon::now())->whereBetween(DB::raw('TIME(created_at)'), ['00:00:01', '12:00:00'])->count();
+        $afternoon = Log::whereMonth('created_at', Carbon::now())->whereBetween(DB::raw('TIME(created_at)'), ['12:00:01', '18:00:00'])->count();
+        $evening = Log::whereMonth('created_at', Carbon::now())->whereBetween(DB::raw('TIME(created_at)'), ['18:00:01', '24:00:00'])->count();
 
         return view('home', [
             "building" => $building,
+            "contacts" => $contacts,
+            "contacts_json" => $contacts->toJson(),
             "logs" => $logs,
             "this_month_count" => $this_month,
             "last_month_count" => $last_month,

@@ -18,6 +18,7 @@ Route::get('/', function() { return view('landing'); });
 Route::get('/music', function() { return view('music'); });
 Route::get('/privacy', function() { return view('privacy'); });
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/loftbot', 'HomeController@index')->name('loftbot');
 
 
 // Project Routes

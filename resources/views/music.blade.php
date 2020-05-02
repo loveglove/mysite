@@ -134,10 +134,10 @@
                 		<div class="col-12">
 		                	<div class="list-group" id="playlist">
 
-                                <a href="/audio/Georgia Lines - Westend Flute.mp3" class="list-group-item active">
+                                <a href="/audio/as/Glover - Ten.mp3" class="list-group-item active">
                                     <i class="icon fa fa-play"></i>
-                                    Georgia Lines - Westend Flute (Original Mix)
-                                    <span class="badge">4:24</span>
+                                    Glover - Ten (Original Mix)
+                                    <span class="badge">5:13</span>
                                 </a>
 
 			                    <a href="/audio/as/Applied Science - SnarlCat (Original Mix).mp3" class="list-group-item">
@@ -372,7 +372,7 @@
 		});
 
         $(document).ready(function(){
-            wavesurfer.load('/audio/Georgia Lines - Westend Flute.mp3');
+            wavesurfer.load('/audio/as/Glover - Ten.mp3');
         });
 
 

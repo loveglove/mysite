@@ -27,10 +27,10 @@
     }
 </style>
 
-<div class="container">
+<div class="container" style="padding:0px;">
     <div class="row">
         <div class="col-md-12">
-            <div class="card card-outline-info">
+            <div class="card card-outline-info mt-3">
                 <div class="card-header">
                     <h1 class="m-b-0 text-white"><i class="mdi mdi-robot"></i> <small>Loft.Bot</small></h1>
                 </div>
@@ -43,7 +43,7 @@
 
 
                     <!-- Controls -->
-                    <div class="row m-3 mb-4">
+                    <div class="row ml-0 mr-0 mt-4 mb-5">
                         <!-- stat -->
                         <div class="col-lg-2 col-md-6">
                             <div class="row mb-4 mb-sm-0">
@@ -85,7 +85,7 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-2 d-none d-lg-block">
-                                        <button class="btn btn-block btn-info" type="submit">Save Settings</button>
+                                        <button class="btn btn-block btn-danger" type="submit">Save Settings</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 d-block d-lg-none mt-4 mb-lg-0">
-                                        <button class="btn btn-block btn-info" type="submit">Save Settings</button>
+                                        <button class="btn btn-block btn-danger" type="submit">Save Settings</button>
                                     </div>
                                 </div>
                             </form>
@@ -113,7 +113,7 @@
 
                     <hr>
                     <!-- start chart -->
-                    <div class="card-body m-b-20">
+                    <div class="card-body p-0 m-b-20">
                         <div class="d-flex flex-wrap">
                             <div>
                                 <h3 class="card-title d-none d-sm-block">Last Entry: {{ $last_entry->created_at->diffForHumans() }}</h3>
@@ -127,7 +127,13 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="campaign ct-charts"><div class="chartist-tooltip" style="top: 63px; left: 576px;"></div></div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="campaign ct-charts">
+                                    <div class="chartist-tooltip" style="top: 63px;"></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row text-center">
                             <div class="col-4 m-t-20">
                                 <h1 class="m-b-0 font-light">{{ $morning }}</h1><small>Morning</small></div>
@@ -144,8 +150,8 @@
                         <table id="entryTable" class="display nowrap table table-hover table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>LoftBot #</th>
                                     <th>When</th>
+                                    <th>LoftBot</th>
                                     <th>Time</th>
                                     <th>Date</th>
                                     <th>Owner</th>
@@ -155,8 +161,8 @@
                             <tbody>
                             @foreach($logs as $log)
                                 <tr>
-                                    <td>{{ $log->building->loftbotNumber() }}</td>
                                     <td>{{ $log->created_at->diffForHumans() }}</td>
+                                    <td>{{ $log->building->loftbotNumber() }}</td>
                                     <td>{{ $log->created_at->format('g:i a') }}</td>
                                     <td data-sort="{{ $log->created_at }}">{{ $log->created_at->format('D F jS, Y') }}</td>
                                     <td>{{ $log->building->contact->name }}</td>
@@ -171,40 +177,86 @@
                 </div>
             </div>
         </div>
-
     </div>
-</div>
 
-
-
-<!-- start modal -->
-<div id="contacts-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Manage Contacts</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Recipient:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+    <!-- start modal -->
+    <div id="contacts-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Manage Contacts</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form row">
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-btn"><button class="btn btn-info" type="button"><i class="fa fa-user"></i> </button></span>
+                                <input type="text" id="con-name" class="form-control" placeholder="Contact name..." >
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="input-group">
+                                <span class="input-group-btn"><button class="btn btn-info" type="button"><i class="fa fa-phone"></i> </button></span>
+                                <input type="text" id="con-phone" class="form-control" placeholder="Contact phone..." >
+                            </div>
+                        </div>
+                        <div class="form-group col-lg-12">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div id="con-admin" class="checkbox checkbox-success">
+                                        <input id="admin" type="checkbox">
+                                        <label for="admin"> Contact Is Admin</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="float-right">
+                                        <button id="btn-con-save" type="button" class="btn btn-danger waves-effect waves-light" style="display:none;">Save</button>
+                                        <button id="btn-con-cancel" onclick="cancelEdit()" type="button" class="btn btn-secondary waves-effect waves-light" style="display:none;">Cancel</button>
+                                        <button id="btn-con-add" type="button" class="btn btn-info waves-effect waves-light">Add</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">Message:</label>
-                        <textarea class="form-control" id="message-text"></textarea>
+                    <hr>
+                    <div class="row">
+                        <table id="contactsTable" class="display nowrap table table-hover" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Number</th>
+                                    <th>Admin</th>
+                                    <th>Manage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($contacts as $contact)
+                                <tr>
+                                    <td>{{ $contact->name }}</td>
+                                    <td>{{ $contact->phone }}</td>
+                                    <td>{{ $contact->isAdmin ? "Yes" : "No" }}</td>
+                                    <td>
+                                        <button onclick="editContact({{ $contact->id }})" class="btn btn-twitter waves-effect waves-light" type="button"> <i class="fa fa-edit"></i> </button>
+                                        <button onclick="deleteContact({{ $contact->id }})" class="btn btn-youtube waves-effect waves-light" type="button"> <i class="fa fa-trash"></i> </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger waves-effect waves-light">Save changes</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
+    <!-- end modal -->
+
 </div>
-<!-- /.modal -->
+<!-- end container -->
+
 
 @endsection
 
@@ -357,6 +409,32 @@ $(function () {
         });
 
 });
+
+function deleteContact(id){
+
+}
+
+function editContact(id){
+    var contacts = JSON.parse({!! json_encode($contacts_json) !!});
+    index = contacts.findIndex(x => x.id === id);
+    $("#con-name").val(contacts[index].name);
+    $("#con-phone").val(contacts[index].phone);
+    if(contacts[index].isAdmin){
+        $("#con-admin").attr("checked", "checked");
+    }else{
+        $("#con-admin").removeAttr('checked');
+    }
+    $("#btn-con-add").hide();
+    $("#btn-con-save, #btn-con-cancel").show();
+}
+
+function cancelEdit(){
+    $("#con-name").val("");
+    $("#con-phone").val("");
+    $("#con-admin").removeAttr('checked');
+    $("#btn-con-save, #btn-con-cancel").hide();
+    $("#btn-con-add").show();
+}
 
 </script>
 
