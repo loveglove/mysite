@@ -16,9 +16,27 @@ use App\Log;
 use Twilio\Twiml;
 use Twilio\TwiML\VoiceResponse;
 
+use GuzzleHttp\Client;
+use Exception;
+
+
 
 class FlybitsController extends Controller
 {
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+
+        return view('flybits');
+
+    }
+
 
     /************************************************************
      *** Flybits SendGrid test via Demo App w/ context values ***
@@ -45,6 +63,30 @@ class FlybitsController extends Controller
         $sendgrid->send($email);
 
         // 5) Respond to Webhook request (nothing to return)
+        return response()->noContent();
+    }
+
+
+
+    public function flybitsEmail2(Request $request)
+    {   
+        // 1) Get array of context data payload from the webhook request
+        $requestdata = $request->all();
+
+        $data = [
+           'to' => $requestdata["email"],
+           'from' => $requestdata["from"],
+           'subject' => $requestdata["subject"],
+           'body' => $requestdata["body"],
+        ];
+
+
+        Mail::send([], $data, function($message) use ($data) {
+            $message->to($data['to']);
+            $message->subject($data['subject']);
+            $message->setBody('<h1>Hi! </h1><br>'.$data["body"], 'text/html'); 
+        });
+
         return response()->noContent();
     }
 
@@ -114,6 +156,48 @@ class FlybitsController extends Controller
         
         // 3) Respond to webhook request (nothing to return)
         return response()->noContent();
+    }
+
+
+
+    
+    public function flybitsAPI(Request $request)
+    {
+
+        $data = $request->all();
+        
+        $jwt = "eyJhbGciOiJIUzI1NiIsImtpZCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDI2MjQ5NzMsIm5iZiI6MTU5NzQ0MDk3MywidXNlcklEIjoiNEQ2RDFCOUEtMzQxMi00MUFGLUI5NjEtOTk5NUY4QkU5MzhEIiwiZGV2aWNlSUQiOiI0M0Q4QjQxMy0yNDkzLTQ3NzMtOTk3My0yRjU0OUEyRjAzMTYiLCJ0ZW5hbnRJRCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsImlzU0EiOmZhbHNlfQ.KOQA7ZCk75bl7WyaLMWIy7G_WCTkvDL8W3pMrgt6Xhc";
+        $host = "https://v3.flybits.com";
+        $path = "/context/rules";
+       
+        $url = $host.$path;
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $jwt,
+        ];
+        
+        $ts = time();
+
+        $body = [
+            "name" => "MATT-GLOVER-TEST-2",
+            "scope" => "tenant",
+            "stringRepresentation" => "contextRuleDefinition-".$ts."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.772493DC-F4D7-42D0-82B9-DF142CE7EA04,true))"
+        ];
+
+        try {
+            $client = new Client;
+            $response = $client->post($url, [
+                'headers' => $headers,
+                'body' => json_encode($body)
+            ]);
+            return json_decode($response->getBody()->getContents(), true);
+        } catch (Exception $e) {
+            return $e->getResponse()->getBody()->getContents();
+        }
+
+        throw new Exception($e->getResponse()->getBody()->getContents());
+
     }
 
 

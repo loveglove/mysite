@@ -249,7 +249,7 @@
                             <h2 class="blog-title">Fisher Classic - Golf Tournament App</h2>
                             <p>A handy web app built to organize large golf tournaments with friends. The app has several usefull features for large groups of golfers.</p>
                         </a>
-                        <a href="https://mygatekeeper.com" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
+                        <a href="https://mygatekeeper.ca" class="item single_item blog-content wow fadeInUp" data-wow-delay="0.4s">
                             <div class="blog-image">
                                 <img src="images/projects/medical_banner_icon.jpg" height="180">
                             </div>

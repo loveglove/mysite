@@ -9,12 +9,15 @@
         "aloha/twilio": "^4.0",
         "barryvdh/laravel-debugbar": "^3.1",
         "fideloper/proxy": "~4.0",
+        "guzzlehttp/guzzle": "^7.0",
         "laravel/framework": "5.8.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "sendgrid/sendgrid": "~7",
         "spatie/laravel-http-logger": "^1.5",
+        "symfony/psr-http-message-bridge": "^2.0",
         "twilio/sdk": "^5.34",
-        "sendgrid/sendgrid": "~7"
+        "zendframework/zend-diactoros": "^2.2"
     },
     "require-dev": {
         "filp/whoops": "~2.0",
