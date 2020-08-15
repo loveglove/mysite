@@ -164,8 +164,28 @@ class FlybitsController extends Controller
     public function flybitsAPI(Request $request)
     {
 
-        $data = $request->all();
-        
+        $reqdata = $request->all();
+
+        $data = [
+            "AFFF00F8-00C6-471B-9CC3-BA4016F34310",
+            "DC78F82D-3EF8-4036-9FF2-74F98BADCB7C",
+            "91E901E2-D72F-42F8-AE06-B7DCB10A2BF0"
+        ];
+
+
+        foreach($data as $d){
+            $name = "Eng w/ ". time();
+            $status = $this->flybitsRuleAPI($d, $name);
+        }
+
+        return "Done!";
+
+    }
+
+
+    public function flybitsRuleAPI($contentID, $ruleName)
+    {
+
         $jwt = "eyJhbGciOiJIUzI1NiIsImtpZCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDI2MjQ5NzMsIm5iZiI6MTU5NzQ0MDk3MywidXNlcklEIjoiNEQ2RDFCOUEtMzQxMi00MUFGLUI5NjEtOTk5NUY4QkU5MzhEIiwiZGV2aWNlSUQiOiI0M0Q4QjQxMy0yNDkzLTQ3NzMtOTk3My0yRjU0OUEyRjAzMTYiLCJ0ZW5hbnRJRCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsImlzU0EiOmZhbHNlfQ.KOQA7ZCk75bl7WyaLMWIy7G_WCTkvDL8W3pMrgt6Xhc";
         $host = "https://v3.flybits.com";
         $path = "/context/rules";
@@ -176,13 +196,13 @@ class FlybitsController extends Controller
             'Content-Type' => 'application/json',
             'X-Authorization' => $jwt,
         ];
-        
+
         $ts = time();
 
         $body = [
-            "name" => "MATT-GLOVER-TEST-2",
+            "name" => $ruleName,
             "scope" => "tenant",
-            "stringRepresentation" => "contextRuleDefinition-".$ts."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.772493DC-F4D7-42D0-82B9-DF142CE7EA04,true))"
+            "stringRepresentation" => "contextRuleDefinition-".$ts."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",true))"
         ];
 
         try {
@@ -199,6 +219,5 @@ class FlybitsController extends Controller
         throw new Exception($e->getResponse()->getBody()->getContents());
 
     }
-
 
 }

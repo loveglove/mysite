@@ -16,7 +16,7 @@
         "sendgrid/sendgrid": "~7",
         "spatie/laravel-http-logger": "^1.5",
         "symfony/psr-http-message-bridge": "^2.0",
-        "twilio/sdk": "^5.34",
+        "twilio/sdk": "6.0.1",
         "zendframework/zend-diactoros": "^2.2"
     },
     "require-dev": {

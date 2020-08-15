@@ -45,13 +45,12 @@ Route::get('/bean', function() { return view('SM/georgia'); });
 Route::get('/byejordan', function() { return view('SM/jordan'); });
 
 
-
 // TWILIO
 Route::get('/apps/operator/test', 'TwilController@twilTest');
 Route::get('/apps/operator/voice/inbound', 'TwilController@voiceInbound');
 Route::any('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
 Route::get('/apps/operator/password/process', 'TwilController@processPassword');
-Route::post('/apps/operator/save', 'HomeController@saveSettings');
+Route::post('/apps/operator/save', 'LoftbotController@saveSettings');
 
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
