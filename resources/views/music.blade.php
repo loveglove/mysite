@@ -120,6 +120,19 @@
                     <p>   Over the past 10 years I have had the amazing opportunity to open for countless legendary international artists and electronic music producers. During that time I had also produced some of my own original tracks, bootlegs, and remixes. Some highlights of those productions are listed below under the guise of <b>Applied Science</b>. </p>
                     <br/>  
 
+
+                    <div class="row blog-image">
+                    	<div class="col-12" style="background-color:black; margin-left:10px;">
+                    	<video poster="/audio/hiyalocal_thumbnail.png" width="100%" height="100%" controls autoplay preload="preload">
+  							<source src="/audio/HiYa Local - Glover Live Set.mp4" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+						<p> <strong>Glover - Live set for HiYa Local, August 9th 2020 </strong></p>
+						</div>
+                    </div>
+                    <br>
+                    <br>
+					<br>
                     <div class="row">
 
                     	<div class="col-12">

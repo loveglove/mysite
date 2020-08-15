@@ -13,12 +13,15 @@
 
 app('debugbar')->disable();
 
-// Main Routes
+// Main View Routes
 Route::get('/', function() { return view('landing'); });
 Route::get('/music', function() { return view('music'); });
 Route::get('/privacy', function() { return view('privacy'); });
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/loftbot', 'HomeController@index')->name('loftbot');
+Route::get('/apps/loftbot', 'LoftbotController@index')->middleware('auth');
+Route::get('/apps/flybits', 'FlybitsController@index')->middleware('auth');
+
+Route::get('/loftbot', 'LoftbotController@index')->name('loftbot');
 
 Route::get('/mail', 'PublicController@mail')->name('mail');
 
@@ -42,22 +45,23 @@ Route::get('/bean', function() { return view('SM/georgia'); });
 Route::get('/byejordan', function() { return view('SM/jordan'); });
 
 
-
 // TWILIO
 Route::get('/apps/operator/test', 'TwilController@twilTest');
 Route::get('/apps/operator/voice/inbound', 'TwilController@voiceInbound');
 Route::any('/apps/operator/messaging/inbound', 'TwilController@messageInbound');
 Route::get('/apps/operator/password/process', 'TwilController@processPassword');
-Route::post('/apps/operator/save', 'HomeController@saveSettings');
+Route::post('/apps/operator/save', 'LoftbotController@saveSettings');
 
 // Mail Routes
 Route::post('/contact', 'PublicController@contact');
 
-// Flybits
+// Flybits Webhooks
 Route::any('/apps/flybits/sms', 'FlybitsController@flybitsSMS');
 Route::any('/apps/flybits/email', 'FlybitsController@flybitsEmail');
 Route::any('/apps/flybits/email2', 'FlybitsController@flybitsEmail2');
 Route::any('/apps/flybits/emailcsv', 'FlybitsController@flybitsEmailCSV');
+// Flybits API
+Route::post('/apps/flybits/api', 'FlybitsController@flybitsAPI')->middleware('auth');
 
 
 Route::get('/apps/email/test', 'MailController@sendGridTest');

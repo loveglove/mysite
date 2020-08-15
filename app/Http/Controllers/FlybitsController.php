@@ -16,9 +16,27 @@ use App\Log;
 use Twilio\Twiml;
 use Twilio\TwiML\VoiceResponse;
 
+use GuzzleHttp\Client;
+use Exception;
+
+
 
 class FlybitsController extends Controller
 {
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+
+        return view('flybits');
+
+    }
+
 
     /************************************************************
      *** Flybits SendGrid test via Demo App w/ context values ***
@@ -84,8 +102,8 @@ class FlybitsController extends Controller
     {   
         // Map of proxyID to email address
         $PII = array(
-            "6d32b2e2-d949-44a8-a117-87bf6c7010b6" => "Sebastian.Lozano@mastercard.com",
-            "26583a23-b13a-4e95-9a01-d316d86fd78b" => "Hernan.PardinasOsadchuk@mastercard.com",
+            // "6d32b2e2-d949-44a8-a117-87bf6c7010b6" => "Sebastian.Lozano@mastercard.com",
+            // "26583a23-b13a-4e95-9a01-d316d86fd78b" => "Hernan.PardinasOsadchuk@mastercard.com",
             "7a2f3575-abda-4c93-8860-0a668c9bd5ad" => "matt.glover@flybits.com",
             "43989ad6-3e7e-4695-b13d-65a06c262d63" => "jason.davies@flybits.com"
         );
@@ -140,5 +158,131 @@ class FlybitsController extends Controller
         return response()->noContent();
     }
 
+
+
+    
+    public function flybitsAPI(Request $request)
+    {
+
+        $request->flash();
+        $reqdata = $request->all();
+
+        $jwt = $reqdata["jwt"];
+        $host = $reqdata["host"];
+
+        // $jwt = "eyJhbGciOiJIUzI1NiIsImtpZCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDI2MjQ5NzMsIm5iZiI6MTU5NzQ0MDk3MywidXNlcklEIjoiNEQ2RDFCOUEtMzQxMi00MUFGLUI5NjEtOTk5NUY4QkU5MzhEIiwiZGV2aWNlSUQiOiI0M0Q4QjQxMy0yNDkzLTQ3NzMtOTk3My0yRjU0OUEyRjAzMTYiLCJ0ZW5hbnRJRCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsImlzU0EiOmZhbHNlfQ.KOQA7ZCk75bl7WyaLMWIy7G_WCTkvDL8W3pMrgt6Xhc";
+        // $host = "https://v3.flybits.com";
+        // $id1 = "772493DC-F4D7-42D0-82B9-DF142CE7EA04";
+        // $id2 = "945CB2C5-433C-499A-A489-8934E0076CA8";
+        // $id3 = "AFFF00F8-00C6-471B-9CC3-BA4016F34310";
+
+        $data = array();
+        if(!empty($reqdata["id1"])){
+            array_push($data, ["id" => $reqdata["id1"], "name" => $reqdata["name1"], "states" => $reqdata["states1"]]);
+        }
+        if(!empty($reqdata["id2"])){
+            array_push($data, ["id" => $reqdata["id2"], "name" => $reqdata["name2"], "states" => $reqdata["states2"]]);
+        }
+        if(!empty($reqdata["id3"])){
+            array_push($data, ["id" => $reqdata["id3"], "name" => $reqdata["name3"], "states" => $reqdata["states3"]]);
+        }
+        if(!empty($reqdata["id4"])){
+            array_push($data, ["id" => $reqdata["id4"], "name" => $reqdata["name4"], "states" => $reqdata["states4"]]);
+        }
+        if(!empty($reqdata["id5"])){
+            array_push($data, ["id" => $reqdata["id5"], "name" => $reqdata["name5"], "states" => $reqdata["states5"]]);
+        }
+        if(!empty($reqdata["id6"])){
+            array_push($data, ["id" => $reqdata["id6"], "name" => $reqdata["name6"], "states" => $reqdata["states6"]]);
+        }
+
+        $results = array();
+
+        foreach($data as $d){
+            switch($d["states"])
+            {
+                case 0:
+                    $name = "Not Eng - ".$d["name"];
+                    $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
+                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    sleep(2);
+                break;
+
+                case 1:
+                    $name = "Has Eng - ".$d["name"];
+                    $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
+                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    sleep(2);
+                break;
+
+                case 2;
+                    $name = "Not Eng - ".$d["name"];
+                    $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
+                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    sleep(2);
+                    $name = "Has Eng - ".$d["name"];
+                    $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
+                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    sleep(2);
+                break;
+            }
+        }
+
+        return view('flybits', [
+            "results" => $results
+        ]);
+
+    }
+
+
+    public function fbEngageRuleAPI($contentID, $ruleName, $state, $jwt, $host)
+    {
+
+
+        $path = "/context/rules";
+       
+        $url = $host.$path;
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $jwt,
+        ];
+
+        $ts = time();
+
+        $body = [
+            "name" => $ruleName,
+            "scope" => "tenant",
+            "stringRepresentation" => "contextRuleDefinition-".$ts."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",".$state."))"
+        ];
+
+        try {
+
+            $client = new Client;
+            $response = $client->post($url, [
+                'headers' => $headers,
+                'body' => json_encode($body)
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response->getBody()->getContents(), true)
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getResponse()->getBody()->getContents()
+            ];
+        }
+
+        throw new Exception($e->getResponse()->getBody()->getContents());
+
+    }
 
 }

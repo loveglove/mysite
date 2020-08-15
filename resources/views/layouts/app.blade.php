@@ -120,12 +120,11 @@
                                             </div>
                                         </div>
                                     </li>
- <!--                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+                                 <li role="separator" class="divider"></li>
+                                    <li><a href="/apps/loftbot"><i class="mdi mdi-robot"></i> Loftbot</a></li>
+                                    <li><a href="/apps/flybits"><i class="mdi mdi-compass"></i> Flybits</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li> -->
+                                    <li><a href="/home"><i class="mdi mdi-home"></i> Account</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
