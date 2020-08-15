@@ -11,6 +11,24 @@ class PublicController extends Controller
 {
 
 
+    public function mail(Request $request)
+    {
+        $data = [
+           'email' => "TEST email",
+           'name' => "TEST name",
+           'text' => "TEST text",
+           'sendto' => 'mattjglover@hotmail.com'
+        ];
+
+        Mail::send('emails.contact', $data, function($message) use ($data) {
+            $message->to($data['sendto']);
+            $message->subject('New message from MattGlover.ca');
+        });
+
+        return "Mail delivered!";
+
+    }
+
     /**
         Send email message     *
      * @return \Illuminate\Http\Response

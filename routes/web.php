@@ -20,6 +20,7 @@ Route::get('/privacy', function() { return view('privacy'); });
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/loftbot', 'HomeController@index')->name('loftbot');
 
+Route::get('/mail', 'PublicController@mail')->name('mail');
 
 // Project Routes
 Route::get('/projects/led-wall', function() { return view('projects.ledwall'); });
@@ -55,7 +56,13 @@ Route::post('/contact', 'PublicController@contact');
 // Flybits
 Route::any('/apps/flybits/sms', 'FlybitsController@flybitsSMS');
 Route::any('/apps/flybits/email', 'FlybitsController@flybitsEmail');
+Route::any('/apps/flybits/email2', 'FlybitsController@flybitsEmail2');
 Route::any('/apps/flybits/emailcsv', 'FlybitsController@flybitsEmailCSV');
 
 
 Route::get('/apps/email/test', 'MailController@sendGridTest');
+
+// Quest
+Route::post('/apps/quest/sms', 'QuestController@sendSMS');
+Route::get('/quest', 'QuestController@admin')->middleware('auth');
+Route::get('/quest/compass', 'QuestController@compass');

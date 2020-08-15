@@ -50,6 +50,30 @@ class FlybitsController extends Controller
 
 
 
+    public function flybitsEmail2(Request $request)
+    {   
+        // 1) Get array of context data payload from the webhook request
+        $requestdata = $request->all();
+
+        $data = [
+           'to' => $requestdata["email"],
+           'from' => $requestdata["from"],
+           'subject' => $requestdata["subject"],
+           'body' => $requestdata["body"],
+        ];
+
+
+        Mail::send([], $data, function($message) use ($data) {
+            $message->to($data['to']);
+            $message->subject($data['subject']);
+            $message->setBody('<h1>Hi! </h1><br>'.$data["body"], 'text/html'); 
+        });
+
+        return response()->noContent();
+    }
+
+
+
 
 
     /********************************************

@@ -134,7 +134,13 @@
                 		<div class="col-12">
 		                	<div class="list-group" id="playlist">
 
-                                <a href="/audio/as/Glover - Ten.mp3" class="list-group-item active">
+                                <a href="/audio/as/Glover - Days End.mp3" class="list-group-item active">
+                                    <i class="icon fa fa-play"></i>
+                                    Glover - Days End (Original Mix)
+                                    <span class="badge">3:02</span>
+                                </a>
+
+                                <a href="/audio/as/Glover - Ten.mp3" class="list-group-item">
                                     <i class="icon fa fa-play"></i>
                                     Glover - Ten (Original Mix)
                                     <span class="badge">5:13</span>
@@ -372,7 +378,7 @@
 		});
 
         $(document).ready(function(){
-            wavesurfer.load('/audio/as/Glover - Ten.mp3');
+            wavesurfer.load('/audio/as/Glover - Days End.mp3');
         });
 
 
