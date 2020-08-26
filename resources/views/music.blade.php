@@ -123,7 +123,7 @@
 
                     <div class="row blog-image">
                     	<div class="col-12" style="background-color:black; margin-left:10px;">
-                    	<video poster="/audio/hiyalocal_thumbnail.png" width="100%" height="100%" controls autoplay preload="preload">
+                    	<video poster="/audio/hiya_set_thumbnail.PNG" width="100%" height="100%" controls autoplay preload="preload">
   							<source src="/audio/HiYa Local - Glover Live Set.mp4" type="video/mp4">
 							Your browser does not support the video tag.
 						</video>

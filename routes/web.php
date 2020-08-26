@@ -18,17 +18,14 @@ Route::get('/', function() { return view('landing'); });
 Route::get('/music', function() { return view('music'); });
 Route::get('/privacy', function() { return view('privacy'); });
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/apps/flybits', 'FlybitsController@index')->name('flybits');
 Route::get('/apps/loftbot', 'LoftbotController@index')->middleware('auth');
-Route::get('/apps/flybits', 'FlybitsController@index')->middleware('auth');
-
-Route::get('/loftbot', 'LoftbotController@index')->name('loftbot');
 
 Route::get('/mail', 'PublicController@mail')->name('mail');
 
 // Project Routes
 Route::get('/projects/led-wall', function() { return view('projects.ledwall'); });
 Route::get('/projects/fisher-classic', function() { return view('projects.fisherclassic'); });
-
 
 // Auth Routes
 Auth::routes();
@@ -43,7 +40,6 @@ Route::get('/comingsoon', function() { return view('sandbox.comingsoon'); });
 // Pinning Routes
 Route::get('/bean', function() { return view('SM/georgia'); });
 Route::get('/byejordan', function() { return view('SM/jordan'); });
-
 
 // TWILIO
 Route::get('/apps/operator/test', 'TwilController@twilTest');
@@ -60,8 +56,10 @@ Route::any('/apps/flybits/sms', 'FlybitsController@flybitsSMS');
 Route::any('/apps/flybits/email', 'FlybitsController@flybitsEmail');
 Route::any('/apps/flybits/email2', 'FlybitsController@flybitsEmail2');
 Route::any('/apps/flybits/emailcsv', 'FlybitsController@flybitsEmailCSV');
-// Flybits API
-Route::post('/apps/flybits/api', 'FlybitsController@flybitsAPI')->middleware('auth');
+// Flybits API 
+Route::post('/apps/flybits/api/engagement', 'FlybitsController@flybitsCreateEngagement');
+Route::get('/apps/flybits/api/getcontent', 'FlybitsController@flybitsGetContentAPI');
+Route::get('/apps/flybits/api/setProject', 'FlybitsController@flybitsSetProject');
 
 
 Route::get('/apps/email/test', 'MailController@sendGridTest');

@@ -158,11 +158,16 @@ class FlybitsController extends Controller
         return response()->noContent();
     }
 
-
-
     
-    public function flybitsAPI(Request $request)
+    public function flybitsCreateEngagement(Request $request)
     {
+
+
+        $validatedData = $request->validate([
+            'jwt' => 'required|string',
+            'host' => 'required|string',
+            'id1' => 'required|string'
+        ]);
 
         $request->flash();
         $reqdata = $request->all();
@@ -204,7 +209,7 @@ class FlybitsController extends Controller
                 case 0:
                     $name = "Not Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
-                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name]);
                     sleep(2);
                 break;
@@ -212,7 +217,7 @@ class FlybitsController extends Controller
                 case 1:
                     $name = "Has Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
-                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name]);
                     sleep(2);
                 break;
@@ -220,21 +225,19 @@ class FlybitsController extends Controller
                 case 2;
                     $name = "Not Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
-                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name]);
                     sleep(2);
                     $name = "Has Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
-                    $label = $status["status"] ? "Success: " : "Failed: ";
+                    $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name]);
                     sleep(2);
                 break;
             }
         }
 
-        return view('flybits', [
-            "results" => $results
-        ]);
+        return json_encode($results);
 
     }
 
@@ -242,9 +245,7 @@ class FlybitsController extends Controller
     public function fbEngageRuleAPI($contentID, $ruleName, $state, $jwt, $host)
     {
 
-
         $path = "/context/rules";
-       
         $url = $host.$path;
 
         $headers = [
@@ -284,5 +285,140 @@ class FlybitsController extends Controller
         throw new Exception($e->getResponse()->getBody()->getContents());
 
     }
+
+
+    public function flybitsSetProject(Request $request)
+    {
+
+        $request->flash();
+        $reqdata = $request->all();
+
+        $email = $reqdata["email"];
+        $pass = $reqdata["password"];
+        $project = $reqdata["project"];
+        $host = $reqdata["host"];
+
+        $result1 = $this->flybitsSignInAPI($email, $pass, $project, $host);
+
+        if($result1["status"]){
+            sleep(2);
+            $result2 = $this->flybitsGetContentAPI($result1["jwt"], $host);
+            
+            return [
+                "status" => true,
+                "content" => $result2["content"],
+                "jwt" => $result1["jwt"],
+            ];
+
+
+        }else{
+            return [
+                "status" => false,
+                "response" => "Error logging into project"
+            ];
+        }
+        return $result;
+
+    }
+
+
+
+    public function flybitsSignInAPI($email, $pass, $project, $host)
+    {
+
+        $path = "/sso/auth/authenticate";
+        $url = $host.$path;
+
+        $headers = [
+            'Content-Type' => 'application/json',
+        ];
+
+        $body = [
+            "email" => $email,
+            "password" => $pass,
+            "projectId" => $project
+        ];
+
+        try {
+
+            $client = new Client;
+            $response = $client->post($url, [
+                'headers' => $headers,
+                'body' => json_encode($body)
+            ]);
+
+            $headers = $response->getHeaders();
+
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            return [
+                "status" => true,
+                "content" => $data,
+                "headers" => $headers,
+                "jwt" => $headers["X-Authorization"][0]
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getMessage()
+            ];
+        }
+
+        throw new Exception($e->getResponse()->getBody()->getContents());
+       
+    }
+
+
+    public function flybitsGetContentAPI($jwt, $host)
+    {
+
+        $path = "/kernel/content/instances";
+        $url = $host.$path;
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $jwt,
+        ];
+
+        try {
+
+            $client = new Client;
+            $response = $client->get($url, [
+                'headers' => $headers,
+            ]);
+
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            // dd($data);
+
+            $contentList = array();
+
+            foreach($data["data"] as $d){
+               array_push($contentList, ["id" => $d["id"], "name" => $d["localizations"]["en"]["name"], "type" => $d["templateType"]]);
+            }
+
+            // dd($contentList);
+
+            return [
+                "status" => true,
+                "content" => $contentList
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getMessage()
+            ];
+        }
+
+        throw new Exception($e->getResponse()->getBody()->getContents());
+
+    }
+
+
+
 
 }
