@@ -81,7 +81,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">Host:</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="host" name="host" class="form-control" value="https://v3.flybits.com" />
+                                        <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
                                     </div>
                                 </div>
                             </div>

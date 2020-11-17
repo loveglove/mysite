@@ -63,6 +63,11 @@
 <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
 <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
+<meta property="og:title" content="Matt Glover">
+<meta property="og:description" content="Projects and Developments">
+<meta property="og:image" content="{{ asset('images/bulb_logo.png') }}">
+<meta property="og:url" content="https://mattglover.ca">
+
 <!-- ReCAPTCHA -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <!-- LinkedIn Badge -->

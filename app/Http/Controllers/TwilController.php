@@ -105,7 +105,7 @@ class TwilController extends Controller
 				}
 			}
 			$response = new VoiceResponse();
-			$response->say('Correct, come on in!');
+			$response->say($building->entry_message);
 			$response->play('', ['digits' => '9w9w9w9w9w9w9w99w99']);
 		}else{
 			$response->say('Sorry, that is incorrect, please try again.');
@@ -228,6 +228,12 @@ class TwilController extends Controller
 				}else{
 					Twilio::message($loftbot_number, $contact->phone, "Current auto entry message is: ".$building->entry_message);
 				}
+			break;
+
+			case "commands":
+				$commands_message = "Available Commands:\n\r Check Current Mode: mode \n\r Dial Out to All Contacts: mode multi \n\r Auto Open with Message: mode auto \n\r Request Passcode for Entry: mode pass \n\r Set Entry Message: message <your custom message> \n\r Set Passcode: passcode <your custom code> \n\r Enable / Disable Notifications: notify on (or) off";
+				Twilio::message($loftbot_number, $contact->phone, $commands_message);
+
 			break;
 		}
 
