@@ -259,11 +259,18 @@
                     console.log(data);
 
                     $.each(data, function (i, item) {
+                        
                         var alert = "alert-danger";
+                        var error = "";
                         if(item.status){
                             alert = "alert-success";
+                        }else{
+
+                            var obj = JSON.parse(item.response);
+                            error = obj.error.exceptionMessage;
+
                         }
-                        var html = '<div class="alert ' + alert + ' alert-block"><strong>'+ item.message +'</strong></div>';
+                        var html = '<div class="alert ' + alert + ' alert-block"><strong>'+ item.message +'</strong><br><small>' + error + '<small></div>';
                         $('#results').append(html);
                     });
 
@@ -328,6 +335,9 @@
 
                         $("#jwt").val(data.jwt)
 
+                        $('.content-selector').html('');
+                        $('.content-selector').append('<option value="" selected>-- Select Content --</option>');
+
 	                    $.each(data.content, function (i, item) {
 	                        $('.content-selector').append($('<option>', { 
 	                            value: item.id,
@@ -346,7 +356,8 @@
                             hideAfter: 5000, 
                         });
 	                }else{
-	                	$("#content-msg").html(data.response);
+	                	$("#content-msg").html(data.error);
+                        console.log(data.response);
 	                }
 	            },
                 error: function(error){

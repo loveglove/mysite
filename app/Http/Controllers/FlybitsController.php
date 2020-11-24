@@ -210,7 +210,7 @@ class FlybitsController extends Controller
                     $name = "Not Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
-                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
                 break;
 
@@ -218,7 +218,7 @@ class FlybitsController extends Controller
                     $name = "Has Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
-                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
                 break;
 
@@ -226,12 +226,12 @@ class FlybitsController extends Controller
                     $name = "Not Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
-                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
                     $name = "Has Eng - ".$d["name"];
                     $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
-                    array_push($results, ["status" => $status["status"], "message" => $label.$name]);
+                    array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
                 break;
             }
@@ -254,11 +254,12 @@ class FlybitsController extends Controller
         ];
 
         $ts = time();
+        $rn = preg_replace('/\s+/', '_', $ruleName);
 
         $body = [
             "name" => $ruleName,
             "scope" => "tenant",
-            "stringRepresentation" => "contextRuleDefinition-".$ts."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",".$state."))"
+            "stringRepresentation" => "contextRuleDefinition-".$rn."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",".$state."))"
         ];
 
         try {
@@ -308,13 +309,15 @@ class FlybitsController extends Controller
                 "status" => true,
                 "content" => $result2["content"],
                 "jwt" => $result1["jwt"],
+                "rawData" => $result2["rawData"]
             ];
 
 
         }else{
             return [
                 "status" => false,
-                "response" => "Error logging into project"
+                "error" => "Error logging into project",
+                "response" => $result1["response"]
             ];
         }
         return $result;
@@ -374,7 +377,7 @@ class FlybitsController extends Controller
     public function flybitsGetContentAPI($jwt, $host)
     {
 
-        $path = "/kernel/content/instances";
+        $path = "/kernel/content/instances?limit=200";
         $url = $host.$path;
 
         $headers = [
@@ -403,7 +406,8 @@ class FlybitsController extends Controller
 
             return [
                 "status" => true,
-                "content" => $contentList
+                "content" => $contentList,
+                "rawData" => $data
             ];
 
         } catch (Exception $e) {
