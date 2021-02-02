@@ -200,6 +200,18 @@ class FlybitsController extends Controller
         if(!empty($reqdata["id6"])){
             array_push($data, ["id" => $reqdata["id6"], "name" => $reqdata["name6"], "states" => $reqdata["states6"]]);
         }
+        if(!empty($reqdata["id7"])){
+            array_push($data, ["id" => $reqdata["id7"], "name" => $reqdata["name7"], "states" => $reqdata["states7"]]);
+        }
+        if(!empty($reqdata["id8"])){
+            array_push($data, ["id" => $reqdata["id8"], "name" => $reqdata["name8"], "states" => $reqdata["states8"]]);
+        }
+        if(!empty($reqdata["id9"])){
+            array_push($data, ["id" => $reqdata["id9"], "name" => $reqdata["name9"], "states" => $reqdata["states9"]]);
+        }
+        if(!empty($reqdata["id10"])){
+            array_push($data, ["id" => $reqdata["id10"], "name" => $reqdata["name10"], "states" => $reqdata["states10"]]);
+        }
 
         $results = array();
 
@@ -259,7 +271,7 @@ class FlybitsController extends Controller
         $body = [
             "name" => $ruleName,
             "scope" => "tenant",
-            "stringRepresentation" => "contextRuleDefinition-".$rn."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",".$state."))"
+            "stringRepresentation" => "".$rn."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",".$state."))"
         ];
 
         try {

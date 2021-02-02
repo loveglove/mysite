@@ -90,6 +90,7 @@
                         <br>
                         <button id="content" class="btn btn-lg btn-primary" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above">Get Content</button>
                         <span id="content-msg"></span>
+                        <a id="showcontent" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-outline-secondary float-right mt-3" style="display:none;">Show Content IDs</a>
                         <br>
                         <br>
                         <div class="row">
@@ -111,87 +112,143 @@
                                     </thead>
                                    <tbody>
                                         <tr>
-                                            <td><input type="text" name="name1" class="form-control name" value="{{old('name1')}}" /></td>
+                                            <td><input id="name-1" type="text" name="name1" class="form-control name" value="{{old('name1')}}" /></td>
                                             <td>
-                                                <select id="id1" name="id1" class="form-control content-selector custom-select" >
+                                                <select id="id-1" name="id1" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
                                             <td>
                                                 <select name="states1" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
                                                   <option value="1">Has Engaged</option>
                                                   <option value="0">Not Engaged</option>
-                                                  <option value="2">Both</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" name="name2" class="form-control name" value="{{old('name2')}}"  /></td>
+                                            <td><input id="name-2" type="text" name="name2" class="form-control name" value="{{old('name2')}}"  /></td>
                                             <td>
-                                                <select name="id2" class="form-control content-selector custom-select" >
+                                                <select id="id-2" name="id2" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
                                             <td><select name="states2" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
                                                   <option value="1">Has Engaged</option>
                                                   <option value="0">Not Engaged</option>
-                                                  <option value="2">Both</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" name="name3" class="form-control name" value="{{old('name3')}}" /></td>
+                                            <td><input id="name-3" type="text" name="name3" class="form-control name" value="{{old('name3')}}" /></td>
                                             <td>
-                                                <select name="id3" class="form-control content-selector custom-select" >
+                                                <select id="id-3" name="id3" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
                                             <td><select name="states3" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
                                                   <option value="1">Has Engaged</option>
                                                   <option value="0">Not Engaged</option>
-                                                  <option value="2">Both</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" name="name4" class="form-control name" value="{{old('name4')}}"  /></td>
+                                            <td><input id="name-4" type="text" name="name4" class="form-control name" value="{{old('name4')}}"  /></td>
                                             <td>
-                                                <select name="id4" class="form-control content-selector custom-select" >
+                                                <select id="id-4" name="id4" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
                                             <td><select name="states4" class="form-control custom-select">
-                                                   <option value="1">Has Engaged</option>
+                                                   <option value="2" selected>Both</option>
+                                                  <option value="1">Has Engaged</option>
                                                   <option value="0">Not Engaged</option>
-                                                  <option value="2">Both</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" name="name5" class="form-control name" value="{{old('name5')}}"  /></td>
+                                            <td><input id="name-5" type="text" name="name5" class="form-control name" value="{{old('name5')}}"  /></td>
                                             <td>
-                                                <select name="id5" class="form-control content-selector custom-select" >
+                                                <select id="id-5" name="id5" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
                                             <td><select name="states5" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
                                                   <option value="1">Has Engaged</option>
                                                   <option value="0">Not Engaged</option>
-                                                  <option value="2">Both</option>
                                                 </select>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input type="text" name="name6" class="form-control name" value="{{old('name6')}}" /></td>
+                                            <td><input id="name-6" type="text" name="name6" class="form-control name" value="{{old('name6')}}" /></td>
                                             <td>
-                                                <select name="id6" class="form-control content-selector custom-select" >
+                                                <select id="id-6" name="id6" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
                                             <td><select name="states6" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
                                                   <option value="1">Has Engaged</option>
                                                   <option value="0">Not Engaged</option>
-                                                  <option value="2">Both</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input id="name-7" type="text" name="name6" class="form-control name" value="{{old('name7')}}" /></td>
+                                            <td>
+                                                <select id="id-7" name="id7" class="form-control content-selector custom-select" >
+                                                    <option value="" selected>-- Select Content --</option>
+                                                </select>
+                                            </td>
+                                            <td><select name="states7" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
+                                                  <option value="1">Has Engaged</option>
+                                                  <option value="0">Not Engaged</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input id="name-8" type="text" name="name8" class="form-control name" value="{{old('name8')}}" /></td>
+                                            <td>
+                                                <select id="id-8" name="id8" class="form-control content-selector custom-select" >
+                                                    <option value="" selected>-- Select Content --</option>
+                                                </select>
+                                            </td>
+                                            <td><select name="states8" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
+                                                  <option value="1">Has Engaged</option>
+                                                  <option value="0">Not Engaged</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input id="name-9" type="text" name="name9" class="form-control name" value="{{old('name9')}}" /></td>
+                                            <td>
+                                                <select id="id-9" name="id9" class="form-control content-selector custom-select" >
+                                                    <option value="" selected>-- Select Content --</option>
+                                                </select>
+                                            </td>
+                                            <td><select name="states9" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
+                                                  <option value="1">Has Engaged</option>
+                                                  <option value="0">Not Engaged</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input id="name-10" type="text" name="name10" class="form-control name" value="{{old('name10')}}" /></td>
+                                            <td>
+                                                <select id="id-10" name="id10" class="form-control content-selector custom-select" >
+                                                    <option value="" selected>-- Select Content --</option>
+                                                </select>
+                                            </td>
+                                            <td><select name="states10" class="form-control custom-select">
+                                                  <option value="2" selected>Both</option>
+                                                  <option value="1">Has Engaged</option>
+                                                  <option value="0">Not Engaged</option>
                                                 </select>
                                             </td>
                                         </tr>
@@ -213,6 +270,29 @@
     </div>
 
 
+    <!-- content modal -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Content IDs</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div id="modal-info" class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+
+
 
 </div>
 <!-- end container -->
@@ -232,8 +312,8 @@
 
     $( "#content-form" ).on( "submit", function( event ) {
         event.preventDefault();
-        console.log($("#id1").val());
-        if($("#id1").val() == null || $("#id1").val() == ""){
+        console.log($("#id-1").val());
+        if($("#id-1").val() == null || $("#id-1").val() == ""){
             
             $.toast({
                 heading: 'No Content Selected',
@@ -271,7 +351,7 @@
 
                         }
                         var html = '<div class="alert ' + alert + ' alert-block"><strong>'+ item.message +'</strong><br><small>' + error + '<small></div>';
-                        $('#results').append(html);
+                        $('#results').prepend(html);
                     });
 
                     $("#generate-msg").html("");
@@ -336,16 +416,20 @@
                         $("#jwt").val(data.jwt)
 
                         $('.content-selector').html('');
-                        $('.content-selector').append('<option value="" selected>-- Select Content --</option>');
-
+                        
 	                    $.each(data.content, function (i, item) {
-	                        $('.content-selector').append($('<option>', { 
+	                        $('.content-selector').prepend($('<option>', { 
 	                            value: item.id,
 	                            text : item.name 
 	                        }));
+                            $('#modal-info').prepend(item.id + '&nbsp&nbsp|&nbsp&nbsp ' + item.name + '<br>');
 	                    });
 
-	                    $("#content-msg").html(data.content.length + " content instances found. Select content below to continue...")
+                        $('.content-selector').prepend('<option value="" selected>-- Select Content --</option>');
+
+	                    $("#content-msg").html(data.content.length + " content instances found. Select content below to continue...");
+
+                        $("#showcontent").show();
 
                         $.toast({
                             heading: 'Content Fetched Sucessfully',
@@ -368,8 +452,19 @@
     });
 
 $(function () {
-  $('[data-toggle="popover"]').popover();
+  
+    $('[data-toggle="popover"]').popover();
+
+
+    $('.content-selector').on('change', function(){
+        var id = this.id.split("-")[1];
+        var name = $(this).find('option:selected').text();
+        var abr = name.split("-")[0].trim();
+        $("#name-"+id).val(abr);
+    });
+
 })
+
 
 
 </script>
