@@ -115,7 +115,7 @@
     <!-- NAV -->
     <nav>
         <div class="row" >
-            <div class="container-fluid">
+            <div class="container-fluid" style="background:white;">
                 <div class="logo">
                     <img src="{{ asset('images/bulb_logo.png') }}" height="55"  alt="">
                 </div>
@@ -414,7 +414,7 @@
                 <div class="page-title sub text-center text-md-right">
                     <h5>leave me a message</h5>
                 </div>
-                <form id="contact-form" class="contact-form top_60">
+                <form id="contact-form-be" class="contact-form-be top_60">
                     <div class="row">
                         <!--Name-->
                         <div class="col-md-6">
@@ -482,11 +482,13 @@
 
     $(document).ready(function(){
 
-        $('#contact-form').submit(function(e){
+        $('#contact-form-be').submit(function(e){
 
             e.preventDefault();
             $('#mailresponse').removeClass("alert-success").removeClass("alert-danger");
             $('#mailresponse').addClass("alert-primary").html("Sending your message...").show();
+
+            console.log("made it here");
 
             $.ajax({
                 url: '/contact', 

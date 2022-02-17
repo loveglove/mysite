@@ -51,6 +51,26 @@
                     <form id="content-form">
                         @csrf
                         <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">Host:</label>
+                                    <div class="col-md-9">
+                                        <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        <!--                 <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits user email is required">Email:</label>
@@ -85,7 +105,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
     
                         <br>
                         <button id="content" class="btn btn-lg btn-primary" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above">Get Content</button>
@@ -93,12 +113,12 @@
                         <a id="showcontent" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-outline-secondary float-right mt-3" style="display:none;">Show Content IDs</a>
                         <br>
                         <br>
-                        <div class="row">
+     <!--                    <div class="row">
                             <div class="col-12">
-                                <!-- <label for="password">JWT</label> -->
-                                <input type="text" id="jwt" name="jwt" placeholder="JWT" class="form-control" readonly data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The JWT for the user credentials above will be displayed here."/>
+                                <label for="password">JWT</label>
+                                <input type="text" id="jwt-returned" name="jwt" placeholder="JWT" class="form-control" readonly data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The JWT for the user credentials above will be displayed here."/>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -197,7 +217,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td><input id="name-7" type="text" name="name6" class="form-control name" value="{{old('name7')}}" /></td>
+                                            <td><input id="name-7" type="text" name="name7" class="form-control name" value="{{old('name7')}}" /></td>
                                             <td>
                                                 <select id="id-7" name="id7" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
@@ -386,14 +406,17 @@
     });
 
 
+
+
+
     $( "#content" ).click(function( event ) {
         
         event.preventDefault();
 
-        if($("#project").val() == "" || $("#email").val() == "" || $("#password").val() == ""){
+        if($("#jwt").val() == ""){
             $.toast({
                 heading: 'Credentials Missing',
-                text: 'You need to specify a Flybits user E-mail, Password and Project-ID to continue',
+                text: 'You need to provide a Flybits user JWT to continue',
                 position: 'top-center',
                 loaderBg:'#FFD997',
                 icon: 'warning',
@@ -404,30 +427,30 @@
             $("#content-msg").html("Fetching content, one moment please...")
 
             $.ajax({
-                url: '/apps/flybits/api/setProject',
+                url: '/apps/flybits/api/setProjectJWT',
                 type: "GET",
                 dataType: "json",
                 data: $("#content-form").serialize() ,
                 success: function(data){
-                	console.log(data);
+                    console.log(data);
 
-                	if(data.status){
+                    if(data.status){
 
-                        $("#jwt").val(data.jwt)
+                        // $("#jwt").val(data.jwt)
 
                         $('.content-selector').html('');
                         
-	                    $.each(data.content, function (i, item) {
-	                        $('.content-selector').prepend($('<option>', { 
-	                            value: item.id,
-	                            text : item.name 
-	                        }));
+                        $.each(data.content, function (i, item) {
+                            $('.content-selector').prepend($('<option>', { 
+                                value: item.id,
+                                text : item.name 
+                            }));
                             $('#modal-info').prepend(item.id + '&nbsp&nbsp|&nbsp&nbsp ' + item.name + '<br>');
-	                    });
+                        });
 
                         $('.content-selector').prepend('<option value="" selected>-- Select Content --</option>');
 
-	                    $("#content-msg").html(data.content.length + " content instances found. Select content below to continue...");
+                        $("#content-msg").html(data.content.length + " content instances found. Select content below to continue...");
 
                         $("#showcontent").show();
 
@@ -439,17 +462,82 @@
                             icon: 'success',
                             hideAfter: 5000, 
                         });
-	                }else{
-	                	$("#content-msg").html(data.error);
+                    }else{
+                        $("#content-msg").html(data.error);
                         console.log(data.response);
-	                }
-	            },
+                    }
+                },
                 error: function(error){
                    console.log(error);
                 }
             }); 
         }
     });
+
+    // $( "#content" ).click(function( event ) {
+        
+    //     event.preventDefault();
+
+    //     if($("#project").val() == "" || $("#email").val() == "" || $("#password").val() == ""){
+    //         $.toast({
+    //             heading: 'Credentials Missing',
+    //             text: 'You need to specify a Flybits user E-mail, Password and Project-ID to continue',
+    //             position: 'top-center',
+    //             loaderBg:'#FFD997',
+    //             icon: 'warning',
+    //             hideAfter: 5000, 
+    //         });
+    //     }else{
+
+    //         $("#content-msg").html("Fetching content, one moment please...")
+
+    //         $.ajax({
+    //             url: '/apps/flybits/api/setProject',
+    //             type: "GET",
+    //             dataType: "json",
+    //             data: $("#content-form").serialize() ,
+    //             success: function(data){
+    //             	console.log(data);
+
+    //             	if(data.status){
+
+    //                     $("#jwt").val(data.jwt)
+
+    //                     $('.content-selector').html('');
+                        
+	   //                  $.each(data.content, function (i, item) {
+	   //                      $('.content-selector').prepend($('<option>', { 
+	   //                          value: item.id,
+	   //                          text : item.name 
+	   //                      }));
+    //                         $('#modal-info').prepend(item.id + '&nbsp&nbsp|&nbsp&nbsp ' + item.name + '<br>');
+	   //                  });
+
+    //                     $('.content-selector').prepend('<option value="" selected>-- Select Content --</option>');
+
+	   //                  $("#content-msg").html(data.content.length + " content instances found. Select content below to continue...");
+
+    //                     $("#showcontent").show();
+
+    //                     $.toast({
+    //                         heading: 'Content Fetched Sucessfully',
+    //                         text: 'Content for this project has been found and added to your table selection',
+    //                         position: 'top-center',
+    //                         loaderBg:'#2ab9c9',
+    //                         icon: 'success',
+    //                         hideAfter: 5000, 
+    //                     });
+	   //              }else{
+	   //              	$("#content-msg").html(data.error);
+    //                     console.log(data.response);
+	   //              }
+	   //          },
+    //             error: function(error){
+    //                console.log(error);
+    //             }
+    //         }); 
+    //     }
+    // });
 
 $(function () {
   

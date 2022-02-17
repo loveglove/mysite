@@ -14,9 +14,9 @@ class PublicController extends Controller
     public function mail(Request $request)
     {
         $data = [
-           'email' => "TEST email",
-           'name' => "TEST name",
-           'text' => "TEST text",
+           'email' => "tester@domain.com",
+           'name' => "Buster Buggins",
+           'text' => "This is a test, repeat a test.",
            'sendto' => 'mattjglover@hotmail.com'
         ];
 

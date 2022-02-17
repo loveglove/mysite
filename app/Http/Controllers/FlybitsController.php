@@ -30,12 +30,21 @@ class FlybitsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function showRules()
     {
 
-        return view('flybits');
+        return view('flybits.rules');
 
     }
+
+    public function showTemplates()
+    {
+
+        return view('flybits.templates');
+
+    }
+
+
 
 
     /************************************************************
@@ -271,7 +280,7 @@ class FlybitsController extends Controller
         $body = [
             "name" => $ruleName,
             "scope" => "tenant",
-            "stringRepresentation" => "".$rn."() :- (boolEq(ctx.flybits.contentDeviceAnalytics.query.engaged.".$contentID.",".$state."))"
+            "stringRepresentation" => "".$rn."() :- (boolEq(ctx.flybits.contentAnalytics.query.engaged.".$contentID.",".$state."))"
         ];
 
         try {
@@ -333,6 +342,39 @@ class FlybitsController extends Controller
             ];
         }
         return $result;
+
+    }
+
+
+   public function flybitsSetProjectJWT(Request $request)
+    {
+
+        $request->flash();
+        $reqdata = $request->all();
+
+        $jwt = $reqdata["jwt"];
+        $host = $reqdata["host"];
+
+        $result2 = $this->flybitsGetContentAPI($jwt, $host);
+            
+        if($result2["status"]){
+            
+            return [
+                "status" => true,
+                "content" => $result2["content"],
+                "rawData" => $result2["rawData"],
+                "jwt" => $jwt
+            ];
+
+        }else{
+
+            return [
+                "status" => false,
+                "error" => "Error fetching content with JWT provided",
+                "response" => $result2["response"],
+                "jwt" => $jwt
+            ];
+        }
 
     }
 
@@ -435,6 +477,157 @@ class FlybitsController extends Controller
     }
 
 
+
+    public function oracle(Request $request)
+    {
+
+        $requestData = $request->all();
+
+        $url = "https://api.flybits.app/js02ee-eec9-252c/oracletest";
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => "empty"
+        ];
+
+        $values = array();
+
+        foreach($requestData["values"] as $v){
+           array_push($values, [$v => false]);
+        }
+
+
+
+        $body = [
+            "email" => $requestData["proxyID"],
+            "dataTypeID" => "ctx.flybits.contentAnalytics",
+            "value" => $values,
+        ];
+
+
+        try {
+
+            $client = new Client;
+            $response = $client->post($url, [
+                'headers' => $headers,
+                'body' => json_encode($body)
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response->getBody()->getContents(), true)
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getResponse()->getBody()->getContents()
+            ];
+        }
+
+        throw new Exception($e->getResponse()->getBody()->getContents());
+
+    }
+
+
+    public function flybitsGetTemplateAPI(Request $request)
+    {
+        $requestData = $request->all();
+
+        $path = "/kernel/journey/templates/".$requestData["tempID"];
+        $url = $requestData["host"].$path;
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $requestData["jwt"]
+        ];
+
+        try {
+
+            $client = new Client;
+            $response = $client->get($url, [
+                'headers' => $headers,
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response->getBody()->getContents(), true)
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getResponse()->getBody()->getContents(),
+                "url" => $url,
+                "jwt" => $requestData["jwt"]
+            ];
+        }
+    }
+
+
+    public function flybitsUpdateTemplateAPI(Request $request)
+    {
+
+
+        $requestData = $request->all();
+
+        $path = "/kernel/journey/templates/".$requestData["tempID"];
+        $url = $requestData["host"].$path;
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $requestData["jwt"]
+        ];
+
+        try {
+
+            $client = new Client;
+            $response = $client->get($url, [
+                'headers' => $headers,
+            ]);
+
+            $template = json_decode($response->getBody()->getContents(), true);
+
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e,
+                "message" => "error fetching the template"
+            ];
+        }
+
+        $template["name"] = $requestData["template"]["name"];
+        $template["desc"] = $requestData["template"]["description"];
+        $template["icon"] = $requestData["template"]["imageIcon"];
+        $template["tags"] = $requestData["template"]["tags"];
+
+        try {
+
+            $client2 = new Client;
+            $response2 = $client->put($url, [
+                'headers' => $headers,
+                'json' => $template
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response2->getBody()->getContents(), true)
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e,
+                "message" => "Error updating the template",
+                "template" => $template
+            ];
+        }
+    }
 
 
 }
