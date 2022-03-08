@@ -40,15 +40,27 @@
     }
 
     .btn-sq{
-        padding-top: 70px;
-        padding-bottom: 70px;
+        float: right;
+        padding-top: 65px;
+        padding-bottom: 65px;
     }
 
     .img-holder{
-        width: 325px;
+        width: 350px;
         height: auto;
         margin:0 auto;
     }
+    #update{
+        float: right;
+    }
+    .card-header{
+/*        background-color: #7469EF !important;
+*/    }
+    .bs1{
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+
+
 </style>
 
 <div class="container" style="padding:0px;">
@@ -56,7 +68,7 @@
         <div class="col-md-12">
             <div class="card card-outline-info mt-3">
                 <div class="card-header">
-                    <h2 class="m-b-0 text-white"><i class="mdi mdi-compass"></i> <small>Flybits Templates Manager</small></h2>
+                    <h2 class="m-b-0 text-white"><i class="mdi mdi-compass"></i> <small>Flybits Experience Template Editor</small></h2>
                 </div>
                 <div class="card-body">
                     <form id="info-form">
@@ -71,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">Host:</label>
+                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">API Host:</label>
                                     <div class="col-md-9">
                                         <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
                                     </div>
@@ -84,7 +96,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <button id="content" class="btn btn-lg btn-primary btn-sq" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the template for ID entered">Get Template</button>
+                                <button id="content" class="btn btn-lg btn-outline-info btn-sq" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click to fetch the template for ID entered"><i class="icon-wrench"></i>&nbsp&nbspGet Template</button>
                             </div>
                         </div>
                     </form>
@@ -133,11 +145,38 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-12 mx-auto">
-                                    <img id="icon-img" src="" class="img-holder mx-auto d-block" style="display:none;"/>
+                                    <img id="icon-img" src="" class="img-holder mx-auto d-block bs1" style="display:none;"/>
                                 </div>
                             </div>
                             <br>
-                            <button id="update" class="btn btn-lg btn-primary" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Update the template details">Update Template</button>
+                            <div class="form-group row" style="margin-left:70px;">
+                                <div class="col-md-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="rule" value="rule">
+                                        <label class="form-check-label" for="rule">Copy Rule</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" id="actions" value="actions">
+                                        <label class="form-check-label" for="actions">Copy Actions</label>
+                                    </div>
+                                </div> 
+                                <div class="col-md-8"> 
+                                    <div class="row">
+                                        <label class="control-label text-left col-md-5">From Experience Instance ID:</label>
+                                        <div class="col-md-7 text-left">
+                                            <input type="text" id="instance" name="instance" class="form-control" value="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12" style="float:right;">
+                                    <button id="update" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to update the template details"><i class="icon-magic-wand"></i>&nbsp&nbspUpdate Template</button>
+                                </div>
+                            </div>
+
                         </form>
 
                     </div>
@@ -175,7 +214,7 @@
             $.toast({
                 heading: 'JWT or Template ID Missing',
                 text: 'You must provide a JWT for the project and template ID of the template ',
-                position: 'top-center',
+                position: 'top-right',
                 loaderBg:'#FFD997',
                 icon: 'warning',
                 hideAfter: 5000, 
@@ -210,7 +249,7 @@
                         $.toast({
                             heading: 'Template Fetched',
                             text: 'Successfully fetched the template, see results below',
-                            position: 'top-center',
+                            position: 'top-right',
                             loaderBg:'#2ab9c9',
                             icon: 'success',
                             hideAfter: 5000, 
@@ -219,9 +258,9 @@
                     }else{
 
                         $.toast({
-                            heading: 'Error Occured',
-                            text: 'Could not complete the Flybits API request, see console for details',
-                            position: 'top-center',
+                            heading: 'API Error Occured',
+                            text: 'Flybits API response: ' + data.message,
+                            position: 'top-right',
                             loaderBg:'#FFD997',
                             icon: 'warning',
                             hideAfter: 5000, 
@@ -231,9 +270,9 @@
                 },
                 error: function(error){
                     $.toast({
-                        heading: 'Error Occured',
-                        text: 'Something went wrong attempting to get the template, please check JWT and ID are correct.',
-                        position: 'top-center',
+                        heading: 'Update Error Occured',
+                        text: 'Something went wrong attempting to get the template, please check JWT, Host, and ID are correct.',
+                        position: 'top-right',
                         loaderBg:'#FFD997',
                         icon: 'warning',
                         hideAfter: 5000, 
@@ -260,7 +299,7 @@
             $.toast({
                 heading: 'Template Data Missing',
                 text: 'You must include a name, category, subcategory, and image at the least',
-                position: 'top-center',
+                position: 'top-right',
                 loaderBg:'#FFD997',
                 icon: 'warning',
                 hideAfter: 5000, 
@@ -282,15 +321,17 @@
             var tags = tags.concat(tagStrings);
             template.tags = tags;
 
-            console.log(template);
-
             var data = {
                 template : template,
                 jwt : $("#jwt").val(),
                 host : $("#host").val(),
                 tempID : $("#tempID").val(),
-                token : $('input[name="csrf-token"]').attr('value')
+                token : $('input[name="csrf-token"]').attr('value'),
+                rule : $("#rule").is(":checked"),
+                actions: $("#actions").is(":checked"),
+                instance: $("#instance").val()
             }
+            
 
             $.ajax({
                 url: '/apps/flybits/api/templates/update',
@@ -299,6 +340,7 @@
                 data: data,
                 success: function(data){
                     
+                    console.log("RETURN FROM BACKEND..");
                     console.log(data);
  
                     if(data.status){
@@ -306,7 +348,7 @@
                         $.toast({
                             heading: 'Template Updated',
                             text: 'Successfully updated the template!',
-                            position: 'top-center',
+                            position: 'top-right',
                             loaderBg:'#2ab9c9',
                             icon: 'success',
                             hideAfter: 5000, 
@@ -315,9 +357,9 @@
                     }else{
 
                         $.toast({
-                            heading: 'Error Occured',
-                            text: 'Could not complete the Flybits API request, see console for details',
-                            position: 'top-center',
+                            heading: 'API Error Occured',
+                            text: 'Flybits API response: ' + data.message,
+                            position: 'top-right',
                             loaderBg:'#FFD997',
                             icon: 'warning',
                             hideAfter: 5000, 
@@ -327,9 +369,9 @@
                 },
                 error: function(error){
                     $.toast({
-                        heading: 'Error Occured',
+                        heading: 'Update Error Occured',
                         text: 'Something went wrong attempting to update the template, please try again',
-                        position: 'top-center',
+                        position: 'top-right',
                         loaderBg:'#FFD997',
                         icon: 'warning',
                         hideAfter: 5000, 

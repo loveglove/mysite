@@ -573,6 +573,7 @@ class FlybitsController extends Controller
 
         $requestData = $request->all();
 
+
         $path = "/kernel/journey/templates/".$requestData["tempID"];
         $url = $requestData["host"].$path;
 
@@ -600,22 +601,61 @@ class FlybitsController extends Controller
             ];
         }
 
+
         $template["name"] = $requestData["template"]["name"];
         $template["desc"] = $requestData["template"]["description"];
         $template["icon"] = $requestData["template"]["imageIcon"];
         $template["tags"] = $requestData["template"]["tags"];
 
+
+        // if copy action or rule was checked
+        if($requestData["rule"] || $requestData["actions"]){
+
+            $url2 = $requestData["host"].'/kernel/journey/instances/'.$requestData["instance"];
+
+            try {
+
+                $client2 = new Client;
+                $response2 = $client2->get($url2, [
+                    'headers' => $headers,
+                ]);
+    
+                $instance = json_decode($response2->getBody()->getContents(), true);
+    
+
+            } catch (Exception $e) {
+    
+                return [
+                    "status" => false,
+                    "response" => $e,
+                    "message" => "Error while trying to fetch the experience instance data"
+                ];
+            }
+
+        }
+
+        if($requestData["rule"]){
+            $template["steps"][0]["ruleStringRepresentation"] = $instance["steps"][0]["ruleStringRepresentation"];
+            $template["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
+            $template["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
+        }
+        if($requestData["actions"]){
+            $template["steps"][0]["actions"] = $instance["steps"][0]["actions"];
+        }
+
+        // now update the template values
         try {
 
-            $client2 = new Client;
-            $response2 = $client->put($url, [
+            $client3 = new Client;
+            $response3 = $client->put($url, [
                 'headers' => $headers,
                 'json' => $template
             ]);
 
             return [
                 "status" => true,
-                "response" => json_decode($response2->getBody()->getContents(), true)
+                "response" => json_decode($response3->getBody()->getContents(), true),
+                "instance" => $instance
             ];
 
         } catch (Exception $e) {
