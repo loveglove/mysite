@@ -609,7 +609,7 @@ class FlybitsController extends Controller
 
 
         // if copy action or rule was checked
-        if($requestData["rule"] || $requestData["actions"]){
+        if($requestData["rule"] == "true" || $requestData["actions"] == "true"){
 
             $url2 = $requestData["host"].'/kernel/journey/instances/'.$requestData["instance"];
 
@@ -632,16 +632,19 @@ class FlybitsController extends Controller
                 ];
             }
 
+            if($requestData["rule"] == "true"){
+                $template["steps"][0]["ruleStringRepresentation"] = $instance["steps"][0]["ruleStringRepresentation"];
+                $template["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
+                $template["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
+            }
+    
+            if($requestData["actions"] == "true"){
+                $template["steps"][0]["actions"] = $instance["steps"][0]["actions"];
+            }
+
         }
 
-        if($requestData["rule"]){
-            $template["steps"][0]["ruleStringRepresentation"] = $instance["steps"][0]["ruleStringRepresentation"];
-            $template["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
-            $template["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
-        }
-        if($requestData["actions"]){
-            $template["steps"][0]["actions"] = $instance["steps"][0]["actions"];
-        }
+
 
         // now update the template values
         try {
@@ -655,7 +658,8 @@ class FlybitsController extends Controller
             return [
                 "status" => true,
                 "response" => json_decode($response3->getBody()->getContents(), true),
-                "instance" => $instance
+                "rule" => $requestData["rule"],
+                "actions" => $requestData["actions"]
             ];
 
         } catch (Exception $e) {

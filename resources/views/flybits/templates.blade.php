@@ -292,7 +292,6 @@
    
      $( "#update" ).click(function( event ) {
         event.preventDefault();
-
         
         if($("#name").val() == "" || $("#category").val() == "" || $("#subcategory").val() == "" || $("#image").val() == ""){
             
@@ -332,6 +331,8 @@
                 instance: $("#instance").val()
             }
             
+            console.log("SUBMIT DATA...");
+            console.log(data);
 
             $.ajax({
                 url: '/apps/flybits/api/templates/update',
