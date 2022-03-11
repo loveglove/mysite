@@ -65,6 +65,7 @@ Route::get('/apps/flybits/api/setProject', 'FlybitsController@flybitsSetProject'
 Route::get('/apps/flybits/api/setProjectJWT', 'FlybitsController@flybitsSetProjectJWT');
 Route::post('/apps/flybits/api/templates/get', 'FlybitsController@flybitsGetTemplateAPI');
 Route::post('/apps/flybits/api/templates/update', 'FlybitsController@flybitsUpdateTemplateAPI');
+Route::post('/apps/flybits/api/templates/create', 'FlybitsController@flybitsCreateTemplateAPI');
 
 Route::get('/apps/email/test', 'MailController@sendGridTest');
 

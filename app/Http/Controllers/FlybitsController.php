@@ -19,6 +19,7 @@ use Twilio\TwiML\VoiceResponse;
 use GuzzleHttp\Client;
 use Exception;
 
+use Illuminate\Support\Str;
 
 
 class FlybitsController extends Controller
@@ -510,7 +511,7 @@ class FlybitsController extends Controller
             $client = new Client;
             $response = $client->post($url, [
                 'headers' => $headers,
-                'body' => json_encode($body)
+                'body' => ($body)
             ]);
 
             return [
@@ -672,6 +673,84 @@ class FlybitsController extends Controller
             ];
         }
     }
+
+    
+    public function flybitsCreateTemplateAPI(Request $request)
+    {
+
+        $requestData = $request->all();
+
+        $url1 = $requestData["host"].'/kernel/journey/instances/'.$requestData["instance"];
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $requestData["jwt"]
+        ];
+
+        try {
+
+            $client1 = new Client;
+            $response1 = $client1->get($url1, [
+                'headers' => $headers,
+            ]);
+
+            $instance = json_decode($response1->getBody()->getContents(), true);
+
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e,
+                "message" => "Error while trying to fetch the experience instance data"
+            ];
+        }
+
+        $string = file_get_contents("createTemplate.json");
+        $json = json_decode($string, true);
+
+        $stepGuid = strtoupper(Str::uuid()->toString());
+
+        $json["name"] = $requestData["name"];
+        $json["desc"] = $requestData["description"];
+        $json["icon"] = $requestData["image"];
+        $json["tags"] = $requestData["tags"];
+        $json["steps"][0]["id"] = $stepGuid;
+        $json["rootStepID"] = $stepGuid;
+        $json["createdAt"] = Carbon::now()->timestamp;
+        $json["updatedAt"] = Carbon::now()->timestamp;
+        $json["steps"][0]["ruleStringRepresentation"] = $instance["steps"][0]["ruleStringRepresentation"];
+        $json["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
+        $json["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
+        $json["steps"][0]["actions"] = $instance["steps"][0]["actions"];
+
+        $url2 = $requestData["host"].'/kernel/journey/templates';
+
+        try {
+
+            $client2 = new Client;
+            $response2 = $client2->post($url2, [
+                'headers' => $headers,
+                'body' => json_encode($json)
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response2->getBody()->getContents(), true)
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getResponse()->getBody()->getContents(),
+                "json" => $json,
+                "instance" => $instance
+            ];
+        }
+
+    }
+
 
 
 }

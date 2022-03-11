@@ -108,7 +108,7 @@
                         </div> -->
     
                         <br>
-                        <button id="content" class="btn btn-lg btn-primary" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above">Get Content</button>
+                        <button id="content" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above"><i class="icon-wrench"></i>&nbsp&nbspGet Content</button>
                         <span id="content-msg"></span>
                         <a id="showcontent" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-outline-secondary float-right mt-3" style="display:none;">Show Content IDs</a>
                         <br>
@@ -275,7 +275,7 @@
                                    </tbody>
                                 </table>
                                 </div>
-                                <input type="submit" name="save" id="submit" class="btn btn-lg btn-primary" value="Generate Rules" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to begin generating the rules for the selected content instances"/> <span id="generate-msg"></span>
+                                <button type="submit" name="save" id="submit" class="btn btn-lg btn-outline-info" value="Generate Rules" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to begin generating the rules for the selected content instances"><i class="icon-magic-wand"></i>&nbsp&nbspGenerate Rules</button><span id="generate-msg"></span>
                             </div>
                         </div>
                     </form>

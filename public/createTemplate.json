@@ -1,0 +1,90 @@
+{
+  "name": "",
+  "desc": "",
+  "icon": "",
+  "steps": [
+    {
+      "id": "",
+      "groups": null,
+      "name": "step 1",
+      "desc": "",
+      "ruleName": "",
+      "ruleStringRepresentation": "",
+      "seedRuleStringRepresentation": "",
+      "ruleBody": {},
+      "seedRuleBody": {},
+      "trigger": {
+                "key": "",
+                "type": "",
+                "context": {
+                    "value": 0,
+                    "optionId": ""
+                },
+                "timezone": "",
+                "repeats": null
+            },
+        "actions": [
+        {
+          "id": "",
+          "name": "In-App Content",
+          "desc": "",
+          "actionType": "experience",
+          "actionBody": {
+            "contents": [
+              {
+                "id": "4072E112-3C7A-49CF-B16E-EEA851511B37",
+                "links": [],
+                "labels": [
+                  "starter"
+                ],
+                "iconUrl": "https://flybits-development-file-manager.s3.amazonaws.com/file-manager/0704661F-14AC-42E9-A238-18F90FC4ED7D.png",
+                "internal": false,
+                "metadata": null,
+                "tenantId": "A22C0603-982A-433C-9B4A-64C136775BF2",
+                "createdAt": 1598488434,
+                "accessType": "rule",
+                "modifiedAt": 1598488533,
+                "templateId": "EDFF4045-412B-45E4-8138-C0BCC5D4DCA6",
+                "templateType": "concierge-card-buttons",
+                "localizations": {
+                  "en": {
+                    "name": "Button Link Card",
+                    "description": "Create a call to action by adding up to two buttons. Ideal for offers or messages with next steps."
+                  }
+                },
+                "surveyMetadata": null,
+                "contentModeration": false
+              }
+            ],
+            "contentIds": []
+          },
+          "isConfigurable": false,
+          "isCreatable": false,
+          "isHidden": false
+        }
+      ],
+      "stepChildren": [],
+      "isRoot": true,
+      "isRuleHidden": false,
+      "isRuleCreatable": true,
+      "isRuleConfigurable": true
+    }
+  ],
+  "rootStepID": "",
+  "audienceOptimizationEligible": false,
+  "explorationBudget": {
+    "populationSize": 1000
+  },
+  "automationBudget": {
+    "cutOffPercentage": 1000
+  },
+  "journeyMode": "",
+  "createdAt": 0,
+  "updatedAt": 0,
+  "labels": [],
+  "tags": [
+      "category-", 
+      "subcategory-",
+      "tag"
+    ]
+}

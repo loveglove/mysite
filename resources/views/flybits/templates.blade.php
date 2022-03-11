@@ -67,121 +67,225 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card card-outline-info mt-3">
+
                 <div class="card-header">
-                    <h2 class="m-b-0 text-white"><i class="mdi mdi-compass"></i> <small>Flybits Experience Template Editor</small></h2>
+                    <h2 class="m-b-0 text-white"><i class="mdi mdi-compass"></i> <small>Flybits Experience Template Manager</small></h2>
                 </div>
-                <div class="card-body">
-                    <form id="info-form">
-                        @csrf
-                        <div class="row">
 
-                            <div class="col-md-9">
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">API Host:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the specific template to be edited">Template ID:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="tempID" name="tempID" class="form-control" value="" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <button id="content" class="btn btn-lg btn-outline-info btn-sq" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click to fetch the template for ID entered"><i class="icon-wrench"></i>&nbsp&nbspGet Template</button>
-                            </div>
-                        </div>
-                    </form>
+                <div class="card-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link d-flex active" data-toggle="tab" href="#edit" role="tab" aria-selected="false">
+                          <span>Edit Existing</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link d-flex" data-toggle="tab" href="#create" role="tab" aria-selected="false">
+                          <span>Create New</span>
+                        </a>
+                      </li>
+                    </ul>
                 </div>
-                <hr>
-                <div class="card-body">
 
-                    <div id="template-editor">
-                        <form id="template-form">
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-2">Name:</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="name" name="name" class="form-control" value="{{old('name')}}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-2">Description:</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="description" name="description" class="form-control" value="{{old('description')}}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-2">Category:</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="category" name="category" class="form-control" value="{{old('category')}}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-2">Subcategory:</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="subcategory" name="subcategory" class="form-control" value="{{old('subcategory')}}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-2">Tags:</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="tags" name="tags" class="form-control" value="{{old('tags')}}" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="control-label text-right col-md-2">Image:</label>
-                                <div class="col-md-10">
-                                    <input type="text" id="image" name="image" class="form-control" value="{{old('image')}}" />
-                                </div>
-                                
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-12 mx-auto">
-                                    <img id="icon-img" src="" class="img-holder mx-auto d-block bs1" style="display:none;"/>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="form-group row" style="margin-left:70px;">
-                                <div class="col-md-2">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="rule" value="rule">
-                                        <label class="form-check-label" for="rule">Copy Rule</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="actions" value="actions">
-                                        <label class="form-check-label" for="actions">Copy Actions</label>
-                                    </div>
-                                </div> 
-                                <div class="col-md-8"> 
-                                    <div class="row">
-                                        <label class="control-label text-left col-md-5">From Experience Instance ID:</label>
-                                        <div class="col-md-7 text-left">
-                                            <input type="text" id="instance" name="instance" class="form-control" value="" />
+                <!-- start tabbed content -->
+                <div class="tab-content">
+
+                    <!-- start tab 1 -->
+                    <div id="edit" class="tab-pane active" role="tabpanel">
+                        <div class="card-body">
+                            <form id="info-form">
+                                @csrf
+                                <div class="row">
+
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">API Host:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the specific template to be edited">Template ID:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="tempID" name="tempID" class="form-control" value="" />
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <button id="content" class="btn btn-lg btn-outline-info btn-sq" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click to fetch the template for ID entered"><i class="icon-wrench"></i>&nbsp&nbspGet Template</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <div class="col-md-12" style="float:right;">
-                                    <button id="update" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to update the template details"><i class="icon-magic-wand"></i>&nbsp&nbspUpdate Template</button>
-                                </div>
-                            </div>
+                            </form>
+                            <hr>
+                        </div>
+                        <div class="card-body">
+                            <div id="template-editor">
+                                <form id="template-form">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Name:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="name" name="name" class="form-control" value="{{old('name')}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Description:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="description" name="description" class="form-control" value="{{old('description')}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Category:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="category" name="category" class="form-control" value="{{old('category')}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Subcategory:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="subcategory" name="subcategory" class="form-control" value="{{old('subcategory')}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Tags:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="tags" name="tags" class="form-control" value="{{old('tags')}}" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-2">Image:</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="image" name="image" class="form-control" value="{{old('image')}}" />
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12 mx-auto">
+                                            <img id="icon-img" src="" class="img-holder mx-auto d-block bs1" style="display:none;"/>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <br>
+                                    <div class="form-group row" style="margin-left:70px;">
+                                        <div class="col-md-2">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="rule" value="rule">
+                                                <label class="form-check-label" for="rule">Copy Rule</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="actions" value="actions">
+                                                <label class="form-check-label" for="actions">Copy Actions</label>
+                                            </div>
+                                        </div> 
+                                        <div class="col-md-8"> 
+                                            <div class="row">
+                                                <label class="control-label text-left col-md-5">From Experience Instance ID:</label>
+                                                <div class="col-md-7 text-left">
+                                                    <input type="text" id="instance" name="instance" class="form-control" value="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="form-group row">
+                                        <div class="col-md-12" style="float:right;">
+                                            <button id="update" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to update the template details"><i class="icon-magic-wand"></i>&nbsp&nbspUpdate Template</button>
+                                        </div>
+                                    </div>
 
-                        </form>
-
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                    <!-- end tab 1 -->
+
+                    <!-- start tab 2 -->
+                    <div id="create" class="tab-pane" role="tabpanel">
+                        <div class="card-body">
+                            <form id="create-form">
+                                @csrf
+                               
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="jwt2" name="jwt" class="form-control" value="{{old('jwt')}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to anything other than the demo stack">API Host:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="host2" name="host" class="form-control" value="https://api.demo.flybits.com" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the example experience  to be converted to a template">Instance ID:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="instance2" name="instance" class="form-control" value="" />
+                                    </div>
+                                </div>
+                                              
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The template name to be displayed in the library">Name:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="name2" name="name" class="form-control" value="{{old('name')}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The description of the template displayed in the library">Description:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="description2" name="description" class="form-control" value="{{old('description')}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The category keyword the template will belong to">Category:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="category2" name="category" class="form-control" value="{{old('category')}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The subcategory keyword the template will display under">Subcategory:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="subcategory2" name="subcategory" class="form-control" value="{{old('subcategory')}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Any filter tags to associate with the template (comma separated words)">Tags:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="tags2" name="tags" class="form-control" value="{{old('tags')}}" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The template banner image">Image:</label>
+                                    <div class="col-md-10">
+                                        <input type="text" id="image2" name="image" class="form-control" value="{{old('image')}}" />
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12 mx-auto">
+                                        <img id="icon-img2" src="" class="img-holder mx-auto d-block bs1" style="display:none;"/>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12" style="float:right;">
+                                        <button id="create-btn" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to create a new template from the instance"><i class="icon-magic-wand"></i>&nbsp&nbspCreate New Template</button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <!-- end tab 2 -->
 
                 </div>
+                <!-- end tabbed content -->
             </div>
         </div>
     </div>
@@ -290,14 +394,14 @@
 
 
    
-     $( "#update" ).click(function( event ) {
+     $("#update").click(function( event ) {
         event.preventDefault();
         
         if($("#name").val() == "" || $("#category").val() == "" || $("#subcategory").val() == "" || $("#image").val() == ""){
             
             $.toast({
                 heading: 'Template Data Missing',
-                text: 'You must include a name, category, subcategory, and image at the least',
+                text: 'You must include a name, category, subcategory, and image at the very least',
                 position: 'top-right',
                 loaderBg:'#FFD997',
                 icon: 'warning',
@@ -335,7 +439,7 @@
             console.log(data);
 
             $.ajax({
-                url: '/apps/flybits/api/templates/update',
+                url: '/apps/flybits/api/templates/create',
                 type: "POST",
                 dataType: "json",
                 data: data,
@@ -385,22 +489,117 @@
 
     });
 
+
+
+
+
+
+
+    $("#create-btn").click(function( event ) {
+        event.preventDefault();
+        
+        if($("#name2").val() == "" || $("#category2").val() == "" || $("#subcategory2").val() == "" || $("#image2").val() == ""){
+            
+            $.toast({
+                heading: 'Template Data Missing',
+                text: 'You must include a name, category, subcategory, and image at the least',
+                position: 'top-right',
+                loaderBg:'#FFD997',
+                icon: 'warning',
+                hideAfter: 5000, 
+            });
+
+        }else{
+
+
+            var tags = [
+                "category-" + $("#category2").val(),
+                "subcategory-" + $("#subcategory2").val()
+            ];
+
+            var tagStrings = $("#tags2").val().split(',');
+            var tags = tags.concat(tagStrings);
+
+            var data = {
+                jwt : $("#jwt2").val(),
+                host : $("#host2").val(),
+                instance : $("#instance2").val(),
+                token : $('input[name="csrf-token"]').attr('value'),
+                instance: $("#instance2").val(),
+                name : $("#name2").val(),
+                description: $("#description2").val(),
+                image : $("#image2").val(),
+                tags : tags
+            }
+            
+            console.log("SUBMIT DATA...");
+            console.log(data);
+
+            $.ajax({
+                url: '/apps/flybits/api/templates/create',
+                type: "POST",
+                dataType: "json",
+                data: data,
+                success: function(data){
+                    
+                    console.log("RETURN FROM BACKEND..");
+                    console.log(data);
+ 
+                    if(data.status){
+          
+                        $.toast({
+                            heading: 'Template Create',
+                            text: 'Successfully create a new template!',
+                            position: 'top-right',
+                            loaderBg:'#2ab9c9',
+                            icon: 'success',
+                            hideAfter: 5000, 
+                        });
+
+                    }else{
+
+                        $.toast({
+                            heading: 'API Error Occured',
+                            text: 'Flybits API response: ' + data.message,
+                            position: 'top-right',
+                            loaderBg:'#FFD997',
+                            icon: 'warning',
+                            hideAfter: 5000, 
+                        });
+
+                    }
+                },
+                error: function(error){
+                    $.toast({
+                        heading: 'Create Error Occured',
+                        text: 'Something went wrong attempting to create the template, please try again',
+                        position: 'top-right',
+                        loaderBg:'#FFD997',
+                        icon: 'warning',
+                        hideAfter: 5000, 
+                    });
+                   console.log(error);
+                }
+            }); 
+
+        }
+
+    });
+
+
+
      $("#image").on("change", function(){
         $("#icon-img").attr("src", $("#image").val());
+     })
+
+     $("#image2").on("change", function(){
+        $("#icon-img2").attr("src", $("#image2").val());
      })
 
 
 $(function () {
   
     $('[data-toggle="popover"]').popover();
-
-
-    $('.content-selector').on('change', function(){
-        var id = this.id.split("-")[1];
-        var name = $(this).find('option:selected').text();
-        var abr = name.split("-")[0].trim();
-        $("#name-"+id).val(abr);
-    });
 
 })
 
