@@ -38,6 +38,12 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    .fb-logo{
+        width:30px;
+        height:auto;
+        margin-right:10px;
+    }
 </style>
 
 <div class="container" style="padding:0px;">
@@ -45,80 +51,39 @@
         <div class="col-md-12">
             <div class="card card-outline-info mt-3">
                 <div class="card-header">
-                    <h2 class="m-b-0 text-white"><i class="mdi mdi-compass"></i> <small>Flybits Content Engagement Rule Generator</small></h2>
+                    <h2 class="m-b-0 text-white"><img src="{{ asset('images/Flybits-icon-large-trans_WHITE-ALL.png') }}" class="fb-logo" /><small>Flybits Content Engagement Rule Generator</small></h2>
                 </div>
                 <div class="card-body">
                     <form id="content-form">
                         @csrf
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-9">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
-                                    <div class="col-md-9">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user of a project where you wish to create rules">JWT:</label>
+                                    <div class="col-md-10">
                                         <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" />
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">Host:</label>
-                                    <div class="col-md-9">
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change only if not using the demo stack">Host:</label>
+                                    <div class="col-md-10">
                                         <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-        <!--                 <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits user email is required">Email:</label>
-                                    <div class="col-md-9">
-                                        <input type="email" id="email" name="email" class="form-control" value="{{old('email')}}" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits project ID is required">Project ID:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="project" name="project" class="form-control" value="{{old('project')}}" />
-                                    </div>
-                                </div>
+                            <div class="col-md-3">
+                                <button id="content" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above"><i class="icon-wrench"></i>&nbsp&nbspGet Content</button>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits user password is required">Password:</label>
-                                    <div class="col-md-9">
-                                        <input type="password" id="password" name="password" class="form-control" value="{{old('password')}}" />
-                                    </div>
-                                </div>
+                            <div class="col-md-10">
+                                <span id="content-msg"></span>
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">Host:</label>
-                                    <div class="col-md-9">
-                                        <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
-                                    </div>
-                                </div>
+                            <div class="col-md-2">
+                                <a id="showcontent" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-outline-secondary float-right" style="display:none;">Show All Content IDs</a>
                             </div>
-                        </div> -->
-    
-                        <br>
-                        <button id="content" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above"><i class="icon-wrench"></i>&nbsp&nbspGet Content</button>
-                        <span id="content-msg"></span>
-                        <a id="showcontent" data-toggle="modal" data-target="#myModal" class="btn btn-sm btn-outline-secondary float-right mt-3" style="display:none;">Show Content IDs</a>
-                        <br>
-                        <br>
-     <!--                    <div class="row">
-                            <div class="col-12">
-                                <label for="password">JWT</label>
-                                <input type="text" id="jwt-returned" name="jwt" placeholder="JWT" class="form-control" readonly data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The JWT for the user credentials above will be displayed here."/>
-                            </div>
-                        </div> -->
+                        </div>
+                        <hr>
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -275,13 +240,15 @@
                                    </tbody>
                                 </table>
                                 </div>
-                                <button type="submit" name="save" id="submit" class="btn btn-lg btn-outline-info" value="Generate Rules" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to begin generating the rules for the selected content instances"><i class="icon-magic-wand"></i>&nbsp&nbspGenerate Rules</button><span id="generate-msg"></span>
+                                <div class="row"> 
+                                    <div class="col-md-12">
+                                        <button type="submit" name="save" id="submit" class="btn btn-lg btn-outline-info" style="float:right" value="Generate Rules" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to begin generating the rules for the selected content instances"><i class="icon-magic-wand"></i>&nbsp&nbspGenerate Rules</button><span id="generate-msg"></span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
-                <br>
                 <h3> Results: </h3>
-
                 <div id="results">
                     <div class="loader" style="display:none;"></div> 
                 </div>

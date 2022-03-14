@@ -61,6 +61,11 @@
     }
 
 
+    .fb-logo{
+        width:30px;
+        height:auto;
+        margin-right:10px;
+    }
 </style>
 
 <div class="container" style="padding:0px;">
@@ -68,8 +73,8 @@
         <div class="col-md-12">
             <div class="card card-outline-info mt-3">
 
-                <div class="card-header">
-                    <h2 class="m-b-0 text-white"><i class="mdi mdi-compass"></i> <small>Flybits Experience Template Manager</small></h2>
+            <div class="card-header">
+                    <h2 class="m-b-0 text-white"><img src="{{ asset('images/Flybits-icon-large-trans_WHITE-ALL.png') }}" class="fb-logo" /><small>Flybits Exeperience Template Manager</small></h2>
                 </div>
 
                 <div class="card-body">
@@ -99,13 +104,13 @@
 
                                     <div class="col-md-9">
                                         <div class="form-group row">
-                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
+                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user of a project that contains the templates you wish to edit">JWT:</label>
                                             <div class="col-md-9">
-                                                <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" />
+                                                <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}"" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to a non US region hosted project">API Host:</label>
+                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change only if not using the demo stack">API Host:</label>
                                             <div class="col-md-9">
                                                 <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
                                             </div>
@@ -128,37 +133,37 @@
                             <div id="template-editor">
                                 <form id="template-form">
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-2">Name:</label>
+                                        <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The template name to be displayed in the library">Name:</label>
                                         <div class="col-md-10">
                                             <input type="text" id="name" name="name" class="form-control" value="{{old('name')}}" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-2">Description:</label>
+                                        <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The description of the template displayed in the library">Description:</label>
                                         <div class="col-md-10">
                                             <input type="text" id="description" name="description" class="form-control" value="{{old('description')}}" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-2">Category:</label>
+                                        <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The category keyword the template will belong to">Category:</label>
                                         <div class="col-md-10">
                                             <input type="text" id="category" name="category" class="form-control" value="{{old('category')}}" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-2">Subcategory:</label>
+                                        <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The subcategory keyword the template will display under">Subcategory:</label>
                                         <div class="col-md-10">
                                             <input type="text" id="subcategory" name="subcategory" class="form-control" value="{{old('subcategory')}}" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-2">Tags:</label>
+                                        <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Any filter tags to associate with the template (comma separated words)">Tags:</label>
                                         <div class="col-md-10">
                                             <input type="text" id="tags" name="tags" class="form-control" value="{{old('tags')}}" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="control-label text-right col-md-2">Image:</label>
+                                        <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The template banner image">Image:</label>
                                         <div class="col-md-10">
                                             <input type="text" id="image" name="image" class="form-control" value="{{old('image')}}" />
                                         </div>
@@ -213,19 +218,19 @@
                                 @csrf
                                
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Flybits token is required">JWT:</label>
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user of a project you wish to create templates in">JWT:</label>
                                     <div class="col-md-10">
                                         <input type="text" id="jwt2" name="jwt" class="form-control" value="{{old('jwt')}}" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change if connecting to anything other than the demo stack">API Host:</label>
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change only if not using the demo stack">API Host:</label>
                                     <div class="col-md-10">
                                         <input type="text" id="host2" name="host" class="form-control" value="https://api.demo.flybits.com" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the example experience  to be converted to a template">Instance ID:</label>
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the example experience (in same project) to be converted to a template">Instance ID:</label>
                                     <div class="col-md-10">
                                         <input type="text" id="instance2" name="instance" class="form-control" value="" />
                                     </div>
@@ -274,8 +279,8 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-md-12" style="float:right;">
-                                        <button id="create-btn" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to create a new template from the instance"><i class="icon-magic-wand"></i>&nbsp&nbspCreate New Template</button>
+                                    <div class="col-md-12">
+                                        <button id="create-btn" class="btn btn-lg btn-outline-info"  style="float:right;" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to create a new template from the instance"><i class="icon-magic-wand"></i>&nbsp&nbspCreate New Template</button>
                                     </div>
                                 </div>
                             </form>
