@@ -199,9 +199,10 @@
                                         </div>
                                     </div>
                                     <hr>
+
                                     <div class="form-group row">
-                                        <div class="col-md-12" style="float:right;">
-                                            <button id="update" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to update the template details"><i class="icon-magic-wand"></i>&nbsp&nbspUpdate Template</button>
+                                        <div class="col-md-12" >
+                                            <button id="update-btn" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to update the template details" style="float:right;"><i class="icon-magic-wand"></i>&nbsp&nbspUpdate Template</button>
                                         </div>
                                     </div>
 
@@ -399,7 +400,7 @@
 
 
    
-     $("#update").click(function( event ) {
+     $("#update-btn").click(function( event ) {
         event.preventDefault();
         
         if($("#name").val() == "" || $("#category").val() == "" || $("#subcategory").val() == "" || $("#image").val() == ""){
@@ -444,7 +445,7 @@
             console.log(data);
 
             $.ajax({
-                url: '/apps/flybits/api/templates/create',
+                url: '/apps/flybits/api/templates/update',
                 type: "POST",
                 dataType: "json",
                 data: data,

@@ -723,7 +723,11 @@ class FlybitsController extends Controller
         $json["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
         $json["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
         $json["steps"][0]["actions"] = $instance["steps"][0]["actions"];
-
+        $json["steps"][0]["actions"][0]["id"] = strtoupper(Str::uuid()->toString());
+        if(count($json["steps"][0]["actions"]) > 1){
+            $json["steps"][0]["actions"][1]["id"] = strtoupper(Str::uuid()->toString());
+        }
+       
         $url2 = $requestData["host"].'/kernel/journey/templates';
 
         try {
