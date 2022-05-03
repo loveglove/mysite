@@ -172,12 +172,7 @@ class FlybitsController extends Controller
     public function flybitsCreateEngagement(Request $request)
     {
 
-
-        $validatedData = $request->validate([
-            'jwt' => 'required|string',
-            'host' => 'required|string',
-            'id1' => 'required|string'
-        ]);
+        $results = array();
 
         $request->flash();
         $reqdata = $request->all();
@@ -185,73 +180,84 @@ class FlybitsController extends Controller
         $jwt = $reqdata["jwt"];
         $host = $reqdata["host"];
 
-        // $jwt = "eyJhbGciOiJIUzI1NiIsImtpZCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MDI2MjQ5NzMsIm5iZiI6MTU5NzQ0MDk3MywidXNlcklEIjoiNEQ2RDFCOUEtMzQxMi00MUFGLUI5NjEtOTk5NUY4QkU5MzhEIiwiZGV2aWNlSUQiOiI0M0Q4QjQxMy0yNDkzLTQ3NzMtOTk3My0yRjU0OUEyRjAzMTYiLCJ0ZW5hbnRJRCI6IjVCRDlEQjg5LTJCMkQtNEZCNC1BNUM0LUJEOEVBQTZENDQ5RCIsImlzU0EiOmZhbHNlfQ.KOQA7ZCk75bl7WyaLMWIy7G_WCTkvDL8W3pMrgt6Xhc";
-        // $host = "https://v3.flybits.com";
-        // $id1 = "772493DC-F4D7-42D0-82B9-DF142CE7EA04";
-        // $id2 = "945CB2C5-433C-499A-A489-8934E0076CA8";
-        // $id3 = "AFFF00F8-00C6-471B-9CC3-BA4016F34310";
-
         $data = array();
         if(!empty($reqdata["id1"])){
-            array_push($data, ["id" => $reqdata["id1"], "name" => $reqdata["name1"], "states" => $reqdata["states1"]]);
+            array_push($data, ["id" => $reqdata["id1"], "name" => $reqdata["name1"], "states" => $reqdata["states1"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id2"])){
-            array_push($data, ["id" => $reqdata["id2"], "name" => $reqdata["name2"], "states" => $reqdata["states2"]]);
+            array_push($data, ["id" => $reqdata["id2"], "name" => $reqdata["name2"], "states" => $reqdata["states2"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id3"])){
-            array_push($data, ["id" => $reqdata["id3"], "name" => $reqdata["name3"], "states" => $reqdata["states3"]]);
+            array_push($data, ["id" => $reqdata["id3"], "name" => $reqdata["name3"], "states" => $reqdata["states3"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id4"])){
-            array_push($data, ["id" => $reqdata["id4"], "name" => $reqdata["name4"], "states" => $reqdata["states4"]]);
+            array_push($data, ["id" => $reqdata["id4"], "name" => $reqdata["name4"], "states" => $reqdata["states4"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id5"])){
-            array_push($data, ["id" => $reqdata["id5"], "name" => $reqdata["name5"], "states" => $reqdata["states5"]]);
+            array_push($data, ["id" => $reqdata["id5"], "name" => $reqdata["name5"], "states" => $reqdata["states5"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id6"])){
-            array_push($data, ["id" => $reqdata["id6"], "name" => $reqdata["name6"], "states" => $reqdata["states6"]]);
+            array_push($data, ["id" => $reqdata["id6"], "name" => $reqdata["name6"], "states" => $reqdata["states6"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id7"])){
-            array_push($data, ["id" => $reqdata["id7"], "name" => $reqdata["name7"], "states" => $reqdata["states7"]]);
+            array_push($data, ["id" => $reqdata["id7"], "name" => $reqdata["name7"], "states" => $reqdata["states7"], "label" => null, "type" => null]);
         }
         if(!empty($reqdata["id8"])){
-            array_push($data, ["id" => $reqdata["id8"], "name" => $reqdata["name8"], "states" => $reqdata["states8"]]);
+            array_push($data, ["id" => $reqdata["id8"], "name" => $reqdata["name8"], "states" => $reqdata["states8"], "label" => null, "type" => null]);
         }
-        if(!empty($reqdata["id9"])){
-            array_push($data, ["id" => $reqdata["id9"], "name" => $reqdata["name9"], "states" => $reqdata["states9"]]);
-        }
-        if(!empty($reqdata["id10"])){
-            array_push($data, ["id" => $reqdata["id10"], "name" => $reqdata["name10"], "states" => $reqdata["states10"]]);
+        // component engagement
+        if(!empty($reqdata["id0"])){
+            array_push($data, ["id" => $reqdata["id0"], "name" => $reqdata["name0"], "states" => $reqdata["states0"], "label" => $reqdata["label0"], "type" => $reqdata["type0"]]);
         }
 
-        $results = array();
-
+       
         foreach($data as $d){
             switch($d["states"])
             {
                 case 0:
-                    $name = "Not Eng - ".$d["name"];
-                    $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
+                    if(is_null($d["type"])){
+                        $name = "Not Eng - ".$d["name"];
+                        $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
+                    }else{
+                        $name = "Not Eng - ".$d["name"]."-".$d["type"];
+                        $status = $this->fbEngageCompRuleAPI($d["id"], $name, "false", $jwt, $host, $d["type"], $d["label"]);
+                    }
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
                 break;
 
                 case 1:
-                    $name = "Has Eng - ".$d["name"];
-                    $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
+                    if(is_null($d["type"])){
+                        $name = "Has Eng - ".$d["name"];
+                        $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
+                    }else{
+                        $name = "Has Eng - ".$d["name"]."-".$d["type"];
+                        $status = $this->fbEngageCompRuleAPI($d["id"], $name, "true", $jwt, $host, $d["type"], $d["label"]);
+                    }
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
                 break;
 
                 case 2;
-                    $name = "Not Eng - ".$d["name"];
-                    $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
+                    if(is_null($d["type"])){
+                        $name = "Not Eng - ".$d["name"];
+                        $status = $this->fbEngageRuleAPI($d["id"], $name, "false", $jwt, $host);
+                    }else{
+                        $name = "Not Eng - ".$d["name"]."-".$d["type"];
+                        $status = $this->fbEngageCompRuleAPI($d["id"], $name, "false", $jwt, $host, $d["type"], $d["label"]);
+                    }
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
-                    $name = "Has Eng - ".$d["name"];
-                    $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
+                    if(is_null($d["type"])){
+                        $name = "Has Eng - ".$d["name"];
+                        $status = $this->fbEngageRuleAPI($d["id"], $name, "true", $jwt, $host);
+                    }else{
+                        $name = "Has Eng - ".$d["name"]."-".$d["type"];
+                        $status = $this->fbEngageCompRuleAPI($d["id"], $name, "true", $jwt, $host, $d["type"], $d["label"]);
+                    }
                     $label = $status["status"] ? "Success, rule created with name: " : "Failed, could not create rule: ";
                     array_push($results, ["status" => $status["status"], "message" => $label.$name, "response" => $status["response"]]);
                     sleep(2);
@@ -309,6 +315,56 @@ class FlybitsController extends Controller
 
     }
 
+
+    public function fbEngageCompRuleAPI($contentID, $ruleName, $state, $jwt, $host, $label, $type)
+    {
+
+        $path = "/context/rules";
+        $url = $host.$path;
+
+        $label_text = $label;
+        if($type == "detaildismiss"){
+            $label_text = "Back";
+        }
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $jwt,
+        ];
+
+        $ts = time();
+        $rn = preg_replace('/\s+/', '_', $ruleName);
+
+        $body = [
+            "name" => $ruleName,
+            "scope" => "tenant",
+            "stringRepresentation" => "".$rn."() :- (boolEq(ctx.flybits.contentAnalytics.query.componentEngaged.".$contentID.".".$type.".".$label_text.".button,".$state."))"
+        ];
+
+        try {
+
+            $client = new Client;
+            $response = $client->post($url, [
+                'headers' => $headers,
+                'body' => json_encode($body)
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response->getBody()->getContents(), true)
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e->getResponse()->getBody()->getContents()
+            ];
+        }
+
+        throw new Exception($e->getResponse()->getBody()->getContents());
+
+    }
 
     public function flybitsSetProject(Request $request)
     {
@@ -381,52 +437,7 @@ class FlybitsController extends Controller
 
 
 
-    public function flybitsSignInAPI($email, $pass, $project, $host)
-    {
 
-        $path = "/sso/auth/authenticate";
-        $url = $host.$path;
-
-        $headers = [
-            'Content-Type' => 'application/json',
-        ];
-
-        $body = [
-            "email" => $email,
-            "password" => $pass,
-            "projectId" => $project
-        ];
-
-        try {
-
-            $client = new Client;
-            $response = $client->post($url, [
-                'headers' => $headers,
-                'body' => json_encode($body)
-            ]);
-
-            $headers = $response->getHeaders();
-
-            $data = json_decode($response->getBody()->getContents(), true);
-
-            return [
-                "status" => true,
-                "content" => $data,
-                "headers" => $headers,
-                "jwt" => $headers["X-Authorization"][0]
-            ];
-
-        } catch (Exception $e) {
-
-            return [
-                "status" => false,
-                "response" => $e->getMessage()
-            ];
-        }
-
-        throw new Exception($e->getResponse()->getBody()->getContents());
-       
-    }
 
 
     public function flybitsGetContentAPI($jwt, $host)
@@ -470,60 +481,6 @@ class FlybitsController extends Controller
             return [
                 "status" => false,
                 "response" => $e->getMessage()
-            ];
-        }
-
-        throw new Exception($e->getResponse()->getBody()->getContents());
-
-    }
-
-
-
-    public function oracle(Request $request)
-    {
-
-        $requestData = $request->all();
-
-        $url = "https://api.flybits.app/js02ee-eec9-252c/oracletest";
-
-        $headers = [
-            'Content-Type' => 'application/json',
-            'X-Authorization' => "empty"
-        ];
-
-        $values = array();
-
-        foreach($requestData["values"] as $v){
-           array_push($values, [$v => false]);
-        }
-
-
-
-        $body = [
-            "email" => $requestData["proxyID"],
-            "dataTypeID" => "ctx.flybits.contentAnalytics",
-            "value" => $values,
-        ];
-
-
-        try {
-
-            $client = new Client;
-            $response = $client->post($url, [
-                'headers' => $headers,
-                'body' => ($body)
-            ]);
-
-            return [
-                "status" => true,
-                "response" => json_decode($response->getBody()->getContents(), true)
-            ];
-
-        } catch (Exception $e) {
-
-            return [
-                "status" => false,
-                "response" => $e->getResponse()->getBody()->getContents()
             ];
         }
 
@@ -680,30 +637,35 @@ class FlybitsController extends Controller
 
         $requestData = $request->all();
 
-        $url1 = $requestData["host"].'/kernel/journey/instances/'.$requestData["instance"];
+        $instance = array();
 
         $headers = [
             'Content-Type' => 'application/json',
             'X-Authorization' => $requestData["jwt"]
         ];
 
-        try {
+        if(!empty($requestData["instance"])){
 
-            $client1 = new Client;
-            $response1 = $client1->get($url1, [
-                'headers' => $headers,
-            ]);
+            $url1 = $requestData["host"].'/kernel/journey/instances/'.$requestData["instance"];
 
-            $instance = json_decode($response1->getBody()->getContents(), true);
+            try {
+
+                $client1 = new Client;
+                $response1 = $client1->get($url1, [
+                    'headers' => $headers,
+                ]);
+
+                $instance = json_decode($response1->getBody()->getContents(), true);
 
 
-        } catch (Exception $e) {
+            } catch (Exception $e) {
 
-            return [
-                "status" => false,
-                "response" => $e,
-                "message" => "Error while trying to fetch the experience instance data"
-            ];
+                return [
+                    "status" => false,
+                    "response" => $e,
+                    "message" => "Error while trying to fetch the experience instance data"
+                ];
+            }
         }
 
         $string = file_get_contents("createTemplate.json");
@@ -719,13 +681,16 @@ class FlybitsController extends Controller
         $json["rootStepID"] = $stepGuid;
         $json["createdAt"] = Carbon::now()->timestamp;
         $json["updatedAt"] = Carbon::now()->timestamp;
-        $json["steps"][0]["ruleStringRepresentation"] = $instance["steps"][0]["ruleStringRepresentation"];
-        $json["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
-        $json["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
-        $json["steps"][0]["actions"] = $instance["steps"][0]["actions"];
-        $json["steps"][0]["actions"][0]["id"] = strtoupper(Str::uuid()->toString());
-        if(count($json["steps"][0]["actions"]) > 1){
-            $json["steps"][0]["actions"][1]["id"] = strtoupper(Str::uuid()->toString());
+        
+        if(!empty($requestData["instance"])){
+            $json["steps"][0]["ruleStringRepresentation"] = $instance["steps"][0]["ruleStringRepresentation"];
+            $json["steps"][0]["ruleBody"] = $instance["steps"][0]["ruleBody"];
+            $json["steps"][0]["trigger"] = $instance["steps"][0]["trigger"];
+            $json["steps"][0]["actions"] = $instance["steps"][0]["actions"];
+            $json["steps"][0]["actions"][0]["id"] = strtoupper(Str::uuid()->toString());
+            if(count($json["steps"][0]["actions"]) > 1){
+                $json["steps"][0]["actions"][1]["id"] = strtoupper(Str::uuid()->toString());
+            }
         }
        
         $url2 = $requestData["host"].'/kernel/journey/templates';
@@ -753,6 +718,41 @@ class FlybitsController extends Controller
             ];
         }
 
+    }
+
+    public function flybitsDeleteTemplateAPI(Request $request)
+    {
+
+        $requestData = $request->all();
+
+        $headers = [
+            'Content-Type' => 'application/json',
+            'X-Authorization' => $requestData["jwt"]
+        ];
+
+        $url = $requestData["host"].'/kernel/journey/templates/'.$requestData["tempID"];
+
+        try {
+
+            $client = new Client;
+            $response = $client->delete($url, [
+                'headers' => $headers,
+            ]);
+
+            return [
+                "status" => true,
+                "response" => json_decode($response->getBody()->getContents(), true),
+                "message" => "Template deleted successfully"
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                "status" => false,
+                "response" => $e,
+                "message" => "Error while trying to delete template"
+            ];
+        }
     }
 
 

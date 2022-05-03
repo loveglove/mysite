@@ -25,7 +25,7 @@
     .alert{
         margin-bottom: 5px;
     }
-        .loader {
+    .loader {
       border: 16px solid #f3f3f3; /* Light grey */
       border-top: 16px solid #3498db; /* Blue */
       border-radius: 50%;
@@ -33,12 +33,10 @@
       height: 100px;
       animation: spin 2s linear infinite;
     }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
     .fb-logo{
         width:30px;
         height:auto;
@@ -61,7 +59,7 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user of a project where you wish to create rules">JWT:</label>
                                     <div class="col-md-10">
-                                        <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" />
+                                        <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" onkeyup='saveValue(this);'/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -72,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <button id="content" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content items for the project ID entered above"><i class="icon-wrench"></i>&nbsp&nbspGet Content</button>
+                                <button id="content" class="btn btn-lg btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Click to fetch the content instances from the project"><i class="icon-wrench"></i>&nbsp&nbspGet Content</button>
                             </div>
                         </div>
                         <div class="row">
@@ -209,36 +207,52 @@
                                                 </select>
                                             </td>
                                         </tr>
+
+                                   </tbody>
+                                </table>
+                                <!-- component engagement table -->
+                                <div class="table-responsive">
+                                <table id="comp_table" class="table table-bordered" >
+                                    <thead>
                                         <tr>
-                                            <td><input id="name-9" type="text" name="name9" class="form-control name" value="{{old('name9')}}" /></td>
-                                            <td>
-                                                <select id="id-9" name="id9" class="form-control content-selector custom-select" >
-                                                    <option value="" selected>-- Select Content --</option>
-                                                </select>
-                                            </td>
-                                            <td><select name="states9" class="form-control custom-select">
-                                                  <option value="2" selected>Both</option>
-                                                  <option value="1">Has Engaged</option>
-                                                  <option value="0">Not Engaged</option>
-                                                </select>
-                                            </td>
+                                            <th width="20%" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This abbreviation will be appened to the engagement rule name for identification purposes in Experience Studio">Content Abreviation</th>
+                                            <th width="35%" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Select the content you would like to associate the user engagement too.">Content Name</th>
+                                            <th width="15%" data-toggle="popover" data-trigger="hover"  data-placement="top" data-content="The text used for the button label">Button Label</th>
+                                            <th width="15%" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Choose either the first or second button in the card OR the dismiss button in the detail view"> Button Type</th>
+                                            <th width="15%" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Create a rule when a user HAS engaged with the selected content, or when a user HAS NOT engaged with the selected content. Or create BOTH engagement states">States</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <tr>
-                                            <td><input id="name-10" type="text" name="name10" class="form-control name" value="{{old('name10')}}" /></td>
                                             <td>
-                                                <select id="id-10" name="id10" class="form-control content-selector custom-select" >
+                                                <input id="name-0" type="text" name="name0" class="form-control name" value="{{old('name1')}}" />
+                                            </td>
+                                            <td>
+                                                <select id="id-0" name="id0" class="form-control content-selector custom-select" >
                                                     <option value="" selected>-- Select Content --</option>
                                                 </select>
                                             </td>
-                                            <td><select name="states10" class="form-control custom-select">
-                                                  <option value="2" selected>Both</option>
-                                                  <option value="1">Has Engaged</option>
-                                                  <option value="0">Not Engaged</option>
+                                            <td>
+                                                <input id="label-0" type="text" name="label0" class="form-control name" value="{{old('label0')}}" />
+                                            </td>
+                                            <td>
+                                                <select name="type0" class="form-control custom-select">
+                                                    <option value="btn1" selected>First Button</option>
+                                                    <option value="btn2">Second Button</option>
+                                                    <option value="detaildismiss">Detail Dismiss</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select name="states0" class="form-control custom-select">
+                                                    <option value="2" selected>Both</option>
+                                                    <option value="1">Has Engaged</option>
+                                                    <option value="0">Not Engaged</option>
                                                 </select>
                                             </td>
                                         </tr>
                                    </tbody>
                                 </table>
+                                </div>
                                 </div>
                                 <div class="row"> 
                                     <div class="col-md-12">
@@ -299,76 +313,61 @@
 
     $( "#content-form" ).on( "submit", function( event ) {
         event.preventDefault();
-        console.log($("#id-1").val());
-        if($("#id-1").val() == null || $("#id-1").val() == ""){
-            
-            $.toast({
-                heading: 'No Content Selected',
-                text: 'You must select at least one content instance to proceed with generating rules',
-                position: 'top-center',
-                loaderBg:'#FFD997',
-                icon: 'warning',
-                hideAfter: 5000, 
-            });
 
-        }else{
+        $("#generate-msg").html("Generating rules, please wait a moment...");
+        $(".loader").show();
 
+        $.ajax({
+            url: '/apps/flybits/api/engagement',
+            type: "POST",
+            dataType: "json",
+            data: $(this).serialize(),
+            success: function(data){;
+                console.log(data);
 
-            $("#generate-msg").html("Generating rules, please wait a moment...");
-            $(".loader").show();
+                $.each(data, function (i, item) {
+                    
+                    var alert = "alert-danger";
+                    var error = "";
+                    if(item.status){
+                        alert = "alert-success";
+                    }else{
 
-            $.ajax({
-                url: '/apps/flybits/api/engagement',
-                type: "POST",
-                dataType: "json",
-                data: $(this).serialize(),
-                success: function(data){;
-                    console.log(data);
+                        var obj = JSON.parse(item.response);
+                        error = obj.error.exceptionMessage;
 
-                    $.each(data, function (i, item) {
-                        
-                        var alert = "alert-danger";
-                        var error = "";
-                        if(item.status){
-                            alert = "alert-success";
-                        }else{
+                    }
+                    var html = '<div class="alert ' + alert + ' alert-block"><strong>'+ item.message +'</strong><br><small>' + error + '<small></div>';
+                    $('#results').prepend(html);
+                });
 
-                            var obj = JSON.parse(item.response);
-                            error = obj.error.exceptionMessage;
+                $("#generate-msg").html("");
+                $(".loader").hide();
 
-                        }
-                        var html = '<div class="alert ' + alert + ' alert-block"><strong>'+ item.message +'</strong><br><small>' + error + '<small></div>';
-                        $('#results').prepend(html);
-                    });
+                $.toast({
+                    heading: 'Rules Generated',
+                    text: 'Successfully created rules, see results below',
+                    position: 'top-center',
+                    loaderBg:'#2ab9c9',
+                    icon: 'success',
+                    hideAfter: 5000, 
+                });
 
-                    $("#generate-msg").html("");
-                    $(".loader").hide();
+            },
+            error: function(error){
+                $("#generate-msg").html("An error has occured attempting to generate rules");
+                $.toast({
+                    heading: 'Could Not Create Rules',
+                    text: 'Something went wrong generating the rules, please try again.',
+                    position: 'top-center',
+                    loaderBg:'#FFD997',
+                    icon: 'warning',
+                    hideAfter: 5000, 
+                });
+                console.log(error);
+            }
+        }); 
 
-                    $.toast({
-                        heading: 'Rules Generated',
-                        text: 'Successfully created rules, see results below',
-                        position: 'top-center',
-                        loaderBg:'#2ab9c9',
-                        icon: 'success',
-                        hideAfter: 5000, 
-                    });
-
-                },
-                error: function(error){
-                    $("#generate-msg").html("An error has occured attempting to generate rules");
-                    $.toast({
-                        heading: 'Could Not Create Rules',
-                        text: 'Something went wrong generating the rules, please try again.',
-                        position: 'top-center',
-                        loaderBg:'#FFD997',
-                        icon: 'warning',
-                        hideAfter: 5000, 
-                    });
-                   console.log(error);
-                }
-            }); 
-
-        }
 
     });
 
@@ -441,84 +440,35 @@
         }
     });
 
-    // $( "#content" ).click(function( event ) {
-        
-    //     event.preventDefault();
+   
+    function saveValue(e){
+        var id = e.id;
+        var val = e.value;
+        localStorage.setItem(id, val);
+    }
+    function getSavedValue  (v){
+        if (!localStorage.getItem(v)) {
+            return "";
+        }
+        return localStorage.getItem(v);
+    }
 
-    //     if($("#project").val() == "" || $("#email").val() == "" || $("#password").val() == ""){
-    //         $.toast({
-    //             heading: 'Credentials Missing',
-    //             text: 'You need to specify a Flybits user E-mail, Password and Project-ID to continue',
-    //             position: 'top-center',
-    //             loaderBg:'#FFD997',
-    //             icon: 'warning',
-    //             hideAfter: 5000, 
-    //         });
-    //     }else{
 
-    //         $("#content-msg").html("Fetching content, one moment please...")
 
-    //         $.ajax({
-    //             url: '/apps/flybits/api/setProject',
-    //             type: "GET",
-    //             dataType: "json",
-    //             data: $("#content-form").serialize() ,
-    //             success: function(data){
-    //             	console.log(data);
-
-    //             	if(data.status){
-
-    //                     $("#jwt").val(data.jwt)
-
-    //                     $('.content-selector').html('');
-                        
-	   //                  $.each(data.content, function (i, item) {
-	   //                      $('.content-selector').prepend($('<option>', { 
-	   //                          value: item.id,
-	   //                          text : item.name 
-	   //                      }));
-    //                         $('#modal-info').prepend(item.id + '&nbsp&nbsp|&nbsp&nbsp ' + item.name + '<br>');
-	   //                  });
-
-    //                     $('.content-selector').prepend('<option value="" selected>-- Select Content --</option>');
-
-	   //                  $("#content-msg").html(data.content.length + " content instances found. Select content below to continue...");
-
-    //                     $("#showcontent").show();
-
-    //                     $.toast({
-    //                         heading: 'Content Fetched Sucessfully',
-    //                         text: 'Content for this project has been found and added to your table selection',
-    //                         position: 'top-center',
-    //                         loaderBg:'#2ab9c9',
-    //                         icon: 'success',
-    //                         hideAfter: 5000, 
-    //                     });
-	   //              }else{
-	   //              	$("#content-msg").html(data.error);
-    //                     console.log(data.response);
-	   //              }
-	   //          },
-    //             error: function(error){
-    //                console.log(error);
-    //             }
-    //         }); 
-    //     }
-    // });
-
-$(function () {
+    $(function () {
   
-    $('[data-toggle="popover"]').popover();
+        $('[data-toggle="popover"]').popover();
 
+        document.getElementById("jwt").value = getSavedValue("jwt");
 
-    $('.content-selector').on('change', function(){
-        var id = this.id.split("-")[1];
-        var name = $(this).find('option:selected').text();
-        var abr = name.split("-")[0].trim();
-        $("#name-"+id).val(abr);
-    });
+        $('.content-selector').on('change', function(){
+            var id = this.id.split("-")[1];
+            var name = $(this).find('option:selected').text();
+            var abr = name.split("-")[0].trim();
+            $("#name-"+id).val(abr);
+        });
 
-})
+    })
 
 
 

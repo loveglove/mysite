@@ -55,7 +55,7 @@
     }
     .card-header{
 /*        background-color: #7469EF !important;
-*/    }
+*/   }
     .bs1{
         box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     }
@@ -76,17 +76,40 @@
             <div class="card-header">
                     <h2 class="m-b-0 text-white"><img src="{{ asset('images/Flybits-icon-large-trans_WHITE-ALL.png') }}" class="fb-logo" /><small>Flybits Exeperience Template Manager</small></h2>
                 </div>
+                <!-- credentials -->
+                <div class="card-body">
+                    <form class="input-form">
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user from a project you wish to create templates in">JWT:</label>
+                            <div class="col-md-10">
+                                <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}" onkeyup='saveValue(this);' />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change only if not using the demo stack">API Host:</label>
+                            <div class="col-md-10">
+                                <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                </div>
 
                 <div class="card-body">
                     <ul class="nav nav-tabs" role="tablist">
                       <li class="nav-item">
                         <a class="nav-link d-flex active" data-toggle="tab" href="#edit" role="tab" aria-selected="false">
-                          <span>Edit Existing</span>
+                          <span>Edit</span>
                         </a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link d-flex" data-toggle="tab" href="#create" role="tab" aria-selected="false">
-                          <span>Create New</span>
+                          <span>Create</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link d-flex" data-toggle="tab" href="#delete" role="tab" aria-selected="false">
+                          <span>Delete</span>
                         </a>
                       </li>
                     </ul>
@@ -97,24 +120,12 @@
 
                     <!-- start tab 1 -->
                     <div id="edit" class="tab-pane active" role="tabpanel">
+
                         <div class="card-body">
                             <form id="info-form">
                                 @csrf
                                 <div class="row">
-
                                     <div class="col-md-9">
-                                        <div class="form-group row">
-                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user of a project that contains the templates you wish to edit">JWT:</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="jwt" name="jwt" class="form-control" value="{{old('jwt')}}"" />
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change only if not using the demo stack">API Host:</label>
-                                            <div class="col-md-9">
-                                                <input type="text" id="host" name="host" class="form-control" value="https://api.demo.flybits.com" />
-                                            </div>
-                                        </div>
                                         <div class="form-group row">
                                             <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the specific template to be edited">Template ID:</label>
                                             <div class="col-md-9">
@@ -123,13 +134,13 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <button id="content" class="btn btn-lg btn-outline-info btn-sq" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click to fetch the template for ID entered"><i class="icon-wrench"></i>&nbsp&nbspGet Template</button>
+                                        <button id="get-template-btn" class="btn btn-lg  btn-outline-info" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click to fetch the template for ID entered"><i class="icon-wrench"></i>&nbsp&nbspGet Template</button>
                                     </div>
                                 </div>
                             </form>
-                            <hr>
                         </div>
-                        <div class="card-body">
+
+                        <div id="edit-area" class="card-body" style="display:none;">
                             <div id="template-editor">
                                 <form id="template-form">
                                     <div class="form-group row">
@@ -217,21 +228,8 @@
                         <div class="card-body">
                             <form id="create-form">
                                 @csrf
-                               
                                 <div class="form-group row">
-                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="A valid JWT of an admin user of a project you wish to create templates in">JWT:</label>
-                                    <div class="col-md-10">
-                                        <input type="text" id="jwt2" name="jwt" class="form-control" value="{{old('jwt')}}" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Change only if not using the demo stack">API Host:</label>
-                                    <div class="col-md-10">
-                                        <input type="text" id="host2" name="host" class="form-control" value="https://api.demo.flybits.com" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the example experience (in same project) to be converted to a template">Instance ID:</label>
+                                    <label class="control-label text-right col-md-2" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the example experience (in same project) to be converted to a template. Leave this field blank to create an empty template">Instance ID:</label>
                                     <div class="col-md-10">
                                         <input type="text" id="instance2" name="instance" class="form-control" value="" />
                                     </div>
@@ -290,8 +288,31 @@
                     </div>
                     <!-- end tab 2 -->
 
+                    <!-- start tab 3 -->
+                    <div id="delete" class="tab-pane" role="tabpanel">
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <div class="form-group row">
+                                            <label class="control-label text-right col-md-3" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="The UUID value of the specific template to be edited">Template ID:</label>
+                                            <div class="col-md-9">
+                                                <input type="text" id="tempID-del" name="tempID" class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button id="delete-template-btn" class="btn btn-lg btn-outline-danger" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="Click to permanently delete the template for ID entered"><i class="icon-trash"></i>&nbsp&nbspDelete Template</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- end tab 3 -->
+
                 </div>
                 <!-- end tabbed content -->
+
             </div>
         </div>
     </div>
@@ -315,15 +336,17 @@
 
 <script>
 
-     $( "#content" ).click(function( event ) {
-        event.preventDefault();
 
+
+     $("#get-template-btn").click(function( event ) {
         
-        if($("#jwt").val() == "" || $("#tempID").val() == ""){
+        event.preventDefault();
+        
+        if($("#jwt").val() == ""){
             
             $.toast({
-                heading: 'JWT or Template ID Missing',
-                text: 'You must provide a JWT for the project and template ID of the template ',
+                heading: 'JWT Missing',
+                text: 'You must provide a valid JWT from a Flybits project first',
                 position: 'top-right',
                 loaderBg:'#FFD997',
                 icon: 'warning',
@@ -332,68 +355,89 @@
 
         }else{
 
-            $.ajax({
-                url: '/apps/flybits/api/templates/get',
-                type: "POST",
-                dataType: "json",
-                data: $("#info-form").serialize(),
-                success: function(data){
-                    
-                    console.log(data);
- 
-                    if(data.status){
+            if($("#tempID").val() == ""){
+            
+                $.toast({
+                    heading: 'Template ID Missing',
+                    text: 'You must provide a the ID of a template you wish to edit',
+                    position: 'top-right',
+                    loaderBg:'#FFD997',
+                    icon: 'warning',
+                    hideAfter: 5000, 
+                });
 
-                        templateJSON = data.response;
-                        var category = $(data.response.tags)[0].split("-")[1];
-                        var subcategory = $(data.response.tags)[1].split("-")[1];
-                        var tags = $(data.response.tags).splice(2, data.response.tags.length).toString();
+            }else{
 
-                        $("#name").val(data.response.name);
-                        $("#description").val(data.response.desc);
-                        $("#category").val(category);
-                        $("#subcategory").val(subcategory);
-                        $("#tags").val(tags);
-                        $("#image").val(data.response.icon);
-                        $("#icon-img").attr("src", data.response.icon).show();
+                var formData = $("#info-form").serializeArray();
+                formData.push({name: 'jwt', value: $("#jwt").val()});
+                formData.push({name: 'host', value: $("#host").val()});
 
+                console.log(formData);
+
+                $.ajax({
+                    url: '/apps/flybits/api/templates/get',
+                    type: "POST",
+                    dataType: "json",
+                    data: formData,
+                    success: function(data){
+                        
+                        console.log(data);
+    
+                        if(data.status){
+
+                            templateJSON = data.response;
+                            var category = $(data.response.tags)[0].split("-")[1];
+                            var subcategory = $(data.response.tags)[1].split("-")[1];
+                            var tags = $(data.response.tags).splice(2, data.response.tags.length).toString();
+
+                            $("#name").val(data.response.name);
+                            $("#description").val(data.response.desc);
+                            $("#category").val(category);
+                            $("#subcategory").val(subcategory);
+                            $("#tags").val(tags);
+                            $("#image").val(data.response.icon);
+                            $("#icon-img").attr("src", data.response.icon).show();
+
+                            $.toast({
+                                heading: 'Template Fetched',
+                                text: 'Successfully fetched the template, see results below',
+                                position: 'top-right',
+                                loaderBg:'#2ab9c9',
+                                icon: 'success',
+                                hideAfter: 5000, 
+                            });
+
+                            $("#edit-area").show();
+
+                        }else{
+
+                            $.toast({
+                                heading: 'API Error Occured',
+                                text: 'Flybits API response: ' + data.message,
+                                position: 'top-right',
+                                loaderBg:'#FFD997',
+                                icon: 'warning',
+                                hideAfter: 5000, 
+                            });
+
+                        }
+                    },
+                    error: function(error){
                         $.toast({
-                            heading: 'Template Fetched',
-                            text: 'Successfully fetched the template, see results below',
-                            position: 'top-right',
-                            loaderBg:'#2ab9c9',
-                            icon: 'success',
-                            hideAfter: 5000, 
-                        });
-
-                    }else{
-
-                        $.toast({
-                            heading: 'API Error Occured',
-                            text: 'Flybits API response: ' + data.message,
+                            heading: 'Update Error Occured',
+                            text: 'Something went wrong attempting to get the template, please check JWT, Host, and ID are correct.',
                             position: 'top-right',
                             loaderBg:'#FFD997',
                             icon: 'warning',
                             hideAfter: 5000, 
                         });
-
+                        console.log(error);
                     }
-                },
-                error: function(error){
-                    $.toast({
-                        heading: 'Update Error Occured',
-                        text: 'Something went wrong attempting to get the template, please check JWT, Host, and ID are correct.',
-                        position: 'top-right',
-                        loaderBg:'#FFD997',
-                        icon: 'warning',
-                        hideAfter: 5000, 
-                    });
-                   console.log(error);
-                }
-            }); 
-
+                }); 
+            }
         }
-
     });
+
 
 
 
@@ -500,7 +544,6 @@
 
 
 
-
     $("#create-btn").click(function( event ) {
         event.preventDefault();
         
@@ -527,8 +570,8 @@
             var tags = tags.concat(tagStrings);
 
             var data = {
-                jwt : $("#jwt2").val(),
-                host : $("#host2").val(),
+                jwt : $("#jwt").val(),
+                host : $("#host").val(),
                 instance : $("#instance2").val(),
                 token : $('input[name="csrf-token"]').attr('value'),
                 instance: $("#instance2").val(),
@@ -547,8 +590,7 @@
                 dataType: "json",
                 data: data,
                 success: function(data){
-                    
-                    console.log("RETURN FROM BACKEND..");
+                
                     console.log(data);
  
                     if(data.status){
@@ -593,6 +635,85 @@
     });
 
 
+    
+
+
+    $("#delete-template-btn").click(function( event ) {
+        
+        event.preventDefault();
+
+        if($("#tempID-del").val() == ""){
+            
+            $.toast({
+                heading: 'Template ID Missing',
+                text: 'You must provide a the ID of a template you wish to delete',
+                position: 'top-right',
+                loaderBg:'#FFD997',
+                icon: 'warning',
+                hideAfter: 5000, 
+            });
+
+        }else{
+
+            var tempID = $("#tempID-del").val();
+
+            var data = {
+                jwt : $("#jwt").val(),
+                host : $("#host").val(),
+                tempID : tempID,
+                token : $('input[name="csrf-token"]').attr('value')
+            }
+
+            $.ajax({
+                url: '/apps/flybits/api/templates/delete',
+                type: "POST",
+                dataType: "json",
+                data: data,
+                success: function(data){
+                    
+                    console.log(data);
+                    if(data.status){
+        
+                        $.toast({
+                            heading: 'Template Deleted',
+                            text: 'The template has been permanently deleted',
+                            position: 'top-right',
+                            loaderBg:'#2ab9c9',
+                            icon: 'success',
+                            hideAfter: 5000, 
+                        });
+
+                    }else{
+
+                        $.toast({
+                            heading: 'API Error Occured',
+                            text: 'Flybits API response: ' + data.message,
+                            position: 'top-right',
+                            loaderBg:'#FFD997',
+                            icon: 'warning',
+                            hideAfter: 5000, 
+                        });
+
+                    }
+                },
+                error: function(error){
+                    $.toast({
+                        heading: 'Update Error Occured',
+                        text: 'Something went wrong attempting to delete the template, please check JWT, Host, and ID are correct.',
+                        position: 'top-right',
+                        loaderBg:'#FFD997',
+                        icon: 'warning',
+                        hideAfter: 5000, 
+                    });
+                    console.log(error);
+                }
+
+            });
+
+        }
+
+    });
+        
 
      $("#image").on("change", function(){
         $("#icon-img").attr("src", $("#image").val());
@@ -602,12 +723,25 @@
         $("#icon-img2").attr("src", $("#image2").val());
      })
 
+    function saveValue(e){
+        var id = e.id;
+        var val = e.value;
+        localStorage.setItem(id, val);
+    }
 
-$(function () {
-  
-    $('[data-toggle="popover"]').popover();
+    function getSavedValue  (v){
+        if (!localStorage.getItem(v)) {
+            return "";
+        }
+        return localStorage.getItem(v);
+    }
 
-})
+    $(function () {
+    
+        $('[data-toggle="popover"]').popover();
+        document.getElementById("jwt").value = getSavedValue("jwt");    // set the value to this input
+
+    })
 
 
 

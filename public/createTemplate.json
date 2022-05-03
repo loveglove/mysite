@@ -2,89 +2,86 @@
   "name": "",
   "desc": "",
   "icon": "",
+  "templateID": "",
   "steps": [
-    {
-      "id": "",
-      "groups": null,
-      "name": "step 1",
-      "desc": "",
-      "ruleName": "",
-      "ruleStringRepresentation": "",
-      "seedRuleStringRepresentation": "",
-      "ruleBody": {},
-      "seedRuleBody": {},
-      "trigger": {
-                "key": "",
-                "type": "",
-                "context": {
-                    "value": 0,
-                    "optionId": ""
-                },
-                "timezone": "",
-                "repeats": null
-            },
-        "actions": [
-        {
-          "id": "",
-          "name": "In-App Content",
+      {
+          "id": "A652F267-5D1E-46EA-A575-0E208706B5DC",
+          "groups": null,
+          "name": "step 1",
           "desc": "",
-          "actionType": "experience",
-          "actionBody": {
-            "contents": [
+          "ruleID": "",
+          "seedRuleID": "",
+          "ruleName": "",
+          "ruleStringRepresentation": "",
+          "seedRuleStringRepresentation": "",
+          "ruleBody": "",
+          "seedRuleBody": "",
+          "actions": [
               {
-                "id": "4072E112-3C7A-49CF-B16E-EEA851511B37",
-                "links": [],
-                "labels": [
-                  "starter"
-                ],
-                "iconUrl": "https://flybits-development-file-manager.s3.amazonaws.com/file-manager/0704661F-14AC-42E9-A238-18F90FC4ED7D.png",
-                "internal": false,
-                "metadata": null,
-                "tenantId": "A22C0603-982A-433C-9B4A-64C136775BF2",
-                "createdAt": 1598488434,
-                "accessType": "rule",
-                "modifiedAt": 1598488533,
-                "templateId": "EDFF4045-412B-45E4-8138-C0BCC5D4DCA6",
-                "templateType": "concierge-card-buttons",
-                "localizations": {
-                  "en": {
-                    "name": "Button Link Card",
-                    "description": "Create a call to action by adding up to two buttons. Ideal for offers or messages with next steps."
-                  }
-                },
-                "surveyMetadata": null,
-                "contentModeration": false
+                  "id": "719A4917-0BBA-4D50-9862-7D52B5082A6B",
+                  "name": "ES 2.0 - Blank",
+                  "desc": "",
+                  "actionType": "experience",
+                  "actionID": "BC955D0A-ABF8-44A5-8327-7BEEBBFB41D0",
+                  "actionBody": {
+                      "labels": null,
+                      "isActive": false,
+                      "contentIds": [],
+                      "localizations": {
+                          "en": {
+                              "Name": "ES 2.0 - Blank"
+                          }
+                      }
+                  },
+                  "isConfigurable": false,
+                  "isCreatable": false,
+                  "isHidden": false
               }
-            ],
-            "contentIds": []
-          },
-          "isConfigurable": false,
-          "isCreatable": false,
-          "isHidden": false
-        }
-      ],
-      "stepChildren": [],
-      "isRoot": true,
-      "isRuleHidden": false,
-      "isRuleCreatable": true,
-      "isRuleConfigurable": true
-    }
+          ],
+          "stepChildren": [],
+          "isRoot": true,
+          "isRuleHidden": false,
+          "isRuleCreatable": true,
+          "isRuleConfigurable": true,
+          "trigger": {
+              "key": "onEvent",
+              "type": "",
+              "context": {
+                  "value": 0,
+                  "optionId": ""
+              },
+              "timezone": "",
+              "repeats": []
+          }
+      }
   ],
-  "rootStepID": "",
-  "audienceOptimizationEligible": false,
+  "rootStepID": "A652F267-5D1E-46EA-A575-0E208706B5DC",
+  "status": "Draft",
+  "activation": {
+      "manualActivationAt": 0,
+      "manualDeactivationAt": 0,
+      "automaticActivationAt": 0,
+      "automaticDeactivationAt": 0
+  },
   "explorationBudget": {
-    "populationSize": 1000
+      "populationSize": 1000
   },
   "automationBudget": {
-    "cutOffPercentage": 1000
+      "cutOffPercentage": 1000
+  },
+  "audienceOptimizationEligible": false,
+  "trainingSettings": {
+      "biasedFeatures": null,
+      "timestampLowerBound": 0
   },
   "journeyMode": "",
-  "createdAt": 0,
-  "updatedAt": 0,
+  "schedule": {
+      "start": 0,
+      "end": 0,
+      "timezone": ""
+  },
+  "createdAt": 1649695785,
+  "updatedAt": 1649695785,
   "labels": [],
-  "tags": [
-      "category-", 
-      "subcategory-",
-      "tag"
-    ]
+  "parentFolderID": "00000000-0000-0000-0000-000000000000"
 }

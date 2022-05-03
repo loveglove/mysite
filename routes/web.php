@@ -57,7 +57,7 @@ Route::any('/apps/flybits/sms', 'FlybitsController@flybitsSMS');
 Route::any('/apps/flybits/email', 'FlybitsController@flybitsEmail');
 Route::any('/apps/flybits/email2', 'FlybitsController@flybitsEmail2');
 Route::any('/apps/flybits/emailcsv', 'FlybitsController@flybitsEmailCSV');
-Route::any('/apps/flybits/oracle', 'FlybitsController@oracle');
+
 // Flybits API 
 Route::post('/apps/flybits/api/engagement', 'FlybitsController@flybitsCreateEngagement');
 Route::get('/apps/flybits/api/getcontent', 'FlybitsController@flybitsGetContentAPI');
@@ -66,6 +66,7 @@ Route::get('/apps/flybits/api/setProjectJWT', 'FlybitsController@flybitsSetProje
 Route::post('/apps/flybits/api/templates/get', 'FlybitsController@flybitsGetTemplateAPI');
 Route::post('/apps/flybits/api/templates/update', 'FlybitsController@flybitsUpdateTemplateAPI');
 Route::post('/apps/flybits/api/templates/create', 'FlybitsController@flybitsCreateTemplateAPI');
+Route::post('/apps/flybits/api/templates/delete', 'FlybitsController@flybitsDeleteTemplateAPI');
 
 Route::get('/apps/email/test', 'MailController@sendGridTest');
 
